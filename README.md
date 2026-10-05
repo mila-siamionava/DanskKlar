@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🇩🇰 DanskKlar
 
-## Getting Started
+**Learn Danish. Practise smarter. Get ready for PD3.**
 
-First, run the development server:
+DanskKlar is an interactive web app for Danish learners, especially those preparing for **Prøve i Dansk 3 (PD3)**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 🚀 Try DanskKlar
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**[Open the live app →](https://dansk-trainer.vercel.app/)**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ What you can do
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 📖 Practise with **PD3-style reading texts**
+- 🗂️ Learn vocabulary by **topic**
+- ⭐ Save words and expressions for later
+- 🧠 Build your own **vocabulary review list**
+- 💪 Train vocabulary with:
+  - Flashcards
+  - Multiple choice
+  - Fill the gap
+  - First letter
+  - Build the sentence
+  - Match pairs
+  - Definition → word
 
-## Learn More
+## 💡 How it works
 
-To learn more about Next.js, take a look at the following resources:
+**Read → Discover → Save → Practise → Remember**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+DanskKlar helps you move beyond simply recognising Danish words and start actively remembering and using them.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ Tech Stack
 
-## Deploy on Vercel
+**Next.js · React · Supabase · PostgreSQL · CSS Modules**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🌱 Status
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+DanskKlar is **actively being developed** with new vocabulary, texts, exercises and learning features.
+
+⭐ If you find the project useful, consider starring the repository!
+
+---
+
+**Klar til mere dansk? 🇩🇰**
+
+👉 **[Start learning with DanskKlar](https://dansk-trainer.vercel.app/)**
