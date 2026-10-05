@@ -29,6 +29,12 @@ DanskKlar is an interactive web app for Danish learners, especially those prepar
 
 DanskKlar helps you move beyond simply recognising Danish words and start actively remembering and using them.
 
+## 👩‍💻 Behind the project
+
+DanskKlar is a full-stack learning project built with Next.js, React and Supabase.
+
+It includes authentication, database-driven learning content, reusable UI components, personalised vocabulary review and multiple interactive training modes.
+
 ## 🛠️ Tech Stack
 
 **Next.js · React · Supabase · PostgreSQL · CSS Modules**
