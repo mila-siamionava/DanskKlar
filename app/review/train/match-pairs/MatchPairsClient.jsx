@@ -285,6 +285,9 @@ export default function MatchPairsClient() {
                       ? styles.selected
                       : ""
                   }`}
+                  aria-pressed={
+                    selected
+                  }
                   onClick={() =>
                     chooseTerm(item)
                   }
@@ -337,6 +340,9 @@ export default function MatchPairsClient() {
                       ? styles.selected
                       : ""
                   }`}
+                  aria-pressed={
+                    selected
+                  }
                   onClick={() =>
                     chooseTranslation(
                       item,

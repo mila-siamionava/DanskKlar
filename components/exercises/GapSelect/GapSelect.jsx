@@ -289,6 +289,24 @@ export default function GapSelect({
               : styles.placeholder
           }
         >
+          {isCorrect && (
+            <>
+              <span aria-hidden="true">✓ </span>
+              <span className="u-visually-hidden">
+                Correct:
+              </span>
+            </>
+          )}
+
+          {isWrong && (
+            <>
+              <span aria-hidden="true">✕ </span>
+              <span className="u-visually-hidden">
+                Wrong:
+              </span>
+            </>
+          )}
+
           {selectedOption
             ? selectedOption.text
             : `(${question.id}) Choose answer`}
