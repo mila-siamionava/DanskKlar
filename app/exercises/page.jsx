@@ -1,12 +1,9 @@
 import AppHeader from "@/components/navigation/AppHeader/AppHeader";
 import BackLink from "@/components/navigation/BackLink/BackLink";
-import BottomNavigation from "@/components/navigation/BottomNavigation/BottomNavigation";
 
 import ReadingPracticeClient from "./_components/ReadingPracticeClient/ReadingPracticeClient";
 
 import styles from "./Exercises.module.css";
-
-import { navItems } from "@/data/navigation";
 
 import { canAccessResource } from "@/lib/access/canAccessResource";
 import { getCurrentAccess } from "@/lib/access/getCurrentAccess";
@@ -106,6 +103,10 @@ export default async function ExercisesPage({
       <AppHeader title="DanskKlar" />
 
       <div className={styles.page}>
+        <h1 className="u-visually-hidden">
+          Mockup Reading Tests
+        </h1>
+
         <div className={styles.introRow}>
           <BackLink
             href={backHref}
@@ -124,10 +125,6 @@ export default async function ExercisesPage({
           initialTopic={initialTopic}
         />
       </div>
-
-      <BottomNavigation
-        items={navItems}
-      />
     </main>
   );
 }

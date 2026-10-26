@@ -18,9 +18,9 @@ export default function BackLink({
       </Link>
 
       {title && (
-        <span className={styles.title}>
+        <h1 className={styles.title}>
           {title}
-        </span>
+        </h1>
       )}
     </div>
   );
