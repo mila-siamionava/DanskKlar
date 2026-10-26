@@ -31,6 +31,7 @@ export default function ProgressBar({
       <div
         className={styles.track}
         role="progressbar"
+        aria-label={label ?? "Progress"}
         aria-valuemin="0"
         aria-valuemax={max}
         aria-valuenow={value}
