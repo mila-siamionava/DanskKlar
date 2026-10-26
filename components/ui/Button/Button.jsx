@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import styles from "./Button.module.css";
 
 export default function Button({
@@ -9,6 +11,8 @@ export default function Button({
   type = "button",
   onClick,
   formAction,
+  href,
+  ariaCurrent,
   className = "",
 }) {
   const classes = [
@@ -22,6 +26,18 @@ export default function Button({
   ]
     .filter(Boolean)
     .join(" ");
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className={classes}
+        aria-current={ariaCurrent}
+      >
+        {children}
+      </Link>
+    );
+  }
 
   return (
     <button
