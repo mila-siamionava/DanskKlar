@@ -17,11 +17,11 @@
 
   padding: var(--spacing-md);
 
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-primary);
 
   border-radius: var(--border-radius-lg);
 
-  background: var(--color-surface);
+  background: var(--color-background-surface);
 }
 
 .selectionInfo {
@@ -108,9 +108,9 @@
 }
 
 .secondaryButton {
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-primary);
 
-  background: var(--color-surface);
+  background: var(--color-background-surface);
 
   color: var(--color-text-primary);
 }
@@ -151,11 +151,11 @@
 .wordItem {
   overflow: hidden;
 
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-primary);
 
   border-radius: var(--border-radius-lg);
 
-  background: var(--color-surface);
+  background: var(--color-background-surface);
 
   box-shadow: 0 1px 4px rgb(0 0 0 / 4%);
 
@@ -334,7 +334,7 @@
 
   padding-top: var(--spacing-lg);
 
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border-primary);
 }
 
 /* TRANSLATION */
@@ -388,11 +388,11 @@
 /* DEFINITION + EXAMPLE DROPDOWNS */
 
 .dropdownSection {
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border-primary);
 }
 
 .dropdownSection:last-child {
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border-primary);
 }
 
 .dropdownButton {

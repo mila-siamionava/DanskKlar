@@ -50,13 +50,13 @@
     var(--spacing-md);
 
   border:
-    1px solid var(--color-border);
+    1px solid var(--color-border-primary);
 
   border-radius:
     var(--border-radius-lg);
 
   background:
-    var(--color-surface);
+    var(--color-background-surface);
 
   color: inherit;
 
@@ -76,7 +76,7 @@
 
 .topicLink:hover {
   background:
-    var(--color-surface-subtle);
+    var(--color-background-soft);
 
   border-color:
     var(--color-text-accent);
@@ -108,7 +108,7 @@
     var(--border-radius-md);
 
   background:
-    var(--color-surface-subtle);
+    var(--color-background-soft);
 
   color:
     var(--color-text-accent);
