@@ -78,12 +78,16 @@ textarea {
   font-family: var(--font-family-body);
 }
 
-/* Arabic script translations: Inter has no Arabic letters */
+/*
+  Arabic script translations.
+  The Arabic font goes first: Inter's fallback is local Arial,
+  which has Arabic letters on Windows and would be used instead.
+*/
 
 :lang(ar) {
   font-family:
-    var(--font-inter),
     var(--font-noto-sans-arabic),
+    var(--font-inter),
     Arial,
     sans-serif;
 
@@ -92,8 +96,8 @@ textarea {
 
 :lang(fa) {
   font-family:
-    var(--font-inter),
     var(--font-vazirmatn),
+    var(--font-inter),
     Arial,
     sans-serif;
 
