@@ -106,6 +106,9 @@ test.describe("keyboard", () => {
 
     await expect(page.getByRole("listbox")).toBeVisible();
 
+    // focus moves to the first option a moment after opening
+    await expect(page.getByRole("option").first()).toBeFocused();
+
     await page.keyboard.press("ArrowDown");
     await page.keyboard.press("Enter");
 
