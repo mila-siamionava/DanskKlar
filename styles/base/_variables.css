@@ -19,9 +19,9 @@
   /* Text */
   --color-text-primary: var(--color-black);
   --color-text-secondary: #4e4a45;
-  --color-text-muted: #78736c;
+  --color-text-muted: #736e67;
   --color-text-inverse: var(--color-white);
-  --color-text-accent: #8a6e43;
+  --color-text-accent: #856a40;
   --color-text-on-accent: var(--color-black);
 
   /* Backgrounds */
@@ -37,6 +37,7 @@
   --color-border-primary: #e7e1d7;
   --color-border-secondary: #d7cfc2;
   --color-border-accent: var(--color-accent);
+  --color-border-control: #9c8969;
 
   /* Focus */
   --color-focus: #765c32;
@@ -52,7 +53,7 @@
   --color-error-border: #e2bcbc;
 
   /* Warning */
-  --color-warning: #b27d32;
+  --color-warning: #8e6428;
   --color-warning-background: #f8f0df;
 
   /* Progress */
@@ -272,6 +273,7 @@
   --color-border-primary: #403930;
   --color-border-secondary: #51483d;
   --color-border-accent: var(--color-accent);
+  --color-border-control: #817361;
 
   /* Focus */
   --color-focus: #e2cda8;
