@@ -1,8 +1,6 @@
 import Link from "next/link";
 
 import BackLink from "@/components/navigation/BackLink/BackLink";
-import BottomNavigation from "@/components/navigation/BottomNavigation/BottomNavigation";
-import { navItems } from "@/data/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 import styles from "./Topics.module.css";
@@ -91,10 +89,6 @@ export default async function TopicsPage() {
           </div>
         )}
       </main>
-
-      <BottomNavigation
-        items={navItems}
-      />
     </>
   );
 }

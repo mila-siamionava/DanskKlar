@@ -1,7 +1,5 @@
 import { notFound } from "next/navigation";
 
-import BottomNavigation from "@/components/navigation/BottomNavigation/BottomNavigation";
-import { navItems } from "@/data/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 import TopicVocabularyList from "../_components/TopicVocabularyList";
@@ -64,8 +62,6 @@ export default async function TopicVocabularyPage({
           topicName={topic.name}
         />
       </main>
-
-      <BottomNavigation items={navItems} />
     </>
   );
 }
