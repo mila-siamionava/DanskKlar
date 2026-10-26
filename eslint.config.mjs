@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Accessibility test build and reports:
+    ".next-test/**",
+    "test-results/**",
+    "playwright-report/**",
   ]),
 ]);
 
