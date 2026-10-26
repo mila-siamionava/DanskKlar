@@ -1,4 +1,8 @@
-import { Inter } from "next/font/google";
+import {
+  Inter,
+  Noto_Sans_Arabic,
+  Vazirmatn,
+} from "next/font/google";
 
 import BottomNavigation from "@/components/navigation/BottomNavigation/BottomNavigation";
 import { navItems } from "@/data/navigation";
@@ -9,6 +13,25 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+});
+
+/*
+  Arabic and Farsi translations only.
+  Not preloaded: the browser downloads them
+  when text with lang="ar" or lang="fa" is shown.
+*/
+const notoSansArabic = Noto_Sans_Arabic({
+  subsets: ["arabic"],
+  display: "swap",
+  variable: "--font-noto-sans-arabic",
+  preload: false,
+});
+
+const vazirmatn = Vazirmatn({
+  subsets: ["arabic"],
+  display: "swap",
+  variable: "--font-vazirmatn",
+  preload: false,
 });
 
 export const metadata = {
@@ -23,7 +46,7 @@ export default function RootLayout({
   return (
     <html
       lang="da"
-      className={inter.variable}
+      className={`${inter.variable} ${notoSansArabic.variable} ${vazirmatn.variable}`}
       data-theme="warm"
       data-appearance="light"
       suppressHydrationWarning

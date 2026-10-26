@@ -77,3 +77,25 @@ select,
 textarea {
   font-family: var(--font-family-body);
 }
+
+/* Arabic script translations: Inter has no Arabic letters */
+
+:lang(ar) {
+  font-family:
+    var(--font-inter),
+    var(--font-noto-sans-arabic),
+    Arial,
+    sans-serif;
+
+  line-height: 1.8;
+}
+
+:lang(fa) {
+  font-family:
+    var(--font-inter),
+    var(--font-vazirmatn),
+    Arial,
+    sans-serif;
+
+  line-height: 1.8;
+}
