@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Fragment, useState } from "react";
 
 import ExerciseHeader from "@/components/exercises/ExerciseHeader/ExerciseHeader";
@@ -221,11 +220,9 @@ export default function GapExercise({ exercise }) {
           </section>
 
           <div className={styles.reviewActions}>
-            <Link href="/review">
-              <Button variant="secondary" size="md">
-                Review wrong answers and train
-              </Button>
-            </Link>
+            <Button href="/review" variant="secondary" size="md">
+              Review wrong answers and train
+            </Button>
           </div>
         </>
       )}
