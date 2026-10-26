@@ -220,7 +220,7 @@
 
   border:
     1px solid
-    var(--color-border-primary);
+    var(--color-border-control);
 
   border-radius:
     var(--border-radius-sm);
@@ -242,21 +242,14 @@
 }
 
 .input:focus {
-  outline: none;
+  outline:
+    2px solid
+    var(--color-focus);
+
+  outline-offset: 2px;
 
   border-color:
     var(--color-focus);
-
-  box-shadow:
-    0
-    0
-    0
-    3px
-    color-mix(
-      in srgb,
-      var(--color-focus) 14%,
-      transparent
-    );
 }
 
 /* BUTTONS */
