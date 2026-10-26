@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import BottomNavigation from "@/components/navigation/BottomNavigation/BottomNavigation";
-import { navItems } from "@/data/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function TextPage({ params }) {
@@ -51,8 +49,6 @@ export default async function TextPage({ params }) {
           {text.content}
         </div>
       </main>
-
-      <BottomNavigation items={navItems} />
     </>
   );
 }
