@@ -29,7 +29,16 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body>
-        {children}
+        <a
+          href="#main-content"
+          className="u-skip-link"
+        >
+          Skip to content
+        </a>
+
+        <div id="main-content">
+          {children}
+        </div>
 
         <BottomNavigation items={navItems} />
       </body>

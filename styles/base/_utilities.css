@@ -21,3 +21,29 @@
   border: 0;
 }
 
+.u-skip-link {
+  position: absolute;
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  z-index: 1000;
+
+  padding:
+    var(--spacing-xs)
+    var(--spacing-md);
+
+  border-radius: var(--border-radius-full);
+
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
+
+  font-size: var(--font-size-label-medium);
+  font-weight: var(--font-weight-label-medium);
+
+  box-shadow: var(--shadow-elevated);
+
+  transform: translateY(-200%);
+}
+
+.u-skip-link:focus-visible {
+  transform: translateY(0);
+}
