@@ -1,15 +1,12 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import AppHeader from "@/components/navigation/AppHeader/AppHeader";
-import BottomNavigation from "@/components/navigation/BottomNavigation/BottomNavigation";
 import BackLink from "@/components/navigation/BackLink/BackLink";
 
 import GapExercise from "@/components/exercises/GapExercise/GapExercise";
 import Button from "@/components/ui/Button/Button";
 import Badge from "@/components/ui/Badge/Badge";
 
-import { navItems } from "@/data/navigation";
 import { getExercise } from "@/lib/exercises/getExercise";
 
 import styles from "./ExercisePage.module.css";
@@ -43,7 +40,7 @@ export default async function ExercisePage({ params, searchParams }) {
 
   return (
     <main>
-      <AppHeader title="Dansk Trainer" />
+      <AppHeader title="DanskKlar" />
 
       <div className={styles.page}>
         <div className={styles.topRow}>
@@ -66,34 +63,36 @@ export default async function ExercisePage({ params, searchParams }) {
 
         <div className={styles.exerciseSection}>
           <div className={styles.exerciseTabs}>
-            <Link href={`/exercises/${slug}?type=vocabulary_gap`}>
-              <Button
-                variant={
-                  exerciseType === "vocabulary_gap" ? "primary" : "secondary"
-                }
-                size="md"
-              >
-                Vocabulary
-              </Button>
-            </Link>
+            <Button
+              href={`/exercises/${slug}?type=vocabulary_gap`}
+              variant={
+                exerciseType === "vocabulary_gap" ? "primary" : "secondary"
+              }
+              size="md"
+              ariaCurrent={
+                exerciseType === "vocabulary_gap" ? "page" : undefined
+              }
+            >
+              Vocabulary
+            </Button>
 
-            <Link href={`/exercises/${slug}?type=connector_gap`}>
-              <Button
-                variant={
-                  exerciseType === "connector_gap" ? "primary" : "secondary"
-                }
-                size="md"
-              >
-                Connectors
-              </Button>
-            </Link>
+            <Button
+              href={`/exercises/${slug}?type=connector_gap`}
+              variant={
+                exerciseType === "connector_gap" ? "primary" : "secondary"
+              }
+              size="md"
+              ariaCurrent={
+                exerciseType === "connector_gap" ? "page" : undefined
+              }
+            >
+              Connectors
+            </Button>
           </div>
 
           <GapExercise exercise={exercise} />
         </div>
       </div>
-
-      <BottomNavigation items={navItems} />
     </main>
   );
 }
