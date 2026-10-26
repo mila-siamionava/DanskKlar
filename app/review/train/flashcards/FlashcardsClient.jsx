@@ -1,6 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import {
+  useRef,
+  useState,
+} from "react";
 import {
   ChevronDown,
   RotateCcw,
@@ -39,6 +42,12 @@ export default function FlashcardsClient() {
     finished,
     setFinished,
   ] = useState(false);
+
+  const revealButtonRef =
+    useRef(null);
+
+  const turnBackButtonRef =
+    useRef(null);
 
   if (isLoading) {
     return (
@@ -197,17 +206,23 @@ export default function FlashcardsClient() {
     );
   }
 
-  function handleKeyDown(event) {
-    if (
-      event.key === "Enter" ||
-      event.key === " "
-    ) {
-      event.preventDefault();
+  function flipFromButton(
+    event,
+    nextButtonRef,
+  ) {
+    event.stopPropagation();
 
-      setFlipped(
-        (current) => !current,
-      );
-    }
+    setFlipped(
+      (current) => !current,
+    );
+
+    /*
+      The face we came from becomes inert,
+      so move focus to the button on the other face.
+    */
+    requestAnimationFrame(() => {
+      nextButtonRef.current?.focus();
+    });
   }
 
   function stopDetailsClick(event) {
@@ -239,12 +254,6 @@ export default function FlashcardsClient() {
           onPointerUp={
             handlePointerUp
           }
-          onKeyDown={
-            handleKeyDown
-          }
-          role="button"
-          tabIndex={0}
-          aria-label="Flip flashcard"
         >
           <div
             className={
@@ -253,6 +262,7 @@ export default function FlashcardsClient() {
           >
             <div
               className={`${styles.cardFace} ${styles.cardFront}`}
+              inert={flipped}
             >
               <div
                 className={
@@ -284,24 +294,34 @@ export default function FlashcardsClient() {
                 </div>
               </div>
 
-              <div
+              <button
+                ref={revealButtonRef}
+                type="button"
                 className={
                   styles.tapHint
+                }
+                onClick={(event) =>
+                  flipFromButton(
+                    event,
+                    turnBackButtonRef,
+                  )
                 }
               >
                 <RotateCcw
                   size={20}
                   strokeWidth={1.8}
+                  aria-hidden="true"
                 />
 
                 <span>
                   Tap to reveal
                 </span>
-              </div>
+              </button>
             </div>
 
             <div
               className={`${styles.cardFace} ${styles.cardBack}`}
+              inert={!flipped}
             >
               {currentItem.definition_da && (
                 <section
@@ -465,20 +485,29 @@ export default function FlashcardsClient() {
                 )}
               </div>
 
-              <div
+              <button
+                ref={turnBackButtonRef}
+                type="button"
                 className={
                   styles.tapHint
+                }
+                onClick={(event) =>
+                  flipFromButton(
+                    event,
+                    revealButtonRef,
+                  )
                 }
               >
                 <RotateCcw
                   size={20}
                   strokeWidth={1.8}
+                  aria-hidden="true"
                 />
 
                 <span>
                   Tap to turn back
                 </span>
-              </div>
+              </button>
             </div>
           </div>
         </div>
