@@ -11,6 +11,7 @@ export default function FilterChip({
       className={`${styles.chip} ${
         active ? styles.active : ""
       }`}
+      aria-pressed={active}
       onClick={onClick}
     >
       {children}
