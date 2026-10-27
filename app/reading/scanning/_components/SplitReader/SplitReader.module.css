@@ -40,7 +40,7 @@
 
   background: var(--color-background-surface);
 
-  box-shadow: 0 -6px 20px rgba(29, 29, 29, 0.08);
+  box-shadow: var(--shadow-sheet);
 }
 
 .panelToggle {

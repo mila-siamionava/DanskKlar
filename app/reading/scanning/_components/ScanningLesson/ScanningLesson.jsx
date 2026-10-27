@@ -1,9 +1,9 @@
 "use client";
 
-
+import Link from "next/link";
 import { useState } from "react";
 
-
+import { BookMark } from "@/components/brand/Logo/Logo";
 import BackLink from "@/components/navigation/BackLink/BackLink";
 import Button from "@/components/ui/Button/Button";
 
@@ -162,6 +162,14 @@ export default function ScanningLesson({ lesson }) {
   return (
     <main className={styles.page}>
       <header className={styles.topBar}>
+        <Link
+          href="/"
+          className={styles.home}
+          aria-label="DanskKlar – til forsiden"
+        >
+          <BookMark />
+        </Link>
+
         <BackLink
           href="/reading/scanning"
           label="Tilbage til skanning"

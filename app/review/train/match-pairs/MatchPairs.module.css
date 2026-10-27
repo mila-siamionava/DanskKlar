@@ -113,7 +113,7 @@
 .card:focus-visible {
   outline:
     2px solid
-    var(--color-border-accent);
+    var(--color-focus);
 
   outline-offset: 2px;
 }
@@ -240,7 +240,7 @@
 .nextButton:focus-visible {
   outline:
     2px solid
-    var(--color-border-accent);
+    var(--color-focus);
 
   outline-offset: 2px;
 }
