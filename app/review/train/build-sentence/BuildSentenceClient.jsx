@@ -313,9 +313,9 @@ export default function BuildSentenceClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Build sentence"
-          title="Loading words"
-          message="Preparing your selected review words…"
+          eyebrow="Byg en sætning"
+          title="Henter ord"
+          message="Gør dine valgte ord klar …"
         />
       </main>
     );
@@ -325,10 +325,10 @@ export default function BuildSentenceClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Build sentence"
-          title="No words selected"
-          message="Choose some words in Review before starting this exercise."
-          actionLabel="Back to review"
+          eyebrow="Byg en sætning"
+          title="Ingen ord valgt"
+          message="Vælg nogle ord under Dine ord, før du starter øvelsen."
+          actionLabel="Tilbage til dine ord"
           actionHref="/review"
         />
       </main>
@@ -341,10 +341,10 @@ export default function BuildSentenceClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Build sentence"
-          title="No usable examples"
-          message="Your selected Review words do not have usable example sentences for this exercise."
-          actionLabel="Back to review"
+          eyebrow="Byg en sætning"
+          title="Ingen brugbare eksempler"
+          message="Dine valgte ord har ingen eksempelsætninger, der kan bruges i denne øvelse."
+          actionLabel="Tilbage til dine ord"
           actionHref="/review"
         />
       </main>
@@ -355,17 +355,17 @@ export default function BuildSentenceClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Build sentence"
-          title="Practice complete"
-          message={`You completed ${
+          eyebrow="Byg en sætning"
+          title="Øvelsen er færdig"
+          message={`Du har lavet ${
             usableItems.length
           } ${
             usableItems.length ===
             1
-              ? "sentence"
-              : "sentences"
+              ? "sætning"
+              : "sætninger"
           }.`}
-          actionLabel="Back to training"
+          actionLabel="Tilbage til træning"
           actionHref="/review/train"
         />
       </main>
@@ -374,8 +374,8 @@ export default function BuildSentenceClient({
 
   return (
     <ExerciseShell
-      eyebrow="Build sentence"
-      title="Put the words in the correct order"
+      eyebrow="Byg en sætning"
+      title="Sæt ordene i den rigtige rækkefølge"
       current={
         currentIndex + 1
       }
@@ -408,7 +408,7 @@ export default function BuildSentenceClient({
                 styles.hintSummary
               }
             >
-              Hint
+              Tip
             </summary>
 
             <div
@@ -436,7 +436,7 @@ export default function BuildSentenceClient({
                       )
                     }
                   >
-                    English
+                    Engelsk
                   </button>
                 )}
 
@@ -455,7 +455,7 @@ export default function BuildSentenceClient({
                       )
                     }
                   >
-                    Russian
+                    Russisk
                   </button>
                 )}
 
@@ -569,7 +569,7 @@ export default function BuildSentenceClient({
               checkSentence
             }
           >
-            Check
+            Tjek
           </button>
         )}
 
@@ -585,7 +585,7 @@ export default function BuildSentenceClient({
                   styles.correct
                 }
               >
-                ✓ Correct
+                ✓ Rigtigt
               </p>
             ) : (
               <div
@@ -594,7 +594,7 @@ export default function BuildSentenceClient({
                 }
               >
                 <p>
-                  Correct sentence:
+                  Rigtig sætning:
                 </p>
 
                 <strong>
@@ -614,7 +614,7 @@ export default function BuildSentenceClient({
                 nextSentence
               }
             >
-              Next →
+              Næste →
             </button>
           </div>
         )}

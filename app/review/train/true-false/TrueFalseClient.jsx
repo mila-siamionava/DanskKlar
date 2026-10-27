@@ -19,19 +19,19 @@ const MODES = [
   {
     key: "english",
     label: "EN",
-    title: "English",
+    title: "Engelsk",
     field: "english",
   },
   {
     key: "russian",
     label: "RU",
-    title: "Russian",
+    title: "Russisk",
     field: "russian",
   },
   {
     key: "definition",
     label: "Definition",
-    title: "Danish definition",
+    title: "Dansk definition",
     field: "definition_da",
   },
 ];
@@ -231,9 +231,9 @@ export default function TrueFalseClient() {
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="True / False"
-          title="Loading words"
-          message="Preparing your selected review words…"
+          eyebrow="Sandt eller falsk"
+          title="Henter ord"
+          message="Gør dine valgte ord klar …"
         />
       </main>
     );
@@ -243,10 +243,10 @@ export default function TrueFalseClient() {
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="True / False"
-          title="No words selected"
-          message="Choose some words in Review before starting this exercise."
-          actionLabel="Back to review"
+          eyebrow="Sandt eller falsk"
+          title="Ingen ord valgt"
+          message="Vælg nogle ord under Dine ord, før du starter øvelsen."
+          actionLabel="Tilbage til dine ord"
           actionHref="/review"
         />
       </main>
@@ -259,10 +259,10 @@ export default function TrueFalseClient() {
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="True / False"
-          title="No usable vocabulary"
-          message="Your selected words have no English, Russian or Danish definition yet."
-          actionLabel="Back to review"
+          eyebrow="Sandt eller falsk"
+          title="Ingen brugbare ord"
+          message="Dine valgte ord har endnu ingen oversættelse eller dansk definition."
+          actionLabel="Tilbage til dine ord"
           actionHref="/review"
         />
       </main>
@@ -273,17 +273,17 @@ export default function TrueFalseClient() {
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="True / False"
-          title="Practice complete"
-          message={`You reviewed ${
+          eyebrow="Sandt eller falsk"
+          title="Øvelsen er færdig"
+          message={`Du har øvet ${
             usableVocabulary.length
           } ${
             usableVocabulary.length ===
             1
-              ? "word"
-              : "words"
+              ? "ord"
+              : "ord"
           }.`}
-          actionLabel="Back to training"
+          actionLabel="Tilbage til træning"
           actionHref="/review/train"
         />
       </main>
@@ -317,8 +317,8 @@ export default function TrueFalseClient() {
 
   return (
     <ExerciseShell
-      eyebrow="True / False"
-      title="Is this meaning correct?"
+      eyebrow="Sandt eller falsk"
+      title="Er betydningen rigtig?"
       current={
         currentIndex + 1
       }
@@ -336,7 +336,7 @@ export default function TrueFalseClient() {
             styles.modeLabel
           }
         >
-          Train with
+          Træn med
         </span>
 
         <div
@@ -344,7 +344,7 @@ export default function TrueFalseClient() {
             styles.modeButtons
           }
           role="group"
-          aria-label="Choose training language"
+          aria-label="Vælg træningssprog"
         >
           {availableModes.map((mode) => (
             <button
@@ -386,7 +386,7 @@ export default function TrueFalseClient() {
             styles.means
           }
         >
-          means
+          betyder
         </span>
 
         <div
@@ -418,7 +418,7 @@ export default function TrueFalseClient() {
               isAnswered
             }
           >
-            True
+            Sandt
           </button>
 
           <button
@@ -431,7 +431,7 @@ export default function TrueFalseClient() {
               isAnswered
             }
           >
-            False
+            Falsk
           </button>
         </div>
 
@@ -447,7 +447,7 @@ export default function TrueFalseClient() {
                   styles.correct
                 }
               >
-                ✓ Correct
+                ✓ Rigtigt
               </p>
             ) : (
               <p
@@ -455,7 +455,7 @@ export default function TrueFalseClient() {
                   styles.wrong
                 }
               >
-                ✕ Not quite
+                ✕ Ikke helt
               </p>
             )}
 
@@ -465,7 +465,7 @@ export default function TrueFalseClient() {
               }
             >
               <strong>
-                Correct meaning:
+                Rigtig betydning:
               </strong>
 
               <p>
@@ -486,7 +486,7 @@ export default function TrueFalseClient() {
                 nextQuestion
               }
             >
-              Next →
+              Næste →
             </button>
           </div>
         )}

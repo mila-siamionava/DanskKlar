@@ -131,9 +131,9 @@ export default function FirstLetterClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="First-letter hint"
-          title="Loading words"
-          message="Preparing your selected review words…"
+          eyebrow="Første bogstav"
+          title="Henter ord"
+          message="Gør dine valgte ord klar …"
         />
       </main>
     );
@@ -143,10 +143,10 @@ export default function FirstLetterClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="First-letter hint"
-          title="No words selected"
-          message="Choose some words in Review before starting this exercise."
-          actionLabel="Back to review"
+          eyebrow="Første bogstav"
+          title="Ingen ord valgt"
+          message="Vælg nogle ord under Dine ord, før du starter øvelsen."
+          actionLabel="Tilbage til dine ord"
           actionHref="/review"
         />
       </main>
@@ -157,10 +157,10 @@ export default function FirstLetterClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="First-letter hint"
-          title="No usable examples"
-          message="Your selected Review words do not have usable example sentences for this exercise."
-          actionLabel="Back to review"
+          eyebrow="Første bogstav"
+          title="Ingen brugbare eksempler"
+          message="Dine valgte ord har ingen eksempelsætninger, der kan bruges i denne øvelse."
+          actionLabel="Tilbage til dine ord"
           actionHref="/review"
         />
       </main>
@@ -171,16 +171,16 @@ export default function FirstLetterClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="First-letter hint"
-          title="Practice complete"
-          message={`You completed ${
+          eyebrow="Første bogstav"
+          title="Øvelsen er færdig"
+          message={`Du har lavet ${
             items.length
           } ${
             items.length === 1
-              ? "gap"
-              : "gaps"
+              ? "hul"
+              : "huller"
           }.`}
-          actionLabel="Back to training"
+          actionLabel="Tilbage til træning"
           actionHref="/review/train"
         />
       </main>
@@ -236,8 +236,8 @@ export default function FirstLetterClient({
 
   return (
     <ExerciseShell
-      eyebrow="First-letter hint"
-      title="Complete the sentence"
+      eyebrow="Første bogstav"
+      title="Gør sætningen færdig"
       current={
         currentIndex + 1
       }
@@ -300,7 +300,7 @@ export default function FirstLetterClient({
                 styles.hintSummary
               }
             >
-              Hint
+              Tip
             </summary>
 
             <div
@@ -328,7 +328,7 @@ export default function FirstLetterClient({
                       )
                     }
                   >
-                    English
+                    Engelsk
                   </button>
                 )}
 
@@ -347,7 +347,7 @@ export default function FirstLetterClient({
                       )
                     }
                   >
-                    Russian
+                    Russisk
                   </button>
                 )}
 
@@ -423,7 +423,7 @@ export default function FirstLetterClient({
             }
             htmlFor="first-letter-answer"
           >
-            Your answer
+            Dit svar
           </label>
 
           <input
@@ -453,7 +453,7 @@ export default function FirstLetterClient({
                 styles.checkButton
               }
             >
-              Check
+              Tjek
             </button>
           )}
         </form>
@@ -470,7 +470,7 @@ export default function FirstLetterClient({
                   styles.correct
                 }
               >
-                ✓ Correct
+                ✓ Rigtigt
               </p>
             ) : (
               <div
@@ -479,7 +479,7 @@ export default function FirstLetterClient({
                 }
               >
                 <p>
-                  Correct answer:
+                  Rigtigt svar:
                 </p>
 
                 <strong>
@@ -499,7 +499,7 @@ export default function FirstLetterClient({
                 nextQuestion
               }
             >
-              Next →
+              Næste →
             </button>
           </div>
         )}

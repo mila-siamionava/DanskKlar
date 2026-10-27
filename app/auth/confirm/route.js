@@ -37,7 +37,7 @@ export async function GET(request) {
  redirectTo.pathname = "/login";
 redirectTo.searchParams.set(
   "error",
-  "This confirmation link has already been used or has expired. If your account is confirmed, sign in below. Otherwise, request a new confirmation email.",
+  "Linket er allerede brugt eller er udløbet. Hvis din konto er bekræftet, kan du logge ind nedenfor. Ellers kan du få en ny bekræftelsesmail.",
 );
 redirectTo.searchParams.set(
   "showResend",

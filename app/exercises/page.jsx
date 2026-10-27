@@ -94,14 +94,14 @@ export default async function ExercisesPage({
     : "/reading";
 
   const backLabel = initialTopic
-    ? "Back to topic"
-    : "Back to reading";
+    ? "Tilbage til emnet"
+    : "Tilbage til læsning";
 
   return (
     <main>
       <div className={styles.page}>
         <h1 className="u-visually-hidden">
-          Text practice
+          Tekstøvelser
         </h1>
 
         <div className={styles.introRow}>
@@ -111,8 +111,8 @@ export default async function ExercisesPage({
           />
 
           <p className={styles.instruction}>
-            Choose a text to practice vocabulary
-            or connectors.
+            Vælg en tekst, og øv ord
+            eller bindeord.
           </p>
         </div>
 

@@ -140,9 +140,9 @@ export default function DefinitionWordClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Definition → Word"
-          title="Loading words"
-          message="Preparing your selected review words…"
+          eyebrow="Definition → ord"
+          title="Henter ord"
+          message="Gør dine valgte ord klar …"
         />
       </main>
     );
@@ -152,10 +152,10 @@ export default function DefinitionWordClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Definition → Word"
-          title="No words selected"
-          message="Choose some words in Review before starting this exercise."
-          actionLabel="Back to review"
+          eyebrow="Definition → ord"
+          title="Ingen ord valgt"
+          message="Vælg nogle ord under Dine ord, før du starter øvelsen."
+          actionLabel="Tilbage til dine ord"
           actionHref="/review"
         />
       </main>
@@ -168,10 +168,10 @@ export default function DefinitionWordClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Definition → Word"
-          title="No vocabulary available"
-          message="Choose words with Danish definitions in Review before starting this exercise."
-          actionLabel="Back to review"
+          eyebrow="Definition → ord"
+          title="Ingen ord tilgængelige"
+          message="Vælg ord med en dansk definition under Dine ord, før du starter øvelsen."
+          actionLabel="Tilbage til dine ord"
           actionHref="/review"
         />
       </main>
@@ -182,16 +182,16 @@ export default function DefinitionWordClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Definition → Word"
-          title="Practice complete"
-          message={`You reviewed ${
+          eyebrow="Definition → ord"
+          title="Øvelsen er færdig"
+          message={`Du har øvet ${
             usableItems.length
           } ${
             usableItems.length === 1
-              ? "word"
-              : "words"
+              ? "ord"
+              : "ord"
           }.`}
-          actionLabel="Back to training"
+          actionLabel="Tilbage til træning"
           actionHref="/review/train"
         />
       </main>
@@ -231,15 +231,14 @@ export default function DefinitionWordClient({
 
   return (
     <ExerciseShell
-      eyebrow="Definition → Word"
-      title="Choose the word that matches the definition"
+      eyebrow="Definition → ord"
+      title="Vælg det ord, der passer til definitionen"
       current={
         currentIndex + 1
       }
       total={
         usableItems.length
       }
-      instructions="Choose the correct Danish word or expression."
     >
       <ExerciseQuestionCard>
         <p
@@ -247,7 +246,7 @@ export default function DefinitionWordClient({
             styles.questionLabel
           }
         >
-          Danish definition
+          Dansk definition
         </p>
 
         <p
@@ -337,7 +336,7 @@ export default function DefinitionWordClient({
                   styles.feedbackCorrect
                 }
               >
-                ✓ Correct
+                ✓ Rigtigt
               </p>
             ) : (
               <div
@@ -346,7 +345,7 @@ export default function DefinitionWordClient({
                 }
               >
                 <p>
-                  Correct answer:
+                  Rigtigt svar:
                 </p>
 
                 <strong>
@@ -378,7 +377,7 @@ export default function DefinitionWordClient({
                 nextQuestion
               }
             >
-              Next →
+              Næste →
             </button>
           </div>
         )}

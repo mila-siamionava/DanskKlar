@@ -369,9 +369,9 @@ export default function FillGapClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Fill the gap"
-          title="Loading words"
-          message="Preparing your selected review words…"
+          eyebrow="Udfyld hullet"
+          title="Henter ord"
+          message="Gør dine valgte ord klar …"
         />
       </main>
     );
@@ -381,10 +381,10 @@ export default function FillGapClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Fill the gap"
-          title="No words selected"
-          message="Choose some words in Review before starting this exercise."
-          actionLabel="Back to review"
+          eyebrow="Udfyld hullet"
+          title="Ingen ord valgt"
+          message="Vælg nogle ord under Dine ord, før du starter øvelsen."
+          actionLabel="Tilbage til dine ord"
           actionHref="/review"
         />
       </main>
@@ -395,10 +395,10 @@ export default function FillGapClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Fill the gap"
-          title="No usable examples"
-          message="Your selected Review words do not have usable gap-training examples."
-          actionLabel="Back to review"
+          eyebrow="Udfyld hullet"
+          title="Ingen brugbare eksempler"
+          message="Dine valgte ord har ingen eksempelsætninger, der kan bruges i denne øvelse."
+          actionLabel="Tilbage til dine ord"
           actionHref="/review"
         />
       </main>
@@ -409,16 +409,16 @@ export default function FillGapClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Fill the gap"
-          title="Practice complete"
-          message={`You completed ${
+          eyebrow="Udfyld hullet"
+          title="Øvelsen er færdig"
+          message={`Du har lavet ${
             items.length
           } ${
             items.length === 1
-              ? "gap"
-              : "gaps"
+              ? "hul"
+              : "huller"
           }.`}
-          actionLabel="Back to training"
+          actionLabel="Tilbage til træning"
           actionHref="/review/train"
         />
       </main>
@@ -536,8 +536,8 @@ export default function FillGapClient({
 
   return (
     <ExerciseShell
-      eyebrow="Fill the gap"
-      title="Complete the sentence"
+      eyebrow="Udfyld hullet"
+      title="Gør sætningen færdig"
       current={
         currentIndex + 1
       }
@@ -830,7 +830,7 @@ export default function FillGapClient({
                     styles.feedbackCorrect
                   }
                 >
-                  ✓ Correct
+                  ✓ Rigtigt
                 </p>
               ) : (
                 <p
@@ -854,7 +854,7 @@ export default function FillGapClient({
                     styles.feedbackCorrect
                   }
                 >
-                  ✓ Correct
+                  ✓ Rigtigt
                 </p>
               ) : (
                 <p
@@ -884,7 +884,7 @@ export default function FillGapClient({
                 nextQuestion
               }
             >
-              Next →
+              Næste →
             </button>
           </div>
         )}

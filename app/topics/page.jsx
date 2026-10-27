@@ -6,9 +6,9 @@ import { createClient } from "@/lib/supabase/server";
 import styles from "./Topics.module.css";
 
 const topicLabels = {
-  arbejde: "Work",
-  miljo: "Environment",
-  sundhed: "Health",
+  arbejde: "Arbejde",
+  miljo: "Miljø",
+  sundhed: "Sundhed",
 };
 
 export default async function TopicsPage() {
@@ -42,8 +42,8 @@ export default async function TopicsPage() {
         <div className={styles.headerRow}>
           <BackLink
             href="/"
-            label="Back to home"
-            title="Topics"
+            label="Tilbage til forsiden"
+            title="Emner"
           />
         </div>
 
@@ -75,7 +75,7 @@ export default async function TopicsPage() {
                 <span className={styles.wordCount}>
                   {topic.vocabulary_topics?.[0]
                     ?.count ?? 0}{" "}
-                  words
+                  ord
                 </span>
 
                 <span

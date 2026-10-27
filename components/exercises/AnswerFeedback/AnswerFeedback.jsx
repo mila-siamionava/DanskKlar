@@ -39,7 +39,7 @@ export default function AnswerFeedback({
       <div className={styles.header}>
         <div className={styles.headerContent}>
           <span className={styles.status}>
-            Not quite
+            Ikke helt
           </span>
 
           {!showCorrectAnswer && (
@@ -50,7 +50,7 @@ export default function AnswerFeedback({
                 setShowCorrectAnswer(true)
               }
             >
-              Show correct answer
+              Vis rigtigt svar
             </button>
           )}
 
@@ -104,7 +104,7 @@ export default function AnswerFeedback({
                         styles.languageLabel
                       }
                     >
-                      English
+                      Engelsk
                     </span>
 
                     <span
@@ -188,7 +188,7 @@ export default function AnswerFeedback({
                         styles.languageLabel
                       }
                     >
-                      Words & expressions
+                      Ord og udtryk
                     </span>
 
                     <span

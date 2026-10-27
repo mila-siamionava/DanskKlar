@@ -38,7 +38,7 @@ const vazirmatn = Vazirmatn({
 export const metadata = {
   title: "DanskKlar",
   description:
-    "Danish language practice and PD3.5 preparation",
+    "Øv dansk, og bliv klar til PD3",
 };
 
 export default function RootLayout({
@@ -57,7 +57,7 @@ export default function RootLayout({
           href="#main-content"
           className="u-skip-link"
         >
-          Skip to content
+          Gå til indhold
         </a>
 
         <SiteHeader />

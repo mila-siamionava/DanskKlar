@@ -15,6 +15,7 @@ import {
 } from "@/lib/reviewStorage";
 
 import styles from "./TopicVocabularyList.module.css";
+import { formatPartOfSpeech } from "@/lib/vocabulary/partOfSpeech";
 
 const SELECTED_REVIEW_KEY =
   "danskTrainerSelectedReview";
@@ -123,9 +124,7 @@ export default function TopicVocabularyList({
     const amount = selectedWords.length;
 
     setStatusMessage(
-      `✓ ${amount} ${
-        amount === 1 ? "word" : "words"
-      } added to Review`,
+      `✓ ${amount} ord er gemt`,
     );
 
     setSelectedIds(new Set());
@@ -152,9 +151,7 @@ export default function TopicVocabularyList({
     const amount = selectedWords.length;
 
     setStatusMessage(
-      `✓ ${amount} ${
-        amount === 1 ? "word" : "words"
-      } ready for training`,
+      `✓ ${amount} ord er klar til træning`,
     );
 
     setTimeout(() => {
@@ -197,21 +194,21 @@ export default function TopicVocabularyList({
       <div className={styles.headerRow}>
         <BackLink
           href={`/topics/${topicSlug}`}
-          label={`Back to ${topicName}`}
-          title="Vocabulary"
+          label={`Tilbage til ${topicName}`}
+          title="Ordforråd"
         />
       </div>
 
       <section
         className={styles.selectionPanel}
-        aria-label="Vocabulary selection"
+        aria-label="Valg af ord"
       >
         <div className={styles.selectionTop}>
           <p className={styles.selectionCount}>
             <strong>{selectedCount}</strong>
             <span>
               {" "}
-              of {totalCount} selected
+              af {totalCount} valgt
             </span>
           </p>
 
@@ -221,8 +218,8 @@ export default function TopicVocabularyList({
             onClick={toggleSelectAll}
           >
             {allSelected
-              ? "Clear all"
-              : "Select all"}
+              ? "Fravælg alle"
+              : "Vælg alle"}
           </button>
         </div>
 
@@ -233,7 +230,7 @@ export default function TopicVocabularyList({
             onClick={addSelectedToReview}
             disabled={selectedCount === 0}
           >
-            Add to review
+            Gem ord
           </button>
 
           <button
@@ -242,7 +239,7 @@ export default function TopicVocabularyList({
             onClick={trainSelected}
             disabled={selectedCount === 0}
           >
-            Train selected
+            Træn valgte
           </button>
         </div>
 
@@ -303,7 +300,7 @@ export default function TopicVocabularyList({
                     onChange={() =>
                       toggleSelected(word.id)
                     }
-                    aria-label={`Select ${word.term}`}
+                    aria-label={`Vælg ${word.term}`}
                   />
 
                   <span
@@ -319,7 +316,7 @@ export default function TopicVocabularyList({
                           styles.partOfSpeech
                         }
                       >
-                        {word.part_of_speech}
+                        {formatPartOfSpeech(word.part_of_speech)}
                       </span>
                     )}
 
@@ -329,7 +326,7 @@ export default function TopicVocabularyList({
                           styles.reviewBadge
                         }
                       >
-                        In review
+                        Gemt
                       </span>
                     )}
                   </span>
@@ -345,8 +342,8 @@ export default function TopicVocabularyList({
                 >
                   <span>
                     {isExpanded
-                      ? "Hide details"
-                      : "Details"}
+                      ? "Vis mindre"
+                      : "Vis mere"}
                   </span>
 
                   <span
@@ -370,7 +367,7 @@ export default function TopicVocabularyList({
                         styles.sectionLabel
                       }
                     >
-                      Translation
+                      Oversættelse
                     </span>
 
                     {word.english && (
