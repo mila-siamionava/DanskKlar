@@ -19,13 +19,6 @@ export default async function ResendConfirmationPage({
   return (
     <main className={styles.page}>
       <section className={styles.auth}>
-        <Link
-          href="/"
-          className={styles.logo}
-          aria-label="Back to DanskKlar home"
-        >
-          DK
-        </Link>
 
         <header className={styles.header}>
           <h1>

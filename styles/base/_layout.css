@@ -30,13 +30,13 @@ body {
    APP SHELL
    ============================================================ */
 
+/* every page sits on the cream page colour; cards and panels are white */
 main {
   width: 100%;
-  min-height: 100vh;
 
   margin: 0;
 
-  background: var(--color-background-surface);
+  background: var(--color-background-page);
 }
 
 /* ============================================================
@@ -223,20 +223,6 @@ section {
    ============================================================ */
 
 @media only screen and (min-width: 37.5em) {
-  main {
-    width: min(calc(100% - (var(--page-gap) * 2)), var(--page-max-width));
-
-    min-height: calc(100vh - (var(--page-gap) * 2));
-
-    margin: var(--page-gap) auto;
-
-    border: 1px solid var(--color-border-primary);
-
-    border-radius: var(--border-radius-lg);
-
-    box-shadow: var(--shadow-card);
-  }
-
   .mainPageContainer {
     padding: clamp(2.4rem, 3vw, 4rem) clamp(2rem, 3vw, 4rem)
       calc(var(--bottom-nav-height) + 3rem);

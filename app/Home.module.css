@@ -8,38 +8,29 @@
     var(--spacing-lg)
     var(--spacing-md)
     var(--spacing-xl);
-
-  background:
-    var(--color-background-page);
 }
 
 .topBar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
 
   margin-bottom:
     var(--spacing-xl);
 }
 
-.logo {
-  color:
-    var(--color-text-accent);
-
-  font-family:
-    var(--font-family-heading);
-
-  font-size:
-    var(--font-size-headline-small);
-
-  font-weight: 700;
-}
 
 .header {
   margin-bottom:
     var(--spacing-xl);
 
   text-align: center;
+}
+
+.heroMark {
+  width: 9.6rem;
+
+  margin: 0 auto var(--spacing-sm);
 }
 
 .header h1 {

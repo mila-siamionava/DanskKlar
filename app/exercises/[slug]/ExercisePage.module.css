@@ -1,6 +1,6 @@
 .page {
   width: 100%;
-  max-width: 76rem;
+  max-width: var(--reading-max-width);
 
   margin-inline: auto;
 

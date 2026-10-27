@@ -58,8 +58,6 @@
 .header p {
   margin: 0;
 
-  text-align: center;
-
   color:
     var(--color-text-secondary);
 
@@ -369,17 +367,6 @@
         var(--bottom-nav-height) +
         var(--spacing-2xl)
       );
-  }
-
-  .titleRow h1 {
-    font-size:
-      var(--font-size-headline-large);
-
-    line-height:
-      var(--line-height-headline-large);
-
-    font-weight:
-      var(--font-weight-headline-large);
   }
 
   .wordList {
