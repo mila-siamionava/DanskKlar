@@ -89,6 +89,18 @@ export default function ReviewPage() {
   }
 
   function deleteSelectedWords() {
+    const amount = selectedIds.length;
+
+    const confirmed = window.confirm(
+      `Delete ${amount} selected ${
+        amount === 1 ? "word" : "words"
+      } from Review?`,
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
     selectedIds.forEach((id) => {
       removeReviewItem(id);
     });
@@ -101,6 +113,14 @@ export default function ReviewPage() {
   }
 
   function deleteAllWords() {
+    const confirmed = window.confirm(
+      `Delete all ${items.length} words from Review? This cannot be undone.`,
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
     items.forEach((item) => {
       removeReviewItem(item.id);
     });
