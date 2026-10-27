@@ -20,15 +20,33 @@ export default function MatchPairsClient() {
     isLoading,
   } = useSelectedReviewItems();
 
+  // use Russian when none of the selected words has English yet
+  const translationField =
+    items.some(
+      (item) =>
+        item.term &&
+        item.english,
+    )
+      ? "english"
+      : "russian";
+
+  const translationTitle =
+    translationField === "english"
+      ? "English"
+      : "Russian";
+
   const usableVocabulary =
     useMemo(
       () =>
         items.filter(
           (item) =>
             item.term &&
-            item.english,
+            item[translationField],
         ),
-      [items],
+      [
+        items,
+        translationField,
+      ],
     );
 
   const [round, setRound] =
@@ -204,6 +222,20 @@ export default function MatchPairsClient() {
     );
   }
 
+  if (items.length === 0) {
+    return (
+      <main className="mobilePage">
+        <ExerciseState
+          eyebrow="Match pairs"
+          title="No words selected"
+          message="Choose some words in Review before starting this exercise."
+          actionLabel="Back to review"
+          actionHref="/review"
+        />
+      </main>
+    );
+  }
+
   if (
     usableVocabulary.length === 0
   ) {
@@ -212,7 +244,7 @@ export default function MatchPairsClient() {
         <ExerciseState
           eyebrow="Match pairs"
           title="No usable vocabulary"
-          message="Choose some words with English translations in Review before starting this exercise."
+          message="Your selected words have no English or Russian translation yet."
           actionLabel="Back to review"
           actionHref="/review"
         />
@@ -312,7 +344,7 @@ export default function MatchPairsClient() {
               styles.columnTitle
             }
           >
-            English
+            {translationTitle}
           </h2>
 
           {translations.map(
@@ -352,7 +384,7 @@ export default function MatchPairsClient() {
                     matched
                   }
                 >
-                  {item.english}
+                  {item[translationField]}
                 </button>
               );
             },
