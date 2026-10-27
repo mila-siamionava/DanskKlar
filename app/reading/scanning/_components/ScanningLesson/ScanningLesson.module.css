@@ -35,6 +35,17 @@
   background: var(--color-background-surface);
 }
 
+.home {
+  display: inline-flex;
+
+  border-radius: var(--border-radius-xs);
+}
+
+.home:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 4px;
+}
+
 .heading {
   min-width: 0;
 }
