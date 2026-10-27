@@ -1,4 +1,6 @@
 .page {
+  position: relative;
+
   min-height: 100vh;
 
   display: flex;
@@ -10,13 +12,14 @@
     var(--spacing-xl);
 }
 
+/* sits in the corner so the logo can start at the top */
 .topBar {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-
-  margin-bottom:
-    var(--spacing-xl);
 }
 
 

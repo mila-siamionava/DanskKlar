@@ -219,7 +219,7 @@
 .answerButton:focus-visible {
   outline:
     2px solid
-    var(--color-border-accent);
+    var(--color-focus);
 
   outline-offset: 2px;
 }
@@ -232,46 +232,25 @@
 
 /* TRUE */
 
-.trueButton {
-  border:
-    1px solid
-    var(--button-primary-background);
+/* TRUE / FALSE: same neutral style as other answer options */
 
-  background:
-    var(--button-primary-background);
-
-  color:
-    var(--button-primary-text);
-}
-
-.trueButton:hover:not(:disabled) {
-  border-color:
-    var(--button-primary-background-hover);
-
-  background:
-    var(--button-primary-background-hover);
-}
-
-/* FALSE */
-
+.trueButton,
 .falseButton {
   border:
     1px solid
-    var(--color-border-accent);
+    var(--answer-border);
 
   background:
-    var(--color-background-soft);
+    var(--answer-background);
 
   color:
-    var(--color-text-accent);
+    var(--answer-text);
 }
 
+.trueButton:hover:not(:disabled),
 .falseButton:hover:not(:disabled) {
   border-color:
-    var(--color-text-accent);
-
-  background:
-    var(--surface-background);
+    var(--color-border-control);
 }
 
 .feedback {
@@ -407,7 +386,7 @@
 .nextButton:focus-visible {
   outline:
     2px solid
-    var(--color-border-accent);
+    var(--color-focus);
 
   outline-offset: 2px;
 }
