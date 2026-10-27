@@ -132,10 +132,10 @@
     var(--font-family-heading);
 
   font-size:
-    var(--font-size-title-medium);
+    var(--font-size-body-medium);
 
   line-height:
-    var(--line-height-title-medium);
+    var(--line-height-body-medium);
 
   font-weight: 700;
 }
