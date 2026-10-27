@@ -22,7 +22,7 @@ export default function ExerciseHeader({
         {current && total && (
           <span
             className={styles.counter}
-            aria-label={`Question ${current} of ${total}`}
+            aria-label={`Spørgsmål ${current} af ${total}`}
           >
             {current} / {total}
           </span>

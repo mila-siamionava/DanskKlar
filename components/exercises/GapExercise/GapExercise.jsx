@@ -198,7 +198,7 @@ export default function GapExercise({ exercise }) {
       <ProgressBar
         value={answeredCount}
         max={totalQuestions}
-        label={`${answeredCount} of ${totalQuestions} answered`}
+        label={`${answeredCount} af ${totalQuestions} besvaret`}
       />
 
       <section className={styles.content}>{renderContent()}</section>
@@ -221,7 +221,7 @@ export default function GapExercise({ exercise }) {
 
           <div className={styles.reviewActions}>
             <Button href="/review" variant="secondary" size="md">
-              Review wrong answers and train
+              Gem forkerte svar og træn dem
             </Button>
           </div>
         </>

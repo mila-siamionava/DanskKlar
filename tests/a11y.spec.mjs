@@ -92,7 +92,7 @@ test.describe("keyboard", () => {
     await page.keyboard.press("Tab");
 
     await expect(
-      page.getByRole("link", { name: "Skip to content" }),
+      page.getByRole("link", { name: "Gå til indhold" }),
     ).toBeFocused();
   });
 
@@ -115,23 +115,23 @@ test.describe("keyboard", () => {
 
     await expect(page.getByRole("listbox")).toBeHidden();
     await expect(firstGap).toBeFocused();
-    await expect(firstGap).toHaveText(/(Correct|Wrong):/);
+    await expect(firstGap).toHaveText(/(Rigtigt|Forkert):/);
   });
 
   test("flashcard flips with keyboard and moves focus", async ({ page }) => {
     await saveWords(page);
     await page.goto("/review/train/flashcards");
 
-    await page.getByRole("button", { name: "Tap to reveal" }).focus();
+    await page.getByRole("button", { name: "Tryk for at se svaret" }).focus();
     await page.keyboard.press("Enter");
 
     await expect(
-      page.getByRole("button", { name: "Tap to turn back" }),
+      page.getByRole("button", { name: "Tryk for at vende tilbage" }),
     ).toBeFocused();
 
     // hidden front side is inert, so it can't be reached
     const revealIsInert = await page
-      .getByRole("button", { name: "Tap to reveal", includeHidden: true })
+      .getByRole("button", { name: "Tryk for at se svaret", includeHidden: true })
       .evaluate((element) => element.closest("[inert]") !== null);
 
     expect(revealIsInert).toBe(true);
@@ -146,7 +146,7 @@ test.describe("reduced motion", () => {
     await page.goto("http://localhost:3100/topics");
 
     const duration = await page
-      .getByRole("link", { name: "Back to home" })
+      .getByRole("link", { name: "Tilbage til forsiden" })
       .evaluate((element) => getComputedStyle(element).transitionDuration);
 
     expect(parseFloat(duration)).toBeLessThan(0.01);

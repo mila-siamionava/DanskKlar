@@ -15,7 +15,7 @@ export default function ExerciseState({
         <div className={styles.back}>
           <BackLink
             href={actionHref}
-            label={actionLabel || "Back"}
+            label={actionLabel || "Tilbage"}
           />
         </div>
       )}

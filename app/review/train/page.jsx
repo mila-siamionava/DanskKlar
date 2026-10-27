@@ -10,88 +10,88 @@ import styles from "./ReviewTrain.module.css";
 
 const trainingGroups = [
   {
-    title: "Memory",
+    title: "Husk",
     icon: Brain,
     modes: [
       {
         key: "flashcards",
         href: "/review/train/flashcards",
-        title: "Flashcards",
-        description: "Review words and their meanings.",
+        title: "Huskekort",
+        description: "Gennemgå ord og deres betydning.",
         icon: "▣",
       },
       {
         key: "match-pairs",
         href: "/review/train/match-pairs",
-        title: "Match pairs",
-        description: "Match each expression with its translation.",
+        title: "Find par",
+        description: "Sæt hvert udtryk sammen med oversættelsen.",
         icon: "▱▱",
       },
     ],
   },
   {
-    title: "Recognition",
+    title: "Genkend",
     icon: Eye,
     modes: [
       {
         key: "true-false",
         href: "/review/train/true-false",
-        title: "True or false",
-        description: "Decide whether the meaning is correct.",
+        title: "Sandt eller falsk",
+        description: "Afgør, om betydningen er rigtig.",
         icon: "✓✕",
       },
       {
         key: "multiple-choice",
         href: "/review/train/multiple-choice",
         title: "Multiple choice",
-        description: "Choose the correct meaning.",
+        description: "Vælg den rigtige betydning.",
         icon: "☷",
       },
       {
         key: "definition-word",
         href: "/review/train/definition-word",
-        title: "Definition → Word",
-        description: "Choose the word that matches the definition.",
+        title: "Definition → ord",
+        description: "Vælg det ord, der passer til definitionen.",
         icon: "A→",
       },
     ],
   },
   {
-    title: "Recall",
+    title: "Genkald",
     icon: RotateCcw,
     modes: [
       {
         key: "fill-gap",
         href: "/review/train/fill-gap",
-        title: "Fill the gap",
-        description: "Choose the expression that fits the context.",
+        title: "Udfyld hullet",
+        description: "Vælg det udtryk, der passer ind.",
         icon: "___",
       },
       {
         key: "first-letter",
         href: "/review/train/first-letter",
-        title: "First-letter hint",
-        description: "Recall the expression using the first-letter hint.",
+        title: "Første bogstav",
+        description: "Husk udtrykket ud fra første bogstav.",
         icon: "A_D",
       },
       {
         key: "typed-gap",
         href: "/review/train/typed-gap",
-        title: "Type the gap",
-        description: "Type the missing word or expression.",
+        title: "Skriv ordet",
+        description: "Skriv det manglende ord eller udtryk.",
         icon: "⌨",
       },
     ],
   },
   {
-    title: "Production",
+    title: "Brug",
     icon: PencilLine,
     modes: [
       {
         key: "build-sentence",
         href: "/review/train/build-sentence",
-        title: "Build a sentence",
-        description: "Put the words in the correct order.",
+        title: "Byg en sætning",
+        description: "Sæt ordene i den rigtige rækkefølge.",
         icon: "▤",
       },
     ],
@@ -114,13 +114,13 @@ export default async function ReviewTrainPage() {
     <main>
       <div className="mobilePage">
         <div className={styles.titleRow}>
-          <BackLink href="/review" label="Back to review" />
+          <BackLink href="/review" label="Tilbage til dine ord" />
 
-          <h1>Choose exercise type</h1>
+          <h1>Vælg øvelse</h1>
         </div>
 
         <header className={styles.header}>
-          <p>Practice from memory to active use.</p>
+          <p>Fra genkendelse til aktiv brug.</p>
         </header>
         <div className={styles.groups}>
           {availableGroups.map((group) => (

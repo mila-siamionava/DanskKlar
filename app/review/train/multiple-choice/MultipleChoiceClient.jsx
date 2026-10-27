@@ -20,19 +20,19 @@ const MODES = [
   {
     key: "english",
     label: "EN",
-    title: "English",
+    title: "Engelsk",
     field: "english",
   },
   {
     key: "russian",
     label: "RU",
-    title: "Russian",
+    title: "Russisk",
     field: "russian",
   },
   {
     key: "definition",
     label: "Definition",
-    title: "Danish definition",
+    title: "Dansk definition",
     field: "definition_da",
   },
 ];
@@ -247,8 +247,8 @@ export default function MultipleChoiceClient({
       <main className="mobilePage">
         <ExerciseState
           eyebrow="Multiple choice"
-          title="Loading words"
-          message="Preparing your selected review words…"
+          title="Henter ord"
+          message="Gør dine valgte ord klar …"
         />
       </main>
     );
@@ -259,9 +259,9 @@ export default function MultipleChoiceClient({
       <main className="mobilePage">
         <ExerciseState
           eyebrow="Multiple choice"
-          title="No words selected"
-          message="Choose some words in Review before starting this exercise."
-          actionLabel="Back to review"
+          title="Ingen ord valgt"
+          message="Vælg nogle ord under Dine ord, før du starter øvelsen."
+          actionLabel="Tilbage til dine ord"
           actionHref="/review"
         />
       </main>
@@ -275,9 +275,9 @@ export default function MultipleChoiceClient({
       <main className="mobilePage">
         <ExerciseState
           eyebrow="Multiple choice"
-          title="No usable vocabulary"
-          message="Your selected words have no English, Russian or Danish definition yet."
-          actionLabel="Back to review"
+          title="Ingen brugbare ord"
+          message="Dine valgte ord har endnu ingen oversættelse eller dansk definition."
+          actionLabel="Tilbage til dine ord"
           actionHref="/review"
         />
       </main>
@@ -289,16 +289,16 @@ export default function MultipleChoiceClient({
       <main className="mobilePage">
         <ExerciseState
           eyebrow="Multiple choice"
-          title="Practice complete"
-          message={`You reviewed ${
+          title="Øvelsen er færdig"
+          message={`Du har øvet ${
             usableItems.length
           } ${
             usableItems.length ===
             1
-              ? "word"
-              : "words"
+              ? "ord"
+              : "ord"
           }.`}
-          actionLabel="Back to training"
+          actionLabel="Tilbage til træning"
           actionHref="/review/train"
         />
       </main>
@@ -339,10 +339,9 @@ export default function MultipleChoiceClient({
   return (
     <ExerciseShell
       eyebrow="Multiple choice"
-      title={`Choose the correct ${
-        activeMode?.title ??
-        ""
-      } meaning`}
+      title={`Vælg den rigtige betydning (${
+        activeMode?.title ?? ""
+      })`}
       current={
         currentIndex + 1
       }
@@ -360,7 +359,7 @@ export default function MultipleChoiceClient({
             styles.modeLabel
           }
         >
-          Train with
+          Træn med
         </span>
 
         <div
@@ -368,7 +367,7 @@ export default function MultipleChoiceClient({
             styles.modeButtons
           }
           role="group"
-          aria-label="Choose training language"
+          aria-label="Vælg træningssprog"
         >
           {availableModes.map(
             (mode) => (
@@ -490,13 +489,10 @@ export default function MultipleChoiceClient({
               styles.noAnswer
             }
           >
-            No{" "}
             {
               activeMode?.title
             }{" "}
-            meaning is
-            available for this
-            word.
+            mangler for dette ord.
           </p>
         )}
 
@@ -515,7 +511,7 @@ export default function MultipleChoiceClient({
                   styles.feedbackCorrect
                 }
               >
-                ✓ Correct
+                ✓ Rigtigt
               </p>
             ) : (
               <div
@@ -524,7 +520,7 @@ export default function MultipleChoiceClient({
                 }
               >
                 <p>
-                  Correct answer:
+                  Rigtigt svar:
                 </p>
 
                 <strong>
@@ -545,7 +541,7 @@ export default function MultipleChoiceClient({
                 nextQuestion
               }
             >
-              Next →
+              Næste →
             </button>
           </div>
         )}

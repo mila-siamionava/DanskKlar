@@ -41,7 +41,7 @@ export default async function ExercisePage({ params, searchParams }) {
     <main>
       <div className={styles.page}>
         <div className={styles.topRow}>
-          <BackLink href="/exercises" label="Back to exercises" />
+          <BackLink href="/exercises" label="Tilbage til tekstøvelser" />
 
           <div className={styles.badges}>
             <Badge variant="neutral" size="sm">
@@ -53,7 +53,7 @@ export default async function ExercisePage({ params, searchParams }) {
             </Badge>
 
             <Badge variant="neutral" size="sm">
-              {exercise.questions.length} questions
+              {exercise.questions.length} spørgsmål
             </Badge>
           </div>
         </div>
@@ -70,7 +70,7 @@ export default async function ExercisePage({ params, searchParams }) {
                 exerciseType === "vocabulary_gap" ? "page" : undefined
               }
             >
-              Vocabulary
+              Ordforråd
             </Button>
 
             <Button
@@ -83,7 +83,7 @@ export default async function ExercisePage({ params, searchParams }) {
                 exerciseType === "connector_gap" ? "page" : undefined
               }
             >
-              Connectors
+              Bindeord
             </Button>
           </div>
 

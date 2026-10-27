@@ -9,19 +9,19 @@ import styles from "./ReadingPracticeClient.module.css";
 
 const filters = [
   {
-    label: "All",
+    label: "Alle",
     slug: null,
   },
   {
-    label: "Work",
+    label: "Arbejde",
     slug: "arbejde",
   },
   {
-    label: "Environment",
+    label: "Miljø",
     slug: "miljo",
   },
   {
-    label: "Health",
+    label: "Sundhed",
     slug: "sundhed",
   },
 ];
@@ -68,7 +68,7 @@ export default function ReadingPracticeClient({
             key={text.id}
             title={text.title}
             level={
-              text.level || "PD3.5"
+              text.level || "PD3"
             }
             topic={text.category}
             imageSrc={
