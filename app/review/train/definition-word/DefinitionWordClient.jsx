@@ -148,6 +148,20 @@ export default function DefinitionWordClient({
     );
   }
 
+  if (items.length === 0) {
+    return (
+      <main className="mobilePage">
+        <ExerciseState
+          eyebrow="Definition → Word"
+          title="No words selected"
+          message="Choose some words in Review before starting this exercise."
+          actionLabel="Back to review"
+          actionHref="/review"
+        />
+      </main>
+    );
+  }
+
   if (
     usableItems.length === 0
   ) {
