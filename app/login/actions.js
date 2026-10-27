@@ -69,7 +69,7 @@ export async function signup(formData) {
 
   const siteUrl = getSiteUrl();
 
-  const { error } =
+  const { data, error } =
     await supabase.auth.signUp({
       email,
       password,
@@ -85,6 +85,13 @@ export async function signup(formData) {
         error.message,
       )}`,
     );
+  }
+
+  // email confirmation is off, so the new user is already signed in
+  if (data.session) {
+    revalidatePath("/", "layout");
+
+    redirect("/");
   }
 
   redirect(
