@@ -321,6 +321,20 @@ export default function BuildSentenceClient({
     );
   }
 
+  if (selectedItems.length === 0) {
+    return (
+      <main className="mobilePage">
+        <ExerciseState
+          eyebrow="Build sentence"
+          title="No words selected"
+          message="Choose some words in Review before starting this exercise."
+          actionLabel="Back to review"
+          actionHref="/review"
+        />
+      </main>
+    );
+  }
+
   if (
     usableItems.length === 0
   ) {

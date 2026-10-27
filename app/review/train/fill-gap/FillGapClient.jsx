@@ -377,6 +377,20 @@ export default function FillGapClient({
     );
   }
 
+  if (selectedItems.length === 0) {
+    return (
+      <main className="mobilePage">
+        <ExerciseState
+          eyebrow="Fill the gap"
+          title="No words selected"
+          message="Choose some words in Review before starting this exercise."
+          actionLabel="Back to review"
+          actionHref="/review"
+        />
+      </main>
+    );
+  }
+
   if (items.length === 0) {
     return (
       <main className="mobilePage">
