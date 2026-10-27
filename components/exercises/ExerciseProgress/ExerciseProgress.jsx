@@ -16,7 +16,7 @@ export default function ExerciseProgress({
     <div
   className={styles.progress}
   role="progressbar"
-  aria-label="Exercise progress"
+  aria-label="Fremskridt i øvelsen"
   aria-valuemin={0}
   aria-valuemax={total}
   aria-valuenow={current}

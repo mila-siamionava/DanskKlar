@@ -15,6 +15,7 @@ import ExerciseState from "@/components/exercises/ExerciseState/ExerciseState";
 import { useSelectedReviewItems } from "../_hooks/useSelectedReviewItems";
 
 import styles from "./Flashcards.module.css";
+import { formatPartOfSpeech } from "@/lib/vocabulary/partOfSpeech";
 
 export default function FlashcardsClient() {
   const {
@@ -53,9 +54,9 @@ export default function FlashcardsClient() {
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Flashcards"
-          title="Loading flashcards"
-          message="Preparing your selected words…"
+          eyebrow="Huskekort"
+          title="Henter kort"
+          message="Gør dine valgte ord klar …"
         />
       </main>
     );
@@ -65,10 +66,10 @@ export default function FlashcardsClient() {
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Flashcards"
-          title="No words selected"
-          message="Choose some words in Review before starting flashcards."
-          actionLabel="Back to training"
+          eyebrow="Huskekort"
+          title="Ingen ord valgt"
+          message="Vælg nogle ord under Dine ord, før du starter med kortene."
+          actionLabel="Tilbage til træning"
           actionHref="/review/train"
         />
       </main>
@@ -79,14 +80,14 @@ export default function FlashcardsClient() {
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Flashcards"
-          title="Review complete"
-          message={`You reviewed ${items.length} ${
+          eyebrow="Huskekort"
+          title="Du er færdig"
+          message={`Du har øvet ${items.length} ${
             items.length === 1
-              ? "word"
-              : "words"
+              ? "ord"
+              : "ord"
           }.`}
-          actionLabel="Back to training"
+          actionLabel="Tilbage til træning"
           actionHref="/review/train"
         />
       </main>
@@ -98,19 +99,19 @@ export default function FlashcardsClient() {
 
   const english =
     currentItem.english ||
-    "No English translation";
+    "Ingen engelsk oversættelse";
 
   const russian =
     currentItem.russian ||
     "Нет русского перевода";
 
-  const partOfSpeech =
+  const partOfSpeech = formatPartOfSpeech(
     currentItem.part_of_speech ||
-    currentItem.partOfSpeech ||
-    currentItem.pos ||
-    currentItem.word_type ||
-    currentItem.type ||
-    "";
+      currentItem.partOfSpeech ||
+      currentItem.pos ||
+      currentItem.word_type ||
+      currentItem.type,
+  );
 
   function moveToNextCard() {
     setFlipped(false);
@@ -231,8 +232,8 @@ export default function FlashcardsClient() {
 
   return (
     <ExerciseShell
-      eyebrow="Flashcards"
-      title="Remember, then flip"
+      eyebrow="Huskekort"
+      title="Husk ordet, og vend så kortet"
       current={currentIndex + 1}
       total={items.length}
     >
@@ -314,7 +315,7 @@ export default function FlashcardsClient() {
                 />
 
                 <span>
-                  Tap to reveal
+                  Tryk for at se svaret
                 </span>
               </button>
             </div>
@@ -334,7 +335,7 @@ export default function FlashcardsClient() {
                       styles.sectionLabel
                     }
                   >
-                    Meaning
+                    Betydning
                   </span>
 
                   <p
@@ -372,7 +373,7 @@ export default function FlashcardsClient() {
                         styles.infoLabel
                       }
                     >
-                      English
+                      Engelsk
                     </span>
 
                     <ChevronDown
@@ -416,7 +417,7 @@ export default function FlashcardsClient() {
                         styles.infoLabel
                       }
                     >
-                      Russian
+                      Russisk
                     </span>
 
                     <ChevronDown
@@ -461,7 +462,7 @@ export default function FlashcardsClient() {
                           styles.infoLabel
                         }
                       >
-                        Examples
+                        Eksempler
                       </span>
 
                       <ChevronDown
@@ -505,7 +506,7 @@ export default function FlashcardsClient() {
                 />
 
                 <span>
-                  Tap to turn back
+                  Tryk for at vende tilbage
                 </span>
               </button>
             </div>
@@ -526,7 +527,7 @@ export default function FlashcardsClient() {
           onClick={reviewAgain}
         >
           <span>←</span>
-          Review again
+          Øv igen
         </button>
 
         <button
@@ -536,7 +537,7 @@ export default function FlashcardsClient() {
           }
           onClick={rememberWord}
         >
-          I know this
+          Det kan jeg
           <span>→</span>
         </button>
       </div>

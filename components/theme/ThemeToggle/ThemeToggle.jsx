@@ -53,8 +53,8 @@ export default function ThemeToggle() {
       aria-pressed={isDark}
       aria-label={
         isDark
-          ? "Switch to light theme"
-          : "Switch to dark theme"
+          ? "Skift til lyst tema"
+          : "Skift til mørkt tema"
       }
     >
       <span className={styles.content}>

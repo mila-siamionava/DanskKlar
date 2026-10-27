@@ -26,7 +26,9 @@ export async function login(formData) {
 
   if (!email || !password) {
     redirect(
-      "/login?error=Email and password are required.",
+      `/login?error=${encodeURIComponent(
+        "Skriv både e-mail og adgangskode.",
+      )}`,
     );
   }
 
@@ -57,13 +59,17 @@ export async function signup(formData) {
 
   if (!email || !password) {
     redirect(
-      "/login?mode=signup&error=Email and password are required.",
+      `/login?mode=signup&error=${encodeURIComponent(
+        "Skriv både e-mail og adgangskode.",
+      )}`,
     );
   }
 
   if (password.length < 8) {
     redirect(
-      "/login?mode=signup&error=Password must be at least 8 characters.",
+      `/login?mode=signup&error=${encodeURIComponent(
+        "Adgangskoden skal have mindst 8 tegn.",
+      )}`,
     );
   }
 
@@ -95,7 +101,9 @@ export async function signup(formData) {
   }
 
   redirect(
-    "/login?message=Account created. You can sign in now.",
+    `/login?message=${encodeURIComponent(
+        "Din konto er oprettet. Du kan logge ind nu.",
+      )}`,
   );
 }
 
@@ -108,7 +116,9 @@ export async function resendConfirmation(
 
   if (!email) {
     redirect(
-      "/resend-confirmation?error=Email is required.",
+      `/resend-confirmation?error=${encodeURIComponent(
+        "Skriv din e-mail.",
+      )}`,
     );
   }
 
@@ -133,7 +143,9 @@ export async function resendConfirmation(
   }
 
   redirect(
-    "/resend-confirmation?message=If this email belongs to an unconfirmed account, a new confirmation email has been sent.",
+    `/resend-confirmation?message=${encodeURIComponent(
+        "Hvis e-mailen hører til en konto, der ikke er bekræftet, har vi sendt en ny bekræftelsesmail.",
+      )}`,
   );
 }
 
@@ -146,7 +158,9 @@ export async function requestPasswordReset(
 
   if (!email) {
     redirect(
-      "/forgot-password?error=Email is required.",
+      `/forgot-password?error=${encodeURIComponent(
+        "Skriv din e-mail.",
+      )}`,
     );
   }
 
@@ -170,7 +184,9 @@ export async function requestPasswordReset(
   }
 
   redirect(
-    "/forgot-password?message=If an account exists for this email, a password reset link has been sent.",
+    `/forgot-password?message=${encodeURIComponent(
+        "Hvis der findes en konto med denne e-mail, har vi sendt et link til en ny adgangskode.",
+      )}`,
   );
 }
 
@@ -187,19 +203,25 @@ export async function updatePassword(
 
   if (!password || !confirmPassword) {
     redirect(
-      "/update-password?error=Both password fields are required.",
+      `/update-password?error=${encodeURIComponent(
+        "Udfyld begge felter med adgangskode.",
+      )}`,
     );
   }
 
   if (password.length < 8) {
     redirect(
-      "/update-password?error=Password must be at least 8 characters.",
+      `/update-password?error=${encodeURIComponent(
+        "Adgangskoden skal have mindst 8 tegn.",
+      )}`,
     );
   }
 
   if (password !== confirmPassword) {
     redirect(
-      "/update-password?error=Passwords do not match.",
+      `/update-password?error=${encodeURIComponent(
+        "Adgangskoderne er ikke ens.",
+      )}`,
     );
   }
 
@@ -209,7 +231,9 @@ export async function updatePassword(
 
   if (!user) {
     redirect(
-      "/login?error=Your password reset link is invalid or has expired. Please request a new one.",
+      `/login?error=${encodeURIComponent(
+        "Linket til ny adgangskode er ugyldigt eller udløbet. Bestil et nyt.",
+      )}`,
     );
   }
 
@@ -229,6 +253,8 @@ export async function updatePassword(
   await supabase.auth.signOut();
 
   redirect(
-    "/login?message=Your password has been updated. You can sign in with your new password.",
+    `/login?message=${encodeURIComponent(
+        "Din adgangskode er ændret. Du kan logge ind med den nye adgangskode.",
+      )}`,
   );
 }

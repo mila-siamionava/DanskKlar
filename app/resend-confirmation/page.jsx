@@ -22,12 +22,12 @@ export default async function ResendConfirmationPage({
 
         <header className={styles.header}>
           <h1>
-            Resend confirmation email
+            Send bekræftelsesmail igen
           </h1>
 
           <p>
-            Enter the email address you used
-            when creating your account.
+            Skriv den e-mailadresse, du
+            brugte, da du oprettede din konto.
           </p>
         </header>
 
@@ -52,7 +52,7 @@ export default async function ResendConfirmationPage({
         <form className={styles.form}>
           <div className={styles.field}>
             <label htmlFor="email">
-              Email
+              E-mail
             </label>
 
             <input
@@ -69,7 +69,7 @@ export default async function ResendConfirmationPage({
             fullWidth
             formAction={resendConfirmation}
           >
-            Resend confirmation email
+            Send bekræftelsesmail igen
           </Button>
         </form>
 
@@ -77,7 +77,7 @@ export default async function ResendConfirmationPage({
           href="/login"
           className={styles.backLink}
         >
-          Back to sign in
+          Tilbage til log ind
         </Link>
       </section>
     </main>

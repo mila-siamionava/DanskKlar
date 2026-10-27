@@ -21,12 +21,12 @@ export default async function UpdatePasswordPage({
 
         <header className={styles.header}>
           <h1>
-            Choose a new password
+            Vælg en ny adgangskode
           </h1>
 
           <p>
-            Your new password must contain
-            at least 8 characters.
+            Din nye adgangskode skal
+            have mindst 8 tegn.
           </p>
         </header>
 
@@ -42,7 +42,7 @@ export default async function UpdatePasswordPage({
         <form className={styles.form}>
           <div className={styles.field}>
             <label htmlFor="password">
-              New password
+              Ny adgangskode
             </label>
 
             <input
@@ -61,7 +61,7 @@ export default async function UpdatePasswordPage({
 
           <div className={styles.field}>
             <label htmlFor="confirmPassword">
-              Confirm new password
+              Gentag ny adgangskode
             </label>
 
             <input
@@ -79,7 +79,7 @@ export default async function UpdatePasswordPage({
             fullWidth
             formAction={updatePassword}
           >
-            Update password
+            Gem ny adgangskode
           </Button>
         </form>
 
@@ -87,7 +87,7 @@ export default async function UpdatePasswordPage({
           href="/login"
           className={styles.backLink}
         >
-          Back to sign in
+          Tilbage til log ind
         </Link>
       </section>
     </main>

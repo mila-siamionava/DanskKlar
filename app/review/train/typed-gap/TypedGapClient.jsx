@@ -116,9 +116,9 @@ export default function TypedGapClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Typed gap"
-          title="Loading words"
-          message="Preparing your selected review words…"
+          eyebrow="Skriv ordet"
+          title="Henter ord"
+          message="Gør dine valgte ord klar …"
         />
       </main>
     );
@@ -128,10 +128,10 @@ export default function TypedGapClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Typed gap"
-          title="No words selected"
-          message="Choose some words in Review before starting this exercise."
-          actionLabel="Back to review"
+          eyebrow="Skriv ordet"
+          title="Ingen ord valgt"
+          message="Vælg nogle ord under Dine ord, før du starter øvelsen."
+          actionLabel="Tilbage til dine ord"
           actionHref="/review"
         />
       </main>
@@ -142,10 +142,10 @@ export default function TypedGapClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Typed gap"
-          title="No usable examples"
-          message="Your selected Review words do not have usable example sentences for this exercise."
-          actionLabel="Back to review"
+          eyebrow="Skriv ordet"
+          title="Ingen brugbare eksempler"
+          message="Dine valgte ord har ingen eksempelsætninger, der kan bruges i denne øvelse."
+          actionLabel="Tilbage til dine ord"
           actionHref="/review"
         />
       </main>
@@ -156,16 +156,16 @@ export default function TypedGapClient({
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Typed gap"
-          title="Practice complete"
-          message={`You completed ${
+          eyebrow="Skriv ordet"
+          title="Øvelsen er færdig"
+          message={`Du har lavet ${
             items.length
           } ${
             items.length === 1
-              ? "gap"
-              : "gaps"
+              ? "hul"
+              : "huller"
           }.`}
-          actionLabel="Back to training"
+          actionLabel="Tilbage til træning"
           actionHref="/review/train"
         />
       </main>
@@ -216,8 +216,8 @@ export default function TypedGapClient({
 
   return (
     <ExerciseShell
-      eyebrow="Typed gap"
-      title="Complete the sentence"
+      eyebrow="Skriv ordet"
+      title="Gør sætningen færdig"
       current={
         currentIndex + 1
       }
@@ -265,7 +265,7 @@ export default function TypedGapClient({
                 styles.hintSummary
               }
             >
-              Hint
+              Tip
             </summary>
 
             <div
@@ -293,7 +293,7 @@ export default function TypedGapClient({
                       )
                     }
                   >
-                    English
+                    Engelsk
                   </button>
                 )}
 
@@ -312,7 +312,7 @@ export default function TypedGapClient({
                       )
                     }
                   >
-                    Russian
+                    Russisk
                   </button>
                 )}
 
@@ -388,7 +388,7 @@ export default function TypedGapClient({
             }
             htmlFor="typed-answer"
           >
-            Your answer
+            Dit svar
           </label>
 
           <input
@@ -418,7 +418,7 @@ export default function TypedGapClient({
                 styles.checkButton
               }
             >
-              Check
+              Tjek
             </button>
           )}
         </form>
@@ -435,7 +435,7 @@ export default function TypedGapClient({
                   styles.correct
                 }
               >
-                ✓ Correct
+                ✓ Rigtigt
               </p>
             ) : (
               <div
@@ -444,7 +444,7 @@ export default function TypedGapClient({
                 }
               >
                 <p>
-                  Correct answer:
+                  Rigtigt svar:
                 </p>
 
                 <strong>
@@ -464,7 +464,7 @@ export default function TypedGapClient({
                 nextQuestion
               }
             >
-              Next →
+              Næste →
             </button>
           </div>
         )}

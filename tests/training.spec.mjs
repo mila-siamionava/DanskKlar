@@ -46,7 +46,7 @@ test.describe("training with no words selected", () => {
       await page.goto(`/review/train/${mode}`);
 
       await expect(
-        page.getByRole("heading", { name: "No words selected" }),
+        page.getByRole("heading", { name: "Ingen ord valgt" }),
       ).toBeVisible();
     });
   }
@@ -72,7 +72,7 @@ test.describe("training with words that have no English", () => {
     await page.goto("/review/train/match-pairs");
 
     await expect(
-      page.getByRole("heading", { name: "Russian" }),
+      page.getByRole("heading", { name: "Russisk" }),
     ).toBeVisible();
 
     await expect(page.getByRole("button", { name: "работа" })).toBeVisible();
@@ -85,15 +85,15 @@ test.describe("review", () => {
     await page.goto("/review");
 
     page.once("dialog", (dialog) => dialog.dismiss());
-    await page.getByRole("button", { name: "Delete all" }).click();
+    await page.getByRole("button", { name: "Slet alle" }).click();
 
     await expect(page.getByText("kollega")).toBeVisible();
 
     page.once("dialog", (dialog) => dialog.accept());
-    await page.getByRole("button", { name: "Delete all" }).click();
+    await page.getByRole("button", { name: "Slet alle" }).click();
 
     await expect(
-      page.getByText("No words or phrases to review yet."),
+      page.getByText("Du har ikke gemt nogen ord eller udtryk endnu."),
     ).toBeVisible();
   });
 });

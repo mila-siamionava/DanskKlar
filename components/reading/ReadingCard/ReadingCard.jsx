@@ -7,7 +7,7 @@ import styles from "./ReadingCard.module.css";
 
 export default function ReadingCard({
   title,
-  level = "PD3.5",
+  level = "PD3",
   topic,
   vocabularyHref,
   conjunctionsHref,
@@ -23,7 +23,7 @@ export default function ReadingCard({
         <Link
           href={primaryHref}
           className={styles.cardLink}
-          aria-label={`Open ${title}`}
+          aria-label={`Åbn ${title}`}
         />
       )}
 
@@ -61,7 +61,7 @@ export default function ReadingCard({
               href={vocabularyHref}
               className={`${styles.action} ${styles.primaryAction}`}
             >
-              Vocabulary
+              Ordforråd
             </Link>
           )}
 
@@ -70,7 +70,7 @@ export default function ReadingCard({
               href={conjunctionsHref}
               className={`${styles.action} ${styles.secondaryAction}`}
             >
-            Connectors
+            Bindeord
             </Link>
           )}
         </div>

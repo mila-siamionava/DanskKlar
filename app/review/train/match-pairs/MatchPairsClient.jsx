@@ -32,8 +32,8 @@ export default function MatchPairsClient() {
 
   const translationTitle =
     translationField === "english"
-      ? "English"
-      : "Russian";
+      ? "Engelsk"
+      : "Russisk";
 
   const usableVocabulary =
     useMemo(
@@ -214,9 +214,9 @@ export default function MatchPairsClient() {
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Match pairs"
-          title="Loading words"
-          message="Preparing your selected review words…"
+          eyebrow="Find par"
+          title="Henter ord"
+          message="Gør dine valgte ord klar …"
         />
       </main>
     );
@@ -226,10 +226,10 @@ export default function MatchPairsClient() {
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Match pairs"
-          title="No words selected"
-          message="Choose some words in Review before starting this exercise."
-          actionLabel="Back to review"
+          eyebrow="Find par"
+          title="Ingen ord valgt"
+          message="Vælg nogle ord under Dine ord, før du starter øvelsen."
+          actionLabel="Tilbage til dine ord"
           actionHref="/review"
         />
       </main>
@@ -242,10 +242,10 @@ export default function MatchPairsClient() {
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Match pairs"
-          title="No usable vocabulary"
-          message="Your selected words have no English or Russian translation yet."
-          actionLabel="Back to review"
+          eyebrow="Find par"
+          title="Ingen brugbare ord"
+          message="Dine valgte ord har endnu ingen engelsk eller russisk oversættelse."
+          actionLabel="Tilbage til dine ord"
           actionHref="/review"
         />
       </main>
@@ -258,10 +258,10 @@ export default function MatchPairsClient() {
     return (
       <main className="mobilePage">
         <ExerciseState
-          eyebrow="Match pairs"
-          title="Practice complete"
-          message="You matched all selected review words."
-          actionLabel="Back to training"
+          eyebrow="Find par"
+          title="Øvelsen er færdig"
+          message="Du har fundet alle par."
+          actionLabel="Tilbage til træning"
           actionHref="/review/train"
         />
       </main>
@@ -270,8 +270,8 @@ export default function MatchPairsClient() {
 
   return (
     <ExerciseShell
-      eyebrow="Match pairs"
-      title="Match each word with its meaning"
+      eyebrow="Find par"
+      title="Find betydningen af hvert ord"
       current={round + 1}
       total={totalRounds}
     >
@@ -290,7 +290,7 @@ export default function MatchPairsClient() {
               styles.columnTitle
             }
           >
-            Danish
+            Dansk
           </h2>
 
           {roundItems.map(
@@ -398,8 +398,8 @@ export default function MatchPairsClient() {
             styles.wrong
           }
         >
-          Not a match — try
-          again.
+          Ikke et par. Prøv
+          igen.
         </p>
       )}
 
@@ -413,7 +413,7 @@ export default function MatchPairsClient() {
             nextRound
           }
         >
-          Next round →
+          Næste runde →
         </button>
       )}
     </ExerciseShell>

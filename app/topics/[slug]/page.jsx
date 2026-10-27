@@ -34,7 +34,7 @@ export default async function TopicPage({ params }) {
         <div className={styles.headerRow}>
           <BackLink
             href="/topics"
-            label="Back to topics"
+            label="Tilbage til emner"
             title={topic.name}
           />
         </div>
@@ -42,7 +42,7 @@ export default async function TopicPage({ params }) {
         
 
         <p className={styles.intro}>
-          Choose what you want to practise
+          Vælg, hvad du vil øve
         </p>
 
         <div className={styles.optionList}>
@@ -52,16 +52,16 @@ export default async function TopicPage({ params }) {
           >
             <div className={styles.optionContent}>
               <h2 className={styles.optionTitle}>
-                Vocabulary
+                Ordforråd
               </h2>
 
               <p className={styles.optionDescription}>
-                Learn useful topic words and add them
-                to your review list.
+                Lær nyttige ord om emnet, og gem
+                dem under Dine ord.
               </p>
 
               <span className={styles.optionMeta}>
-                {wordCount} words
+                {wordCount} ord
               </span>
             </div>
 
@@ -79,16 +79,16 @@ export default async function TopicPage({ params }) {
 >
   <div className={styles.optionContent}>
     <h2 className={styles.optionTitle}>
-      Texts
+      Tekster
     </h2>
 
     <p className={styles.optionDescription}>
-      Practise reading texts related to this
-      topic.
+      Øv dig med tekster om
+      emnet.
     </p>
 
     <span className={styles.optionMeta}>
-      Reading practice
+      Tekstøvelser
     </span>
   </div>
 

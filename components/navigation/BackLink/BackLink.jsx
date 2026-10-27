@@ -4,7 +4,7 @@ import styles from "./BackLink.module.css";
 
 export default function BackLink({
   href,
-  label = "Back",
+  label = "Tilbage",
   title = "",
 }) {
   return (
