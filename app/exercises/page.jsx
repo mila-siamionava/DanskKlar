@@ -1,4 +1,3 @@
-import AppHeader from "@/components/navigation/AppHeader/AppHeader";
 import BackLink from "@/components/navigation/BackLink/BackLink";
 
 import ReadingPracticeClient from "./_components/ReadingPracticeClient/ReadingPracticeClient";
@@ -100,8 +99,6 @@ export default async function ExercisesPage({
 
   return (
     <main>
-      <AppHeader title="DanskKlar" />
-
       <div className={styles.page}>
         <h1 className="u-visually-hidden">
           Text practice

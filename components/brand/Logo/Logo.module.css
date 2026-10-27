@@ -1,0 +1,50 @@
+.mark {
+  display: block;
+
+  width: 3.6rem;
+  height: auto;
+
+  flex-shrink: 0;
+}
+
+.cover {
+  fill: var(--color-logo-cover);
+}
+
+.page {
+  fill: var(--color-logo-page);
+  stroke: var(--color-logo-cover);
+}
+
+.flag {
+  fill: var(--color-flag);
+}
+
+.cross {
+  fill: none;
+  stroke: var(--color-flag-cross);
+}
+
+.lines {
+  fill: none;
+  stroke: var(--color-logo-line);
+  stroke-linecap: round;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+
+  gap: var(--spacing-xs);
+}
+
+.name {
+  color: var(--color-text-primary);
+
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-large);
+  line-height: var(--line-height-label-large);
+  font-weight: 700;
+
+  letter-spacing: -0.01em;
+}

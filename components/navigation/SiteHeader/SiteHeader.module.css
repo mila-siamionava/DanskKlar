@@ -1,0 +1,32 @@
+.header {
+  width: min(100%, var(--content-max-width));
+
+  margin-inline: auto;
+
+  padding:
+    var(--spacing-sm)
+    var(--spacing-md)
+    0;
+}
+
+.home {
+  display: inline-flex;
+
+  border-radius: var(--border-radius-xs);
+
+  text-decoration: none;
+}
+
+.home:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 4px;
+}
+
+@media only screen and (min-width: 37.5em) {
+  .header {
+    padding:
+      var(--spacing-md)
+      var(--spacing-lg)
+      0;
+  }
+}
