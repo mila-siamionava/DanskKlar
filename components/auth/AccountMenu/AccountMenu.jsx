@@ -60,8 +60,8 @@ export default function AccountMenu({ email }) {
         className={styles.accountButton}
         aria-label={
           isOpen
-            ? "Close account menu"
-            : "Open account menu"
+            ? "Luk kontomenu"
+            : "Åbn kontomenu"
         }
         aria-expanded={isOpen}
         onClick={() =>
@@ -79,7 +79,7 @@ export default function AccountMenu({ email }) {
         <div className={styles.accountDropdown}>
           <div className={styles.accountInfo}>
             <span className={styles.accountLabel}>
-              Signed in as
+              Logget ind som
             </span>
 
             <span className={styles.accountEmail}>
@@ -107,7 +107,7 @@ export default function AccountMenu({ email }) {
                 aria-hidden="true"
               />
 
-              Sign out
+              Log ud
             </button>
           </form>
         </div>

@@ -92,9 +92,7 @@ export default function ReviewPage() {
     const amount = selectedIds.length;
 
     const confirmed = window.confirm(
-      `Delete ${amount} selected ${
-        amount === 1 ? "word" : "words"
-      } from Review?`,
+      `Vil du slette ${amount} valgte ord?`,
     );
 
     if (!confirmed) {
@@ -114,7 +112,7 @@ export default function ReviewPage() {
 
   function deleteAllWords() {
     const confirmed = window.confirm(
-      `Delete all ${items.length} words from Review? This cannot be undone.`,
+      `Vil du slette alle ${items.length} ord? Det kan ikke fortrydes.`,
     );
 
     if (!confirmed) {
@@ -134,17 +132,17 @@ export default function ReviewPage() {
       <div className={styles.titleRow}>
         <BackLink
           href="/"
-          label="Back to home"
+          label="Tilbage til forsiden"
         />
 
         <h1>
-          Vocabulary review
+          Dine ord
         </h1>
       </div>
 
       <header className={styles.header}>
         <p>
-          Select the words and expressions you want to practice.
+          Vælg de ord og udtryk, du vil øve.
         </p>
       </header>
 
@@ -166,7 +164,7 @@ export default function ReviewPage() {
                   selectAllWords
                 }
               >
-                Select all
+                Vælg alle
               </button>
 
               <button
@@ -178,7 +176,7 @@ export default function ReviewPage() {
                   deleteAllWords
                 }
               >
-                Delete all
+                Slet alle
               </button>
             </>
           ) : (
@@ -192,7 +190,7 @@ export default function ReviewPage() {
                   startTraining
                 }
               >
-                Train selected
+                Træn valgte
               </button>
 
               <button
@@ -204,7 +202,7 @@ export default function ReviewPage() {
                   deleteSelectedWords
                 }
               >
-                Delete selected
+                Slet valgte
               </button>
             </>
           )}
@@ -217,8 +215,8 @@ export default function ReviewPage() {
             styles.emptyState
           }
         >
-          No words or phrases to
-          review yet.
+          Du har ikke gemt nogen ord
+          eller udtryk endnu.
         </p>
       ) : (
         <div

@@ -293,7 +293,7 @@ export default function GapSelect({
             <>
               <span aria-hidden="true">✓ </span>
               <span className="u-visually-hidden">
-                Correct:
+                Rigtigt:
               </span>
             </>
           )}
@@ -302,14 +302,14 @@ export default function GapSelect({
             <>
               <span aria-hidden="true">✕ </span>
               <span className="u-visually-hidden">
-                Wrong:
+                Forkert:
               </span>
             </>
           )}
 
           {selectedOption
             ? selectedOption.text
-            : `(${question.id}) Choose answer`}
+            : `(${question.id}) Vælg svar`}
         </span>
 
         <span
@@ -333,7 +333,7 @@ export default function GapSelect({
               : ""
           }`}
           role="listbox"
-          aria-label={`Question ${question.id} answers`}
+          aria-label={`Svarmuligheder til spørgsmål ${question.id}`}
         >
           {question.options.map(
             (option, index) => {

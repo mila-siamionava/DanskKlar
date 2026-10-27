@@ -30,14 +30,14 @@ export default async function LoginPage({
         <header className={styles.header}>
           <h1>
             {isSignup
-              ? "Create your account"
-              : "Welcome back"}
+              ? "Opret en konto"
+              : "Velkommen tilbage"}
           </h1>
 
           <p>
             {isSignup
-              ? "Save your words and keep your Danish practice in one place."
-              : "Sign in to continue your Danish practice."}
+              ? "Gem dine ord, og saml al din danskøvelse ét sted."
+              : "Log ind for at fortsætte med at øve dansk."}
           </p>
         </header>
 
@@ -62,14 +62,14 @@ export default async function LoginPage({
         {showResend && (
           <div className={styles.authHelpBlock}>
             <p>
-              Need a new confirmation link?
+              Har du brug for et nyt bekræftelseslink?
             </p>
 
             <Link
               href="/resend-confirmation"
               className={styles.authLink}
             >
-              Resend confirmation email
+              Send bekræftelsesmail igen
             </Link>
           </div>
         )}
@@ -77,7 +77,7 @@ export default async function LoginPage({
         <form className={styles.form}>
           <div className={styles.field}>
             <label htmlFor="email">
-              Email
+              E-mail
             </label>
 
             <input
@@ -91,7 +91,7 @@ export default async function LoginPage({
 
           <div className={styles.field}>
             <label htmlFor="password">
-              Password
+              Adgangskode
             </label>
 
             <input
@@ -119,7 +119,7 @@ export default async function LoginPage({
                   href="/forgot-password"
                   className={styles.authLink}
                 >
-                  Forgot password?
+                  Glemt adgangskode?
                 </Link>
               </div>
             )}
@@ -135,16 +135,16 @@ export default async function LoginPage({
             }
           >
             {isSignup
-              ? "Create account"
-              : "Sign in"}
+              ? "Opret konto"
+              : "Log ind"}
           </Button>
         </form>
 
         <div className={styles.switch}>
           <span>
             {isSignup
-              ? "Already have an account?"
-              : "New to DanskKlar?"}
+              ? "Har du allerede en konto?"
+              : "Ny på DanskKlar?"}
           </span>
 
           <Link
@@ -155,20 +155,20 @@ export default async function LoginPage({
             }
           >
             {isSignup
-              ? "Sign in"
-              : "Create an account"}
+              ? "Log ind"
+              : "Opret en konto"}
           </Link>
         </div>
 
         <div className={styles.divider}>
-          <span>or</span>
+          <span>eller</span>
         </div>
 
         <Link
           href="/"
           className={styles.guest}
         >
-          Continue without signing in
+          Fortsæt uden at logge ind
         </Link>
       </section>
     </main>

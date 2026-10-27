@@ -22,13 +22,13 @@ export default async function ForgotPasswordPage({
 
         <header className={styles.header}>
           <h1>
-            Reset your password
+            Nulstil din adgangskode
           </h1>
 
           <p>
-            Enter your email address and
-            we will send you a password
-            reset link.
+            Skriv din e-mailadresse, så
+            sender vi dig et link til en
+            ny adgangskode.
           </p>
         </header>
 
@@ -53,7 +53,7 @@ export default async function ForgotPasswordPage({
         <form className={styles.form}>
           <div className={styles.field}>
             <label htmlFor="email">
-              Email
+              E-mail
             </label>
 
             <input
@@ -70,7 +70,7 @@ export default async function ForgotPasswordPage({
             fullWidth
             formAction={requestPasswordReset}
           >
-            Send password reset link
+            Send link til ny adgangskode
           </Button>
         </form>
 
@@ -78,7 +78,7 @@ export default async function ForgotPasswordPage({
           href="/login"
           className={styles.backLink}
         >
-          Back to sign in
+          Tilbage til log ind
         </Link>
       </section>
     </main>

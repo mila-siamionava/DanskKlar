@@ -15,14 +15,14 @@ export default function ExerciseTop({
       <div className={styles.topRow}>
         <BackLink
           href="/review/train"
-          label="Back to training"
+          label="Tilbage til træning"
           title={eyebrow}
         />
 
         {current && total ? (
           <span
             className={styles.counter}
-            aria-label={`Question ${current} of ${total}`}
+            aria-label={`Spørgsmål ${current} af ${total}`}
           >
             {current} / {total}
           </span>
