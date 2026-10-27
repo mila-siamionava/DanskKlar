@@ -52,6 +52,26 @@
     var(--color-text-secondary);
 }
 
+.section {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-sm);
+}
+
+.sectionTitle {
+  margin: 0;
+
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-label-medium);
+  line-height: var(--line-height-label-medium);
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
 .navigation {
   display: flex;
   flex-direction: column;

@@ -92,11 +92,11 @@ export default async function ExercisesPage({
 
   const backHref = initialTopic
     ? `/topics/${initialTopic}`
-    : "/";
+    : "/reading";
 
   const backLabel = initialTopic
     ? "Back to topic"
-    : "Back to home";
+    : "Back to reading";
 
   return (
     <main>
@@ -104,7 +104,7 @@ export default async function ExercisesPage({
 
       <div className={styles.page}>
         <h1 className="u-visually-hidden">
-          Mockup Reading Tests
+          Text practice
         </h1>
 
         <div className={styles.introRow}>
