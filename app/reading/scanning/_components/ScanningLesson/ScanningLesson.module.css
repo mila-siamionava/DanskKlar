@@ -1,0 +1,150 @@
+/* full-height reader: the document and questions scroll, not the page */
+
+.page {
+  /* the reader needs the whole screen, not the framed card other pages use */
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+
+  margin: 0;
+
+  border: none;
+  border-radius: 0;
+
+  box-shadow: none;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--color-background-page);
+}
+
+.topBar {
+  flex: none;
+
+  display: flex;
+  align-items: center;
+
+  gap: var(--spacing-sm);
+
+  padding: var(--spacing-sm) var(--spacing-md);
+
+  border-bottom: 1px solid var(--color-border-primary);
+
+  background: var(--color-background-surface);
+}
+
+.heading {
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+
+  overflow: hidden;
+
+  font-size: var(--font-size-label-large);
+  line-height: var(--line-height-label-large);
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stageLabel {
+  margin: 0;
+
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-label-small);
+  line-height: var(--line-height-label-small);
+}
+
+.progress {
+  flex: none;
+
+  height: 0.4rem;
+
+  background: var(--progress-track);
+}
+
+.progressFill {
+  height: 100%;
+
+  background: var(--progress-fill);
+
+  transition: width var(--transition-slow);
+}
+
+.stage {
+  flex: 1;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: auto;
+}
+
+/* STAGE INTRO */
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: var(--spacing-sm);
+
+  width: min(100%, 56rem);
+
+  margin: auto;
+
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.introStep {
+  margin: 0;
+
+  color: var(--color-text-accent);
+
+  font-size: var(--font-size-label-medium);
+  font-weight: 600;
+}
+
+.introTitle {
+  margin: 0;
+
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-headline-medium);
+  line-height: var(--line-height-headline-medium);
+}
+
+.introText {
+  margin: 0;
+
+  font-size: var(--font-size-body-large);
+  line-height: var(--line-height-body-large);
+}
+
+.introMeta {
+  margin: 0;
+
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-body-small);
+}
+
+.introActions {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: var(--spacing-sm);
+
+  margin-top: var(--spacing-sm);
+}
+
+@media only screen and (min-width: 60em) {
+  .topBar {
+    padding-inline: var(--spacing-xl);
+  }
+}
