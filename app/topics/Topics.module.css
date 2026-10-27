@@ -63,7 +63,7 @@
   text-decoration: none;
 
   box-shadow:
-    0 2px 8px rgb(0 0 0 / 6%);
+    var(--shadow-small);
 
   cursor: pointer;
 
@@ -82,7 +82,7 @@
     var(--color-text-accent);
 
   box-shadow:
-    0 4px 12px rgb(0 0 0 / 9%);
+    var(--shadow-card);
 
   transform:
     translateY(-1px);
@@ -99,8 +99,8 @@
   align-items: center;
   justify-content: center;
 
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 4rem;
+  height: 4rem;
 
   flex-shrink: 0;
 
@@ -113,7 +113,7 @@
   color:
     var(--color-text-accent);
 
-  font-size: 1.25rem;
+  font-size: var(--font-size-label-large);
 }
 
 .topicContent {
@@ -166,7 +166,7 @@
   color:
     var(--color-text-secondary);
 
-  font-size: 1.35rem;
+  font-size: var(--font-size-body-large);
 
   line-height: 1;
 }

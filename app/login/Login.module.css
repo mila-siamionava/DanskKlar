@@ -23,38 +23,6 @@
   box-shadow: var(--surface-shadow);
 }
 
-.logo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 4.4rem;
-  height: 4.4rem;
-
-  margin-bottom: var(--spacing-lg);
-
-  border-radius:
-    var(--border-radius-full);
-
-  background:
-    var(--color-text-primary);
-
-  color:
-    var(--color-background-surface);
-
-  font-family:
-    var(--font-family-heading);
-
-  font-size:
-    var(--font-size-label-medium);
-
-  line-height:
-    var(--line-height-label-medium);
-
-  font-weight: 700;
-
-  text-decoration: none;
-}
 .header {
   margin-bottom: var(--spacing-xl);
 }

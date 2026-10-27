@@ -66,7 +66,7 @@
   text-decoration: none;
 
   box-shadow:
-    0 1px 4px rgb(0 0 0 / 4%);
+    var(--shadow-small);
 
   transition:
     border-color var(--transition-fast),
@@ -78,7 +78,7 @@
   border-color: var(--color-text-accent);
 
   box-shadow:
-    0 4px 12px rgb(0 0 0 / 7%);
+    var(--shadow-card);
 
   transform: translateY(-1px);
 }
@@ -144,7 +144,7 @@
 
   color: var(--color-text-accent);
 
-  font-size: 1.5rem;
+  font-size: var(--font-size-body-large);
   line-height: 1;
 }
 
@@ -160,7 +160,7 @@
   border-color: var(--color-border-primary);
 
   box-shadow:
-    0 1px 4px rgb(0 0 0 / 4%);
+    var(--shadow-small);
 
   transform: none;
 }

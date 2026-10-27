@@ -35,10 +35,14 @@ export default function AarhusSketch({ className = "", decorative = true }) {
         <path d="M930 455 h95" />
         <path d="M1070 470 h115" />
         <path d="M1240 455 h95" />
-        <path d="M1240 455 h95" /> <path d="M1240 455 h95" />
         <path d="M1395 470 h100" />
-        {/* reflections */}
-        
+        {/* reflections of the Rådhus tower and the ARoS rainbow */}
+        <path d="M712 402 h36" />
+        <path d="M718 411 h24" />
+        <path d="M724 420 h12" />
+        <path d="M1150 403 h78" />
+        <path d="M1165 412 h48" />
+
         {/* ================= AARHUS Ø ================= */}
         <g>
           {/* left building */}
@@ -100,6 +104,10 @@ export default function AarhusSketch({ className = "", decorative = true }) {
           <path d="M155 392 V298" />
           <path d="M155 310 L125 375 H155z" />
           <path d="M159 322 L187 375 H159z" />
+
+          {/* Dannebrog */}
+          <rect x="155" y="298" width="14" height="9" style={{ fill: "var(--color-flag)", stroke: "none" }} />
+          <path d="M160 298 V307 M155 302.5 H169" strokeWidth="1.6" style={{ stroke: "var(--color-flag-cross)" }} />
         </g>
         {/* ================= BRIDGE ================= */}
         <g>
@@ -115,6 +123,30 @@ export default function AarhusSketch({ className = "", decorative = true }) {
           <path d="M505 350 V332" />
           <path d="M555 350 V335" />
         </g>
+        {/* ================= DOMKIRKEN ================= */}
+        {/* behind the bridge, so its base is hidden */}
+        <g strokeWidth="3.2">
+          {/* tower and spire */}
+          <path d="M452 324 V235 H488 V324" />
+          <path d="M452 235 L470 150 L488 235" />
+          <path d="M470 150 V138" />
+          <path d="M465 143 h10" />
+
+          {/* clock and belfry */}
+          <circle cx="470" cy="256" r="6" />
+          <path d="M463 282 V298" />
+          <path d="M477 282 V298" />
+
+          {/* nave */}
+          <path d="M488 285 H558 V324" />
+          <path d="M488 285 L496 276 H550 L558 285" />
+
+          {/* arched windows */}
+          <path d="M500 318 V303 Q505 295 510 303 V318" />
+          <path d="M518 318 V303 Q523 295 528 303 V318" />
+          <path d="M536 318 V303 Q541 295 546 303 V318" />
+        </g>
+
         {/* ================= RÅDHUS ================= */}
         <g>
           {/* base */}
@@ -233,6 +265,8 @@ export default function AarhusSketch({ className = "", decorative = true }) {
           <path d="M1320 392 V250" />
           <path d="M1320 265 L1285 375 H1320z" />
           <path d="M1325 285 L1355 375 H1325z" />
+          <rect x="1320" y="250" width="16" height="10" style={{ fill: "var(--color-flag)", stroke: "none" }} />
+          <path d="M1326 250 V260 M1320 255 H1336" strokeWidth="1.6" style={{ stroke: "var(--color-flag-cross)" }} />
 
           {/* boat 2 */}
           <path d="M1340 392 Q1380 405 1420 392" />

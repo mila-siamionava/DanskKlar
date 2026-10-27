@@ -6,6 +6,7 @@ import {
   ClipboardList,
 } from "lucide-react";
 
+import { BookMark } from "@/components/brand/Logo/Logo";
 import HomeNavigationCard from "@/components/navigation/HomeNavigationCard/HomeNavigationCard";
 import AarhusSketch from "@/components/ui/AarhusSketch/AarhusSketch";
 import AccountMenu from "@/components/auth/AccountMenu/AccountMenu";
@@ -24,13 +25,6 @@ export default async function Home() {
   return (
     <main className={styles.page}>
       <div className={styles.topBar}>
-        <span
-          className={styles.logo}
-          aria-label="DanskKlar"
-        >
-          DK
-        </span>
-
         <div className={styles.authActions}>
           {user ? (
             <AccountMenu email={user.email} />
@@ -46,6 +40,8 @@ export default async function Home() {
       </div>
 
       <header className={styles.header}>
+        <BookMark className={styles.heroMark} />
+
         <h1>DanskKlar</h1>
 
         <p className={styles.tagline}>

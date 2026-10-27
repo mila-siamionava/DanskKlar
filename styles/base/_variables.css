@@ -59,6 +59,13 @@
   /* Progress */
   --color-progress-track: #e8e2d8;
 
+  /* Brand: book logo and Dannebrog */
+  --color-logo-cover: #9c8264;
+  --color-logo-page: var(--color-cream-soft);
+  --color-logo-line: #b9a589;
+  --color-flag: #c8102e;
+  --color-flag-cross: var(--color-white);
+
   /* ============================================================
      TYPOGRAPHY
      ============================================================ */
@@ -149,6 +156,9 @@
   --shadow-card: 0 6px 20px rgba(29, 29, 29, 0.07);
 
   --shadow-elevated: 0 10px 30px rgba(29, 29, 29, 0.1);
+
+  /* panels docked to the bottom of the screen */
+  --shadow-sheet: 0 -6px 20px rgba(29, 29, 29, 0.08);
 
   /* ============================================================
      LAYOUT
@@ -295,10 +305,18 @@
   /* Progress */
   --color-progress-track: #403930;
 
+  /* Brand */
+  --color-logo-cover: #b49a7a;
+  --color-logo-page: #f3eee6;
+  --color-logo-line: #9c8a70;
+  --color-flag: #d0283c;
+
   /* Shadows */
   --shadow-small: 0 2px 8px rgba(0, 0, 0, 0.22);
 
   --shadow-card: 0 6px 20px rgba(0, 0, 0, 0.28);
 
   --shadow-elevated: 0 10px 30px rgba(0, 0, 0, 0.34);
+
+  --shadow-sheet: 0 -6px 20px rgba(0, 0, 0, 0.3);
 }
