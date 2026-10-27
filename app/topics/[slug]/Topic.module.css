@@ -105,8 +105,8 @@
 
   color: var(--color-text-primary);
 
-  font-size: var(--font-size-title-medium);
-  line-height: var(--line-height-title-medium);
+  font-size: var(--font-size-body-medium);
+  line-height: var(--line-height-body-medium);
 
   font-weight: 600;
 }
