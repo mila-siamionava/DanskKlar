@@ -231,10 +231,10 @@
     var(--color-text-primary);
 
   font-size:
-    var(--font-size-title-small);
+    var(--font-size-body-medium);
 
   line-height:
-    var(--line-height-title-small);
+    var(--line-height-body-medium);
 
   font-weight: 700;
 }
