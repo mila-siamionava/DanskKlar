@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  BookOpen,
   House,
   RotateCcw,
   Dumbbell,
@@ -13,6 +14,7 @@ import styles from "./BottomNavigation.module.css";
 
 const icons = {
   home: House,
+  reading: BookOpen,
   review: RotateCcw,
   train: Dumbbell,
   topics: ClipboardList,
@@ -25,7 +27,11 @@ const icons = {
 }) {
   const pathname = usePathname();
 
-  if (pathname === "/") {
+  // home has its own cards; scanning lessons need the whole screen
+  if (
+    pathname === "/" ||
+    pathname.startsWith("/reading/scanning/")
+  ) {
     return null;
   }
 

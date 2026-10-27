@@ -2,8 +2,7 @@ import Link from "next/link";
 
 import {
   BookOpen,
-  RotateCcw,
-  Dumbbell,
+  Languages,
   ClipboardList,
 } from "lucide-react";
 
@@ -40,7 +39,7 @@ export default async function Home() {
               href="/login"
               className={styles.authButton}
             >
-              Sign in
+              Log ind
             </Link>
           )}
         </div>
@@ -50,47 +49,53 @@ export default async function Home() {
         <h1>DanskKlar</h1>
 
         <p className={styles.tagline}>
-          Get ready for PD3.5
+          Bliv klar til PD3
         </p>
 
         <p className={styles.description}>
-          Read Danish texts, save unknown words,
-          practise them with exercises.
+          Træn læsestrategier, læs danske tekster
+          og øv dine ord.
         </p>
       </header>
 
-      <nav
-        className={styles.navigation}
-        aria-label="Main navigation"
+      {/* Writing, grammar, mock tests and progress get their own cards once they have content */}
+      <section
+        className={styles.section}
+        aria-labelledby="practise-heading"
       >
-        <HomeNavigationCard
-          href="/exercises"
-          icon={BookOpen}
-          title="Mockup Reading Tests"
-          description="Practise PD3-style reading"
-        />
+        <h2
+          id="practise-heading"
+          className={styles.sectionTitle}
+        >
+          Øv dig
+        </h2>
 
-        <HomeNavigationCard
-          href="/review"
-          icon={RotateCcw}
-          title="Review Vocabulary"
-          description="Review your saved words"
-        />
+        <nav
+          className={styles.navigation}
+          aria-label="Øv dig"
+        >
+          <HomeNavigationCard
+            href="/reading"
+            icon={BookOpen}
+            title="Læsning"
+            description="Læsestrategier og tekstøvelser"
+          />
 
-        <HomeNavigationCard
-          href="/review/train"
-          icon={Dumbbell}
-          title="Train"
-          description="Practise your vocabulary"
-        />
+          <HomeNavigationCard
+            href="/review"
+            icon={Languages}
+            title="Ordforråd"
+            description="Dine gemte ord og træning"
+          />
 
-        <HomeNavigationCard
-          href="/topics"
-          icon={ClipboardList}
-          title="Topics"
-          description="Explore by theme"
-        />
-      </nav>
+          <HomeNavigationCard
+            href="/topics"
+            icon={ClipboardList}
+            title="Emner"
+            description="Arbejde, sundhed og miljø"
+          />
+        </nav>
+      </section>
 
       <div className={styles.illustration}>
         <AarhusSketch
