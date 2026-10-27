@@ -51,9 +51,33 @@ export default function TrueFalseClient() {
   } = useSelectedReviewItems();
 
   const [
-    trainingMode,
+    chosenMode,
     setTrainingMode,
   ] = useState("english");
+
+  // only offer modes that at least one selected word has
+  const availableModes =
+    useMemo(
+      () =>
+        MODES.filter((mode) =>
+          items.some(
+            (item) =>
+              item.term &&
+              item[mode.field],
+          ),
+        ),
+      [items],
+    );
+
+  // e.g. no English yet: start with Russian instead of stopping
+  const trainingMode =
+    availableModes.some(
+      (mode) =>
+        mode.key === chosenMode,
+    )
+      ? chosenMode
+      : (availableModes[0]?.key ??
+        chosenMode);
 
   const usableVocabulary =
     useMemo(() => {
@@ -215,6 +239,20 @@ export default function TrueFalseClient() {
     );
   }
 
+  if (items.length === 0) {
+    return (
+      <main className="mobilePage">
+        <ExerciseState
+          eyebrow="True / False"
+          title="No words selected"
+          message="Choose some words in Review before starting this exercise."
+          actionLabel="Back to review"
+          actionHref="/review"
+        />
+      </main>
+    );
+  }
+
   if (
     usableVocabulary.length === 0
   ) {
@@ -223,10 +261,7 @@ export default function TrueFalseClient() {
         <ExerciseState
           eyebrow="True / False"
           title="No usable vocabulary"
-          message={`Your selected review words do not have ${
-            activeMode?.title ??
-            "the required information"
-          } yet.`}
+          message="Your selected words have no English, Russian or Danish definition yet."
           actionLabel="Back to review"
           actionHref="/review"
         />
@@ -311,7 +346,7 @@ export default function TrueFalseClient() {
           role="group"
           aria-label="Choose training language"
         >
-          {MODES.map((mode) => (
+          {availableModes.map((mode) => (
             <button
               key={mode.key}
               type="button"
