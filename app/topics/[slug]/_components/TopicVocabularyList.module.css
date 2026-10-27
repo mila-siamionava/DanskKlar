@@ -157,7 +157,7 @@
 
   background: var(--color-background-surface);
 
-  box-shadow: 0 1px 4px rgb(0 0 0 / 4%);
+  box-shadow: var(--shadow-small);
 
   transition:
     border-color var(--transition-fast),
@@ -167,7 +167,7 @@
 .wordItem:hover {
   border-color: var(--color-text-accent);
 
-  box-shadow: 0 3px 10px rgb(0 0 0 / 6%);
+  box-shadow: var(--shadow-card);
 }
 
 /* TOP ROW */
@@ -314,11 +314,11 @@
   align-items: center;
   justify-content: center;
 
-  width: 1rem;
+  width: 1.6rem;
 
   color: var(--color-text-secondary);
 
-  font-size: 1rem;
+  font-size: var(--font-size-body-medium);
   line-height: 1;
 
   text-decoration: none;
@@ -446,11 +446,11 @@
   align-items: center;
   justify-content: center;
 
-  width: 1.25rem;
+  width: 1.6rem;
 
   color: var(--color-text-accent);
 
-  font-size: 1.1rem;
+  font-size: var(--font-size-body-medium);
   line-height: 1;
 }
 

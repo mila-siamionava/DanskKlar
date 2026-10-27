@@ -5,6 +5,7 @@ import {
 } from "next/font/google";
 
 import BottomNavigation from "@/components/navigation/BottomNavigation/BottomNavigation";
+import SiteHeader from "@/components/navigation/SiteHeader/SiteHeader";
 import { navItems } from "@/data/navigation";
 
 import "@/styles/global.css";
@@ -58,6 +59,8 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+
+        <SiteHeader />
 
         <div id="main-content">
           {children}

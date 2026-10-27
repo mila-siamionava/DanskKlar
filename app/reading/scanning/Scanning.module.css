@@ -12,8 +12,6 @@
     var(--spacing-lg)
     var(--spacing-md)
     calc(var(--bottom-nav-height) + var(--spacing-xl));
-
-  background: var(--color-background-page);
 }
 
 .intro {

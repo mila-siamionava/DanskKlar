@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 
-import AppHeader from "@/components/navigation/AppHeader/AppHeader";
 import BackLink from "@/components/navigation/BackLink/BackLink";
 
 import GapExercise from "@/components/exercises/GapExercise/GapExercise";
@@ -40,8 +39,6 @@ export default async function ExercisePage({ params, searchParams }) {
 
   return (
     <main>
-      <AppHeader title="DanskKlar" />
-
       <div className={styles.page}>
         <div className={styles.topRow}>
           <BackLink href="/exercises" label="Back to exercises" />
