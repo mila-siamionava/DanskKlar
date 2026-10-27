@@ -1,26 +1,27 @@
 .top {
+  display: flex;
+  flex-direction: column;
+
+  gap:
+    var(--spacing-sm);
+
   width: 100%;
 }
 
 .topRow {
-  display: grid;
-
-  grid-template-columns:
-    3.6rem
-    minmax(0, 1fr)
-    3.6rem;
-
+  display: flex;
   align-items: center;
+  justify-content: space-between;
 
   gap:
     var(--spacing-sm);
 }
 
-.exerciseName {
-  min-width: 0;
+.counter {
+  flex-shrink: 0;
 
   color:
-    var(--color-text-accent);
+    var(--color-text-secondary);
 
   font-family:
     var(--font-family-body);
@@ -31,72 +32,20 @@
   line-height:
     var(--line-height-label-medium);
 
-  font-weight:
-    var(--font-weight-label-medium);
-
-  text-align: center;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.counter {
-  justify-self: end;
-
-  color:
-    var(--color-text-secondary);
-
-  font-family:
-    var(--font-family-body);
-
-  font-size:
-    var(--font-size-label-small);
-
-  line-height:
-    var(--line-height-label-small);
-
   font-weight: 600;
 
   white-space: nowrap;
 }
 
-.counterSpacer {
-  width: 3.6rem;
-}
-
-.title {
-  margin:
-    var(--spacing-sm)
-    0;
+.task {
+  margin: 0;
 
   color:
-    var(--color-text-primary);
-
-  font-family:
-    var(--font-family-heading);
+    var(--color-text-secondary);
 
   font-size:
-    var(--font-size-headline-small);
+    var(--font-size-body-medium);
 
   line-height:
-    var(--line-height-headline-small);
-
-  font-weight:
-    var(--font-weight-headline-small);
-
-  text-align: center;
-}
-
-@media (min-width: 37.5em) {
-  .title {
-    font-size:
-      var(--font-size-headline-medium);
-
-    line-height:
-      var(--line-height-headline-medium);
-
-    font-weight:
-      var(--font-weight-headline-medium);
-  }
+    var(--line-height-body-medium);
 }

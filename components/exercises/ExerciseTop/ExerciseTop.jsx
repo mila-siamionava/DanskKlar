@@ -3,6 +3,7 @@ import ExerciseProgress from "@/components/exercises/ExerciseProgress/ExercisePr
 
 import styles from "./ExerciseTop.module.css";
 
+// Same header as the other pages: back arrow and title, then the task
 export default function ExerciseTop({
   eyebrow,
   title,
@@ -15,11 +16,8 @@ export default function ExerciseTop({
         <BackLink
           href="/review/train"
           label="Back to training"
+          title={eyebrow}
         />
-
-        <span className={styles.exerciseName}>
-          {eyebrow}
-        </span>
 
         {current && total ? (
           <span
@@ -28,15 +26,13 @@ export default function ExerciseTop({
           >
             {current} / {total}
           </span>
-        ) : (
-          <span className={styles.counterSpacer} />
-        )}
+        ) : null}
       </div>
 
       {title && (
-        <h1 className={styles.title}>
+        <p className={styles.task}>
           {title}
-        </h1>
+        </p>
       )}
 
       <ExerciseProgress
