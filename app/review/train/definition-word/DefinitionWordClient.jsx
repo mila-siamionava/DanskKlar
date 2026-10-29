@@ -9,6 +9,7 @@ import {
 import ExerciseQuestionCard from "@/components/exercises/ExerciseQuestionCard/ExerciseQuestionCard";
 import ExerciseShell from "@/components/exercises/ExerciseShell/ExerciseShell";
 import ExerciseState from "@/components/exercises/ExerciseState/ExerciseState";
+import { useActivitySession } from "@/lib/progress/useActivitySession";
 
 import { useSelectedReviewItems } from "../_hooks/useSelectedReviewItems";
 import { useTrainingProgress } from "../_hooks/useTrainingProgress";
@@ -49,6 +50,13 @@ export default function DefinitionWordClient({
   } = useTrainingProgress(
     usableItems.length,
   );
+
+  const session = useActivitySession({
+    area: "words",
+    activity: "definition-word",
+    title: "Definition → ord",
+    finished: finished,
+  });
 
   const [
     selectedAnswer,
@@ -217,6 +225,12 @@ export default function DefinitionWordClient({
     if (isAnswered) {
       return;
     }
+
+    session.recordWord(
+      currentItem,
+      "gen",
+      isSameAnswer(answer, correctAnswer),
+    );
 
     setSelectedAnswer(
       answer,

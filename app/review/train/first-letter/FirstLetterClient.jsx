@@ -8,6 +8,7 @@ import {
 import ExerciseQuestionCard from "@/components/exercises/ExerciseQuestionCard/ExerciseQuestionCard";
 import ExerciseShell from "@/components/exercises/ExerciseShell/ExerciseShell";
 import ExerciseState from "@/components/exercises/ExerciseState/ExerciseState";
+import { useActivitySession } from "@/lib/progress/useActivitySession";
 
 import { createGapSentence } from "../_lib/sentenceUtils";
 import { useSelectedReviewItems } from "../_hooks/useSelectedReviewItems";
@@ -108,6 +109,13 @@ export default function FirstLetterClient({
   } = useTrainingProgress(
     items.length,
   );
+
+  const session = useActivitySession({
+    area: "words",
+    activity: "first-letter",
+    title: "Første bogstav",
+    finished: finished,
+  });
 
   const [
     answer,
@@ -219,9 +227,11 @@ export default function FirstLetterClient({
   function checkAnswer(event) {
     event.preventDefault();
 
-    if (!answer.trim()) {
+    if (!answer.trim() || checked) {
       return;
     }
+
+    session.recordWord(currentItem, "skr", isCorrect);
 
     setChecked(true);
   }

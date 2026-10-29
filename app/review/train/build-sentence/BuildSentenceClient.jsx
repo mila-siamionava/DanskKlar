@@ -3,6 +3,7 @@
 import ExerciseQuestionCard from "@/components/exercises/ExerciseQuestionCard/ExerciseQuestionCard";
 import ExerciseShell from "@/components/exercises/ExerciseShell/ExerciseShell";
 import ExerciseState from "@/components/exercises/ExerciseState/ExerciseState";
+import { useActivitySession } from "@/lib/progress/useActivitySession";
 
 import {
   DndContext,
@@ -159,6 +160,13 @@ export default function BuildSentenceClient({
     usableItems.length,
   );
 
+  const session = useActivitySession({
+    area: "words",
+    activity: "build-sentence",
+    title: "Byg en sætning",
+    finished: finished,
+  });
+
   const [
     words,
     setWords,
@@ -299,6 +307,10 @@ export default function BuildSentenceClient({
   }
 
   function checkSentence() {
+    if (!checked) {
+      session.recordWord(currentItem, "bru", isCorrect);
+    }
+
     setChecked(true);
   }
 
