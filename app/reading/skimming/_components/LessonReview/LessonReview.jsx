@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import Badge from "@/components/ui/Badge/Badge";
 import Button from "@/components/ui/Button/Button";
+import { useActivitySession } from "@/lib/progress/useActivitySession";
 import {
   MASTERY_SCORE,
   saveSkimmingResult,
@@ -63,9 +64,39 @@ export default function LessonReview({ lesson, stageResults, onRestart }) {
     (result) => !result.isCorrect,
   );
 
+  const session = useActivitySession({
+    area: "reading",
+    activity: `skimming/${lesson.slug}`,
+    title: `Skimming · ${lesson.title}`,
+  });
+
+  const lessonSeconds = Object.values(stageResults).reduce(
+    (total, result) => total + (result.seconds ?? 0),
+    0,
+  );
+
   useEffect(() => {
     saveSkimmingResult(lesson.slug, score);
-  }, [lesson.slug, score]);
+
+    session.finish({
+      points: check.points,
+      max: check.max,
+      seconds: lessonSeconds,
+      extra: {
+        texts: times.length,
+        textsOnTarget: onTarget,
+      },
+    });
+  }, [
+    lesson.slug,
+    score,
+    session,
+    check.points,
+    check.max,
+    lessonSeconds,
+    times.length,
+    onTarget,
+  ]);
 
   return (
     <div className={styles.review}>

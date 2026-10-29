@@ -8,6 +8,7 @@ import {
 
 import ExerciseShell from "@/components/exercises/ExerciseShell/ExerciseShell";
 import ExerciseState from "@/components/exercises/ExerciseState/ExerciseState";
+import { useActivitySession } from "@/lib/progress/useActivitySession";
 
 import { useSelectedReviewItems } from "../_hooks/useSelectedReviewItems";
 import { shuffle } from "../_lib/arrayUtils";
@@ -96,6 +97,14 @@ export default function MatchPairsClient() {
       usableVocabulary.length / 5,
     );
 
+  const session = useActivitySession({
+    area: "words",
+    activity: "match-pairs",
+    title: "Find par",
+    finished: usableVocabulary.length > 0 &&
+      round >= totalRounds,
+  });
+
   useEffect(() => {
     setTranslations(
       shuffle(roundItems),
@@ -155,6 +164,8 @@ export default function MatchPairsClient() {
       termItem.id ===
       translationItem.id
     ) {
+      session.recordWord(termItem, "gen", true);
+
       setMatchedIds(
         (current) => [
           ...current,
@@ -171,6 +182,8 @@ export default function MatchPairsClient() {
 
       return;
     }
+
+    session.recordWord(termItem, "gen", false);
 
     setWrongPair(true);
 

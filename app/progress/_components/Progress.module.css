@@ -1,0 +1,607 @@
+.page {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-lg);
+
+  width: min(100%, var(--content-max-width));
+
+  margin-inline: auto;
+
+  padding:
+    var(--spacing-lg)
+    var(--spacing-md)
+    calc(var(--bottom-nav-height) + var(--spacing-xl));
+}
+
+/* TABS: scroll sideways on a phone instead of wrapping */
+
+.tabs {
+  display: flex;
+
+  gap: var(--spacing-2xs);
+
+  width: fit-content;
+  max-width: 100%;
+
+  padding: var(--spacing-2xs);
+
+  overflow-x: auto;
+
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--border-radius-full);
+
+  background: var(--color-background-surface);
+
+  scrollbar-width: none;
+}
+
+.tab {
+  flex: none;
+
+  display: inline-flex;
+  align-items: center;
+
+  min-height: var(--control-height-sm);
+
+  padding: 0 var(--spacing-md);
+
+  border-radius: var(--border-radius-full);
+
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-label-medium);
+  font-weight: 500;
+
+  white-space: nowrap;
+}
+
+.tab:hover {
+  color: var(--color-text-primary);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.tab[aria-current="page"] {
+  background: var(--color-text-primary);
+  color: var(--color-text-inverse);
+
+  font-weight: 600;
+}
+
+/* LAYOUT */
+
+.panel {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-lg);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 40rem), 1fr));
+
+  gap: var(--spacing-md);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-md);
+
+  min-width: 0;
+
+  padding: var(--spacing-lg);
+
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--border-radius-md);
+
+  background: var(--color-background-surface);
+
+  box-shadow: var(--shadow-small);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  gap: var(--spacing-xs);
+}
+
+.cardTitle {
+  margin: 0;
+
+  font-size: var(--font-size-label-large);
+  line-height: var(--line-height-label-large);
+}
+
+.cardLink {
+  color: var(--color-text-accent);
+
+  font-size: var(--font-size-label-medium);
+  font-weight: 600;
+}
+
+.cardLink:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.text {
+  margin: 0;
+
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body-small);
+}
+
+.text strong {
+  color: var(--color-text-primary);
+}
+
+.sectionTitle {
+  margin: 0;
+
+  font-size: var(--font-size-label-large);
+  line-height: var(--line-height-label-large);
+}
+
+.empty {
+  margin: 0;
+
+  padding: var(--spacing-md);
+
+  border: 1px dashed var(--color-border-secondary);
+  border-radius: var(--border-radius-sm);
+
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body-small);
+}
+
+/* GOAL RING */
+
+.ring {
+  flex: none;
+}
+
+.ringTrack,
+.ringFill {
+  fill: none;
+
+  stroke-width: 12;
+}
+
+.ringTrack {
+  stroke: var(--progress-track);
+}
+
+.ringFill {
+  stroke: var(--color-border-control);
+  stroke-linecap: round;
+
+  transition: stroke-dasharray var(--transition-slow);
+}
+
+.ringValue {
+  fill: var(--color-text-primary);
+
+  font-size: 2.8rem;
+  font-weight: 700;
+}
+
+.ringLabel {
+  fill: var(--color-text-secondary);
+
+  font-size: 1.3rem;
+}
+
+.goalRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: var(--spacing-lg);
+}
+
+.goalText {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-3xs);
+
+  min-width: 0;
+}
+
+.goalTitle {
+  font-size: var(--font-size-label-large);
+  line-height: var(--line-height-label-large);
+}
+
+/* STAT TILES */
+
+.stats {
+  flex: 1;
+
+  display: grid;
+  grid-template-columns: repeat(var(--stat-columns, 3), minmax(0, 1fr));
+
+  gap: var(--spacing-xs);
+
+  min-width: min(100%, 24rem);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+
+  padding: var(--spacing-sm);
+
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--border-radius-sm);
+
+  background: var(--color-background-soft);
+}
+
+.statValue {
+  font-size: var(--font-size-headline-small);
+  line-height: var(--line-height-headline-small);
+}
+
+.statLabel {
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-label-small);
+  line-height: var(--line-height-label-small);
+}
+
+/* NEXT STEP */
+
+.nextStep {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-3xs);
+
+  padding: var(--spacing-md) var(--spacing-lg);
+
+  border-radius: var(--border-radius-md);
+
+  background: var(--color-text-primary);
+  color: var(--color-text-inverse);
+
+  transition: transform var(--transition-fast);
+}
+
+.nextStep:hover {
+  transform: translateY(-1px);
+}
+
+.nextStep:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.nextStepLabel {
+  color: inherit;
+
+  font-size: var(--font-size-label-small);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nextStepTitle {
+  font-size: var(--font-size-body-large);
+  line-height: var(--line-height-body-large);
+}
+
+.nextStepDetail {
+  opacity: 0.85;
+
+  font-size: var(--font-size-body-small);
+}
+
+/* ACTIVITY LIST */
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.activity {
+  display: grid;
+  grid-template-columns: 5.2rem minmax(0, 1fr) auto;
+  align-items: start;
+
+  gap: var(--spacing-sm);
+
+  padding: var(--spacing-sm) 0;
+
+  border-top: 1px solid var(--color-border-primary);
+}
+
+.activity:first-child {
+  border-top: none;
+}
+
+.activityTime {
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-label-medium);
+  font-variant-numeric: tabular-nums;
+}
+
+.activityBody {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-3xs);
+
+  min-width: 0;
+}
+
+.activityTitle {
+  font-size: var(--font-size-label-large);
+  line-height: var(--line-height-label-large);
+}
+
+.activityMeta {
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body-small);
+}
+
+.score {
+  font-size: var(--font-size-label-medium);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* WEEK BARS */
+
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  align-items: end;
+
+  gap: var(--spacing-xs);
+
+  height: 16rem;
+}
+
+.weekDay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: var(--spacing-2xs);
+
+  height: 100%;
+}
+
+.weekValue {
+  min-height: 1.6rem;
+
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-label-small);
+}
+
+.weekBar {
+  width: 100%;
+  max-width: 3.6rem;
+
+  border-radius: var(--border-radius-xs) var(--border-radius-xs) 0.4rem 0.4rem;
+
+  background: var(--color-accent-hover);
+}
+
+/* the bar area is everything above the labels */
+.weekDay .weekBar {
+  max-height: calc(100% - 4rem);
+}
+
+.weekBarToday {
+  background: var(--color-text-accent);
+}
+
+.weekBarEmpty {
+  height: 0.4rem;
+
+  background: var(--progress-track);
+}
+
+.weekLabel {
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-label-small);
+}
+
+.weekLabelToday {
+  color: var(--color-text-primary);
+
+  font-weight: 700;
+}
+
+/* WORD LEVELS (light → dark, so they differ in lightness, not only hue) */
+
+.levelBar {
+  display: flex;
+
+  gap: 0.2rem;
+
+  height: 2.4rem;
+
+  overflow: hidden;
+
+  border-radius: var(--border-radius-xs);
+
+  background: var(--progress-track);
+}
+
+.levelBar span {
+  flex-basis: 0;
+}
+
+.levelNew {
+  background: var(--color-background-soft);
+
+  box-shadow: inset 0 0 0 1px var(--color-border-secondary);
+}
+
+.levelSeen {
+  background: var(--color-beige);
+}
+
+.levelRecognised {
+  background: var(--color-beige-dark);
+}
+
+.levelWritten {
+  background: var(--color-text-accent);
+}
+
+.levelLearned {
+  background: var(--color-success);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: var(--spacing-xs) var(--spacing-md);
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  font-size: var(--font-size-label-medium);
+}
+
+.legend li {
+  display: inline-flex;
+  align-items: center;
+
+  gap: var(--spacing-2xs);
+}
+
+.swatch {
+  width: 1.2rem;
+  height: 1.2rem;
+
+  border-radius: 0.3rem;
+}
+
+/* SKILL BARS */
+
+.skillList {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-sm);
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.skillRow {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-2xs);
+}
+
+.skillHead {
+  display: flex;
+  justify-content: space-between;
+
+  gap: var(--spacing-xs);
+
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body-small);
+}
+
+.skillTrack {
+  position: relative;
+
+  height: 1rem;
+
+  border-radius: var(--border-radius-full);
+
+  background: var(--progress-track);
+}
+
+.skillFill {
+  position: absolute;
+  inset: 0 auto 0 0;
+
+  border-radius: var(--border-radius-full);
+
+  background: var(--color-accent-hover);
+}
+
+.skillFillDone {
+  background: var(--color-success);
+}
+
+/* the 85 % mastery line */
+.skillGoal {
+  position: absolute;
+  top: -0.4rem;
+  left: 85%;
+
+  width: 0.2rem;
+  height: 1.8rem;
+
+  background: var(--color-text-primary);
+}
+
+.muted {
+  color: var(--color-text-secondary);
+}
+
+@media only screen and (min-width: 60em) {
+  .page {
+    padding-inline: var(--spacing-xl);
+  }
+}
+
+.select {
+  min-height: var(--control-height-sm);
+
+  margin-left: var(--spacing-2xs);
+  padding: 0 var(--spacing-xs);
+
+  border: 1px solid var(--color-border-control);
+  border-radius: var(--border-radius-xs);
+
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
+
+  font: inherit;
+}
+
+.select:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
