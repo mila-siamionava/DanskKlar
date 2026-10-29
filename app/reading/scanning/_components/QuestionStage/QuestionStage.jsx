@@ -10,7 +10,7 @@ import {
 
 import ScanningDocument from "../ScanningDocument/ScanningDocument";
 import ScanningQuestion from "../ScanningQuestion/ScanningQuestion";
-import SplitReader from "../SplitReader/SplitReader";
+import SplitReader from "@/components/reading/SplitReader/SplitReader";
 
 import styles from "./QuestionStage.module.css";
 
