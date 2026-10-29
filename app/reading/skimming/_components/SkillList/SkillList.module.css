@@ -1,0 +1,107 @@
+.heading {
+  margin: 0 0 var(--spacing-sm);
+
+  font-size: var(--font-size-label-large);
+  line-height: var(--line-height-label-large);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-sm);
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+
+  gap: var(--spacing-md);
+
+  padding: var(--spacing-md);
+
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--border-radius-md);
+
+  background: var(--color-background-surface);
+
+  box-shadow: var(--shadow-small);
+
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.card:hover {
+  transform: translateY(-1px);
+
+  border-color: var(--color-border-secondary);
+
+  box-shadow: var(--shadow-card);
+}
+
+.content {
+  min-width: 0;
+
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: var(--spacing-2xs);
+}
+
+.title {
+  color: var(--color-text-primary);
+
+  font-size: var(--font-size-label-large);
+  line-height: var(--line-height-label-large);
+}
+
+.description {
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body-small);
+}
+
+.arrow {
+  flex-shrink: 0;
+
+  color: var(--color-text-muted);
+
+  font-size: var(--font-size-body-large);
+  line-height: 1;
+}
+
+.level {
+  color: var(--color-text-muted);
+
+  font-size: var(--font-size-label-small);
+  font-weight: 500;
+}
+
+/* not playable yet: same card, no link */
+.upcoming {
+  box-shadow: none;
+
+  background: var(--color-background-soft);
+}
+
+.upcoming .title {
+  color: var(--color-text-secondary);
+}
+
+.upcoming:hover {
+  transform: none;
+
+  border-color: var(--color-border-primary);
+
+  box-shadow: none;
+}

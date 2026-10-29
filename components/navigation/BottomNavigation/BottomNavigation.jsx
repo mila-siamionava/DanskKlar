@@ -27,10 +27,11 @@ const icons = {
 }) {
   const pathname = usePathname();
 
-  // home has its own cards; scanning lessons need the whole screen
+  // home has its own cards; reading lessons need the whole screen
   if (
     pathname === "/" ||
-    pathname.startsWith("/reading/scanning/")
+    pathname.startsWith("/reading/scanning/") ||
+    pathname.startsWith("/reading/skimming/")
   ) {
     return null;
   }
