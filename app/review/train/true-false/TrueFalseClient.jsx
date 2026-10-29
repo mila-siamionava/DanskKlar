@@ -9,6 +9,7 @@ import {
 import ExerciseQuestionCard from "@/components/exercises/ExerciseQuestionCard/ExerciseQuestionCard";
 import ExerciseShell from "@/components/exercises/ExerciseShell/ExerciseShell";
 import ExerciseState from "@/components/exercises/ExerciseState/ExerciseState";
+import { useActivitySession } from "@/lib/progress/useActivitySession";
 
 import { useSelectedReviewItems } from "../_hooks/useSelectedReviewItems";
 import { useTrainingProgress } from "../_hooks/useTrainingProgress";
@@ -112,6 +113,13 @@ export default function TrueFalseClient() {
   } = useTrainingProgress(
     usableVocabulary.length,
   );
+
+  const session = useActivitySession({
+    area: "words",
+    activity: "true-false",
+    title: "Sandt eller falsk",
+    finished: finished,
+  });
 
   const [
     selectedAnswer,
@@ -305,6 +313,12 @@ export default function TrueFalseClient() {
     if (isAnswered) {
       return;
     }
+
+    session.recordWord(
+      currentItem,
+      "gen",
+      answer === statement.isCorrect,
+    );
 
     setSelectedAnswer(answer);
   }

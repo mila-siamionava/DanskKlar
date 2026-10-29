@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import Badge from "@/components/ui/Badge/Badge";
 import Button from "@/components/ui/Button/Button";
+import { useActivitySession } from "@/lib/progress/useActivitySession";
 import {
   MASTERY_SCORE,
   saveScanningResult,
@@ -58,9 +59,42 @@ export default function LessonReview({
     (subskill) => subskill.correct < subskill.total,
   );
 
+  const session = useActivitySession({
+    area: "reading",
+    activity: `scanning/${lesson.slug}`,
+    title: `Skanning · ${lesson.title}`,
+  });
+
+  const stagesWithText = Object.values(stageResults).filter(
+    (result) => result.results,
+  );
+
+  const lessonSeconds = stagesWithText.reduce(
+    (total, result) => total + (result.seconds ?? 0),
+    0,
+  );
+
+  const checkCorrect = countCorrect(checkResults);
+  const checkTotal = checkResults.length;
+
   useEffect(() => {
     saveScanningResult(lesson.slug, score);
-  }, [lesson.slug, score]);
+
+    session.finish({
+      points: checkCorrect,
+      max: checkTotal,
+      seconds: lessonSeconds,
+      extra: { texts: stagesWithText.length },
+    });
+  }, [
+    lesson.slug,
+    score,
+    session,
+    checkCorrect,
+    checkTotal,
+    lessonSeconds,
+    stagesWithText.length,
+  ]);
 
   return (
     <div className={styles.review}>

@@ -3,11 +3,8 @@
 import Link from "next/link";
 import { useSyncExternalStore } from "react";
 
-import Badge from "@/components/ui/Badge/Badge";
-import {
-  getScanningProgress,
-  MASTERY_SCORE,
-} from "@/lib/reading/scanningProgress";
+import ScoreBadge from "@/components/reading/ScoreBadge/ScoreBadge";
+import { getScanningProgress } from "@/lib/reading/scanningProgress";
 
 import styles from "./SkillList.module.css";
 
@@ -22,30 +19,6 @@ function subscribe(onChange) {
   return () => window.removeEventListener("storage", onChange);
 }
 
-function ProgressBadge({ result }) {
-  if (!result) {
-    return (
-      <Badge variant="neutral" size="sm">
-        Ikke startet
-      </Badge>
-    );
-  }
-
-  if (result.bestScore >= MASTERY_SCORE) {
-    return (
-      <Badge variant="success" size="sm">
-        Mestret · {result.bestScore} %
-      </Badge>
-    );
-  }
-
-  return (
-    <Badge variant="warning" size="sm">
-      Bedste: {result.bestScore} %
-    </Badge>
-  );
-}
-
 function SkillCard({ href, title, description, result }) {
   return (
     <li>
@@ -53,7 +26,7 @@ function SkillCard({ href, title, description, result }) {
         <span className={styles.content}>
           <strong className={styles.title}>{title}</strong>
           <span className={styles.description}>{description}</span>
-          <ProgressBadge result={result} />
+          <ScoreBadge bestScore={result?.bestScore} />
         </span>
 
         <span className={styles.arrow} aria-hidden="true">

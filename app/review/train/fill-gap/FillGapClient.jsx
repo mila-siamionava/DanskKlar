@@ -9,6 +9,7 @@ import {
 import ExerciseQuestionCard from "@/components/exercises/ExerciseQuestionCard/ExerciseQuestionCard";
 import ExerciseShell from "@/components/exercises/ExerciseShell/ExerciseShell";
 import ExerciseState from "@/components/exercises/ExerciseState/ExerciseState";
+import { useActivitySession } from "@/lib/progress/useActivitySession";
 
 import {
   createGapSentence,
@@ -160,6 +161,13 @@ export default function FillGapClient({
   } = useTrainingProgress(
     items.length,
   );
+
+  const session = useActivitySession({
+    area: "words",
+    activity: "fill-gap",
+    title: "Udfyld hullet",
+    finished: finished,
+  });
 
   const currentItem =
     items[currentIndex];
@@ -523,6 +531,14 @@ export default function FillGapClient({
   }
 
   function nextQuestion() {
+    session.recordWord(
+      currentItem,
+      "gen",
+      isDouble
+        ? isDoubleCorrect
+        : selectedAnswer === correctAnswer,
+    );
+
     setSelectedAnswer(null);
     setSelectedAnswer1(null);
     setSelectedAnswer2(null);

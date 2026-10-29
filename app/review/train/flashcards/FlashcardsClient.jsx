@@ -11,6 +11,7 @@ import {
 
 import ExerciseShell from "@/components/exercises/ExerciseShell/ExerciseShell";
 import ExerciseState from "@/components/exercises/ExerciseState/ExerciseState";
+import { useActivitySession } from "@/lib/progress/useActivitySession";
 
 import { useSelectedReviewItems } from "../_hooks/useSelectedReviewItems";
 
@@ -49,6 +50,13 @@ export default function FlashcardsClient() {
 
   const turnBackButtonRef =
     useRef(null);
+
+  const session = useActivitySession({
+    area: "words",
+    activity: "flashcards",
+    title: "Huskekort",
+    finished: finished,
+  });
 
   if (isLoading) {
     return (
@@ -130,10 +138,12 @@ export default function FlashcardsClient() {
   }
 
   function rememberWord() {
+    session.recordWord(items[currentIndex], "set", true);
     moveToNextCard();
   }
 
   function reviewAgain() {
+    session.recordWord(items[currentIndex], "set", false);
     setFlipped(false);
 
     const currentCard =
