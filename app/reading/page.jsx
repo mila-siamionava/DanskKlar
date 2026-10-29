@@ -1,4 +1,4 @@
-import { FileText, ScanSearch } from "lucide-react";
+import { Eye, FileText, ScanSearch } from "lucide-react";
 
 import BackLink from "@/components/navigation/BackLink/BackLink";
 import HomeNavigationCard from "@/components/navigation/HomeNavigationCard/HomeNavigationCard";
@@ -29,6 +29,17 @@ export default async function ReadingPage() {
           description={
             isSignedIn
               ? "Find tal, nøgleord og regler hurtigt"
+              : "Log ind for at træne læsestrategier"
+          }
+        />
+
+        <HomeNavigationCard
+          href={isSignedIn ? "/reading/skimming" : "/login"}
+          icon={Eye}
+          title="Læsestrategier: Skimming"
+          description={
+            isSignedIn
+              ? "Forstå emne, hovedpointe og opbygning hurtigt"
               : "Log ind for at træne læsestrategier"
           }
         />

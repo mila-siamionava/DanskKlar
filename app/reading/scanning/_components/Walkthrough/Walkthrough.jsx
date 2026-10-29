@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button/Button";
 
 import ScanningDocument from "../ScanningDocument/ScanningDocument";
-import SplitReader from "../SplitReader/SplitReader";
+import SplitReader from "@/components/reading/SplitReader/SplitReader";
 
 import styles from "./Walkthrough.module.css";
 
