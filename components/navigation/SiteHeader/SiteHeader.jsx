@@ -13,7 +13,8 @@ export default function SiteHeader() {
   // home shows the large logo; lessons have their own top bar
   if (
     pathname === "/" ||
-    pathname.startsWith("/reading/scanning/")
+    pathname.startsWith("/reading/scanning/") ||
+    pathname.startsWith("/reading/skimming/")
   ) {
     return null;
   }

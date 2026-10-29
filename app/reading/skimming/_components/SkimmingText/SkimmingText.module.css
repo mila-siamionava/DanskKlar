@@ -1,0 +1,148 @@
+.text {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-md);
+
+  max-width: var(--reading-max-width);
+
+  color: var(--color-text-primary);
+}
+
+.title {
+  margin: 0;
+
+  font-family: var(--font-family-heading);
+
+  font-size: var(--font-size-headline-small);
+  line-height: var(--line-height-headline-small);
+}
+
+.lead {
+  margin: 0;
+
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-body-large);
+  line-height: var(--line-height-body-large);
+  font-weight: 500;
+}
+
+.heading {
+  margin: var(--spacing-xs) 0 0;
+
+  font-size: var(--font-size-label-large);
+  line-height: var(--line-height-label-large);
+  font-weight: 700;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-3xs);
+}
+
+.number {
+  margin: 0;
+
+  color: var(--color-text-accent);
+
+  font-size: var(--font-size-label-small);
+  line-height: var(--line-height-label-small);
+  font-weight: 600;
+}
+
+.paragraph {
+  margin: 0;
+
+  font-size: var(--font-size-body-medium);
+  line-height: var(--line-height-body-medium);
+}
+
+/* PREVIEW: paragraphs as grey lines */
+
+.skeleton {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-xs);
+
+  padding-block: var(--spacing-2xs);
+}
+
+.skeleton span {
+  height: 1rem;
+
+  border-radius: var(--border-radius-full);
+
+  background: var(--progress-track);
+}
+
+.skeleton span:nth-child(2) {
+  width: 92%;
+}
+
+.skeleton span:nth-child(3) {
+  width: 60%;
+}
+
+/* MARKS */
+
+.text [data-skim-id],
+.text mark {
+  transition:
+    color var(--transition-slow),
+    background-color var(--transition-slow),
+    box-shadow var(--transition-slow);
+}
+
+.text mark {
+  color: inherit;
+}
+
+/* a signal that leads to the answer */
+.clue {
+  border-radius: var(--border-radius-xs);
+
+  background: var(--color-warning-background);
+
+  box-shadow:
+    0 0 0 2px var(--color-warning-background),
+    inset 0 -2px 0 var(--color-warning);
+
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+p.clue,
+h2.clue,
+h3.clue {
+  box-shadow: 0 0 0 2px var(--color-warning);
+}
+
+/* an example or fact, not the main message */
+.detail {
+  background: none;
+
+  text-decoration: underline dashed var(--color-border-control);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+}
+
+/*
+  walkthrough: everything except the marks fades back.
+  Muted colour instead of opacity, so the text keeps enough contrast.
+*/
+
+.dimmed [data-skim-id],
+.dimmed .number {
+  color: var(--color-text-muted);
+}
+
+.dimmed mark,
+.dimmed .clue,
+.dimmed .clue *,
+.dimmed .detail {
+  color: var(--color-text-primary);
+}
