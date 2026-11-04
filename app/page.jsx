@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import {
   BookOpen,
+  ChartColumn,
   Languages,
   ClipboardList,
 } from "lucide-react";
@@ -54,7 +55,7 @@ export default async function Home() {
         </p>
       </header>
 
-      {/* Writing, grammar, mock tests and progress get their own cards once they have content */}
+      {/* Writing, grammar and mock tests get their own cards once they have content */}
       <section
         className={styles.section}
         aria-labelledby="practise-heading"
@@ -89,6 +90,13 @@ export default async function Home() {
             icon={ClipboardList}
             title="Emner"
             description="Arbejde, sundhed og miljø"
+          />
+
+          <HomeNavigationCard
+            href="/progress"
+            icon={ChartColumn}
+            title="Fremskridt"
+            description="Din dag, dine teknikker og dine ord"
           />
         </nav>
       </section>

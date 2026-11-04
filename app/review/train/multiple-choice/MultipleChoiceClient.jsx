@@ -9,6 +9,7 @@ import {
 import ExerciseQuestionCard from "@/components/exercises/ExerciseQuestionCard/ExerciseQuestionCard";
 import ExerciseShell from "@/components/exercises/ExerciseShell/ExerciseShell";
 import ExerciseState from "@/components/exercises/ExerciseState/ExerciseState";
+import { useActivitySession } from "@/lib/progress/useActivitySession";
 
 import { useSelectedReviewItems } from "../_hooks/useSelectedReviewItems";
 import { useTrainingProgress } from "../_hooks/useTrainingProgress";
@@ -117,6 +118,13 @@ export default function MultipleChoiceClient({
   } = useTrainingProgress(
     usableItems.length,
   );
+
+  const session = useActivitySession({
+    area: "words",
+    activity: "multiple-choice",
+    title: "Multiple choice",
+    finished: finished,
+  });
 
   const [
     selectedAnswer,
@@ -324,6 +332,12 @@ export default function MultipleChoiceClient({
     if (isAnswered) {
       return;
     }
+
+    session.recordWord(
+      currentItem,
+      "gen",
+      isSameAnswer(answer, correctAnswer),
+    );
 
     setSelectedAnswer(
       answer,

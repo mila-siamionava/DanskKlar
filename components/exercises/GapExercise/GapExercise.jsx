@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import ExerciseHeader from "@/components/exercises/ExerciseHeader/ExerciseHeader";
 import GapSelect from "@/components/exercises/GapSelect/GapSelect";
@@ -8,6 +8,8 @@ import AnswerFeedback from "@/components/exercises/AnswerFeedback/AnswerFeedback
 import ProgressBar from "@/components/ui/ProgressBar/ProgressBar";
 import Button from "@/components/ui/Button/Button";
 
+import { recordWordEncounter } from "@/lib/progress/activityLog";
+import { useActivitySession } from "@/lib/progress/useActivitySession";
 import { addReviewItem } from "@/lib/reviewStorage";
 
 import styles from "./GapExercise.module.css";
@@ -24,6 +26,21 @@ export default function GapExercise({ exercise }) {
   const score = exercise.questions.filter(
     (question) => answers[question.id]?.firstIsCorrect === true,
   ).length;
+
+  const isComplete = answeredCount === totalQuestions;
+
+  const session = useActivitySession({
+    area: "texts",
+    activity: exercise.exerciseType,
+    title: exercise.title,
+  });
+
+  // saved once all gaps are answered; the score counts first attempts
+  useEffect(() => {
+    if (isComplete) {
+      session.finish({ points: score, max: totalQuestions });
+    }
+  }, [isComplete, score, totalQuestions, session]);
 
   function getGapContext(questionId) {
     const placeholder = `{{${questionId}}}`;
@@ -113,6 +130,24 @@ export default function GapExercise({ exercise }) {
 
     if (!isCorrect && exercise.exerciseType === "vocabulary_gap") {
       addWrongVocabularyToReview(question, optionId);
+    }
+
+    // choosing the right word in context counts as recognising it
+    if (isFirstAttempt && exercise.exerciseType === "vocabulary_gap") {
+      const correctOption = question.options.find(
+        (option) => option.id === question.correctOptionId,
+      );
+
+      if (correctOption?.vocabularyId) {
+        recordWordEncounter(
+          {
+            id: correctOption.vocabularyId,
+            term: correctOption.text?.toLowerCase(),
+          },
+          "gen",
+          isCorrect,
+        );
+      }
     }
 
     setAnswers((previousAnswers) => {
