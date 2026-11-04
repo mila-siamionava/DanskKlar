@@ -5,6 +5,7 @@ import {
 } from "next/font/google";
 
 import BottomNavigation from "@/components/navigation/BottomNavigation/BottomNavigation";
+import SiteFooter from "@/components/navigation/SiteFooter/SiteFooter";
 import SiteHeader from "@/components/navigation/SiteHeader/SiteHeader";
 import { navItems } from "@/data/navigation";
 
@@ -65,6 +66,8 @@ export default function RootLayout({
         <div id="main-content">
           {children}
         </div>
+
+        <SiteFooter />
 
         <BottomNavigation items={navItems} />
       </body>
