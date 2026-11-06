@@ -17,16 +17,14 @@ const FORM_COLUMNS = [
 export default function InflectionTable({
   rows,
   columns = FORM_COLUMNS,
-  heading = "Bøjningsskema",
+  heading,
 }) {
   return (
     <section
       className={styles.wrapper}
-      aria-labelledby="inflection-heading"
+      aria-label={heading ?? "Bøjningsskema"}
     >
-      <h3 id="inflection-heading" className={styles.heading}>
-        {heading}
-      </h3>
+      {heading && <h3 className={styles.heading}>{heading}</h3>}
 
       <table className={styles.table}>
         <thead>

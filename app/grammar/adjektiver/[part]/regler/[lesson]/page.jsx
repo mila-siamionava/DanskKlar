@@ -13,6 +13,7 @@ import {
 
 import AdjectiveAnimation from "../../../_components/AdjectiveAnimation/AdjectiveAnimation";
 import InflectionTable from "../../../_components/InflectionTable/InflectionTable";
+import KeyRules from "../../../_components/KeyRules/KeyRules";
 
 import styles from "../../../Adjectives.module.css";
 
@@ -56,19 +57,33 @@ export default async function AdjectiveLessonPage({ params }) {
           {lesson.title}
         </h2>
 
-        <div>
-          <p className={styles.intro}>{lesson.intro}</p>
-          <HelpText en={lesson.intro_en} ru={lesson.intro_ru} />
-        </div>
+        {/* 1. what to remember, 2. how it works, 3. more if you want it */}
+        <KeyRules lesson={lesson} />
 
         <AdjectiveAnimation lesson={lesson} />
 
+        <details className={styles.more}>
+          <summary className={styles.moreSummary}>Læs forklaringen</summary>
+
+          <div className={styles.moreBody}>
+            <p className={styles.intro}>{lesson.intro}</p>
+            <HelpText en={lesson.intro_en} ru={lesson.intro_ru} />
+          </div>
+        </details>
+
         {lesson.table && (
-          <InflectionTable
-            rows={lesson.table}
-            columns={lesson.tableColumns}
-            heading={lesson.tableHeading}
-          />
+          <details className={styles.more}>
+            <summary className={styles.moreSummary}>
+              Se {(lesson.tableHeading ?? "Bøjningsskema").toLowerCase()}
+            </summary>
+
+            <div className={styles.moreBody}>
+              <InflectionTable
+                rows={lesson.table}
+                columns={lesson.tableColumns}
+              />
+            </div>
+          </details>
         )}
       </section>
 
