@@ -128,6 +128,8 @@ const pairs = [
     "--color-success",
     "--color-error",
     "--color-warning",
+    "--color-grammar-ending",
+    "--color-grammar-green",
   ].flatMap((text) =>
     backgrounds.map((background) => [text, background, TEXT]),
   ),
@@ -135,6 +137,8 @@ const pairs = [
   ["--color-success", "--color-success-background", TEXT],
   ["--color-error", "--color-error-background", TEXT],
   ["--color-warning", "--color-warning-background", TEXT],
+  ["--color-grammar-ending", "--color-grammar-ending-background", TEXT],
+  ["--color-grammar-green", "--color-grammar-green-background", UI],
   ["--color-text-on-accent", "--color-accent", TEXT],
   ["--color-text-on-accent", "--color-accent-hover", TEXT],
 

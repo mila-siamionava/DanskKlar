@@ -66,6 +66,12 @@
   --color-flag: #c8102e;
   --color-flag-cross: var(--color-white);
 
+  /* Grammar: letters added to a word, and the "green" in adjective demos */
+  --color-grammar-ending: #b3122c;
+  --color-grammar-ending-background: #fbe9ec;
+  --color-grammar-green: #2f7a4a;
+  --color-grammar-green-background: #e4f2e8;
+
   /* ============================================================
      TYPOGRAPHY
      ============================================================ */
@@ -285,6 +291,12 @@
 
   /* Brand */
   --color-flag: #d0283c;
+
+  /* Grammar */
+  --color-grammar-ending: #ff9aa6;
+  --color-grammar-ending-background: #3d2328;
+  --color-grammar-green: #8fd0a4;
+  --color-grammar-green-background: #22352a;
 
   /* Shadows */
   --shadow-small: 0 2px 8px rgba(0, 0, 0, 0.22);

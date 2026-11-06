@@ -5,6 +5,7 @@ import {
   ChartColumn,
   Languages,
   ClipboardList,
+  SpellCheck,
 } from "lucide-react";
 
 import { BookMark } from "@/components/brand/Logo/Logo";
@@ -55,7 +56,7 @@ export default async function Home() {
         </p>
       </header>
 
-      {/* Writing, grammar and mock tests get their own cards once they have content */}
+      {/* Writing and mock tests get their own cards once they have content */}
       <section
         className={styles.section}
         aria-labelledby="practise-heading"
@@ -76,6 +77,13 @@ export default async function Home() {
             icon={BookOpen}
             title="Læsning"
             description="Læsestrategier og tekstøvelser"
+          />
+
+          <HomeNavigationCard
+            href="/grammar"
+            icon={SpellCheck}
+            title="Grammatik"
+            description="Regler vist trin for trin"
           />
 
           <HomeNavigationCard
