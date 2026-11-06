@@ -3,16 +3,15 @@
 import { Heart } from "lucide-react";
 import { usePathname } from "next/navigation";
 
+import { isReadingLessonPath } from "@/lib/reading/lessonPaths";
+
 import styles from "./SiteFooter.module.css";
 
 export default function SiteFooter() {
   const pathname = usePathname();
 
   // lessons fill the screen and have their own top bar
-  if (
-    pathname.startsWith("/reading/scanning/") ||
-    pathname.startsWith("/reading/skimming/")
-  ) {
+  if (isReadingLessonPath(pathname)) {
     return null;
   }
 

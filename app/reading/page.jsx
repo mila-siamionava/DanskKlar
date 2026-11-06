@@ -1,4 +1,10 @@
-import { Eye, FileText, ScanSearch } from "lucide-react";
+import {
+  Eye,
+  FileText,
+  Lightbulb,
+  Microscope,
+  ScanSearch,
+} from "lucide-react";
 
 import BackLink from "@/components/navigation/BackLink/BackLink";
 import HomeNavigationCard from "@/components/navigation/HomeNavigationCard/HomeNavigationCard";
@@ -40,6 +46,28 @@ export default async function ReadingPage() {
           description={
             isSignedIn
               ? "Forstå emne, hovedpointe og opbygning hurtigt"
+              : "Log ind for at træne læsestrategier"
+          }
+        />
+
+        <HomeNavigationCard
+          href={isSignedIn ? "/reading/naerlaesning" : "/login"}
+          icon={Microscope}
+          title="Læsestrategier: Nærlæsning"
+          description={
+            isSignedIn
+              ? "Læs præcist: rigtigt/forkert, ord og henvisninger"
+              : "Log ind for at træne læsestrategier"
+          }
+        />
+
+        <HomeNavigationCard
+          href={isSignedIn ? "/reading/inferens" : "/login"}
+          icon={Lightbulb}
+          title="Læsestrategier: Læs mellem linjerne"
+          description={
+            isSignedIn
+              ? "Forstå det, der ikke står direkte – holdninger og hensigter"
               : "Log ind for at træne læsestrategier"
           }
         />

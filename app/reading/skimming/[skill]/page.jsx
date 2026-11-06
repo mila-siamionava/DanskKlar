@@ -1,9 +1,8 @@
 import { notFound } from "next/navigation";
 
+import StrategyLesson from "@/components/reading/strategy/StrategyLesson/StrategyLesson";
 import { requireUser } from "@/lib/access/requireUser";
 import { getSkimmingLesson } from "@/lib/reading/getSkimming";
-
-import SkimmingLesson from "../_components/SkimmingLesson/SkimmingLesson";
 
 export default async function SkimmingLessonPage({ params }) {
   const { skill } = await params;
@@ -16,5 +15,5 @@ export default async function SkimmingLessonPage({ params }) {
     notFound();
   }
 
-  return <SkimmingLesson lesson={lesson} />;
+  return <StrategyLesson lesson={lesson} />;
 }

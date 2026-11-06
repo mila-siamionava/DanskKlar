@@ -1,6 +1,8 @@
 "use client";
 
-import styles from "./SkimmingQuestion.module.css";
+import { hasItems, itemKey } from "@/lib/reading/lessonAnswer";
+
+import styles from "./LessonQuestion.module.css";
 
 function classNames(...names) {
   return names.filter(Boolean).join(" ");
@@ -61,15 +63,32 @@ function MultipleChoice({ question, answer, onAnswer, reveal }) {
   );
 }
 
-function ParagraphFunctions({
+/*
+  A list of items, each answered with one chip:
+  paragraph_functions → one chip per paragraph (what does it do?)
+  statements → one chip per statement (rigtigt / forkert / står ikke i teksten)
+*/
+function ChoiceItems({
   question,
   paragraphs,
   answer = {},
   onAnswer,
   reveal,
 }) {
-  function choose(blockId, choiceId) {
-    onAnswer({ ...answer, [blockId]: choiceId });
+  const isStatements = question.type === "statements";
+
+  function choose(key, choiceId) {
+    onAnswer({ ...answer, [key]: choiceId });
+  }
+
+  function itemLabel(item, index) {
+    if (isStatements) {
+      return { title: `Udsagn ${index + 1}`, text: item.text };
+    }
+
+    const paragraph = paragraphs[item.blockId];
+
+    return { title: `Afsnit ${paragraph.number}`, text: paragraph.excerpt };
   }
 
   return (
@@ -77,18 +96,23 @@ function ParagraphFunctions({
       <p className={styles.prompt}>{question.prompt}</p>
 
       <ol className={styles.paragraphList}>
-        {question.items.map((item) => {
-          const paragraph = paragraphs[item.blockId];
-          const chosen = answer[item.blockId];
+        {question.items.map((item, index) => {
+          const key = itemKey(item);
+          const label = itemLabel(item, index);
+          const chosen = answer[key];
           const isWrong = reveal && chosen !== item.correct;
 
           return (
-            <li key={item.blockId}>
+            <li key={key}>
               <fieldset className={styles.paragraphItem}>
                 <legend className={styles.paragraphLabel}>
-                  <strong>Afsnit {paragraph.number}</strong>
-                  <span className={styles.excerpt}>
-                    {paragraph.excerpt}
+                  <strong>{label.title}</strong>
+                  <span
+                    className={
+                      isStatements ? styles.statement : styles.excerpt
+                    }
+                  >
+                    {label.text}
                   </span>
                 </legend>
 
@@ -108,11 +132,11 @@ function ParagraphFunctions({
                       >
                         <input
                           type="radio"
-                          name={`answer-${question.id}-${item.blockId}`}
+                          name={`answer-${question.id}-${key}`}
                           className="u-visually-hidden"
                           checked={isChosen}
                           disabled={reveal}
-                          onChange={() => choose(item.blockId, choice.id)}
+                          onChange={() => choose(key, choice.id)}
                         />
                         {choice.label}
                       </label>
@@ -130,6 +154,11 @@ function ParagraphFunctions({
                     }
                   </p>
                 )}
+
+                {/* statements explain each answer, right or wrong */}
+                {reveal && item.explanation && (
+                  <p className={styles.itemExplanation}>{item.explanation}</p>
+                )}
               </fieldset>
             </li>
           );
@@ -140,13 +169,13 @@ function ParagraphFunctions({
 }
 
 /*
-  One skimming question.
+  One lesson question.
   reveal: answer is checked, so mark the right options and lock the input.
   paragraphs: { [blockId]: { number, excerpt } } for paragraph questions
 */
-export default function SkimmingQuestion(props) {
-  if (props.question.type === "paragraph_functions") {
-    return <ParagraphFunctions {...props} />;
+export default function LessonQuestion(props) {
+  if (hasItems(props.question)) {
+    return <ChoiceItems {...props} />;
   }
 
   return <MultipleChoice {...props} />;

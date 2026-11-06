@@ -9,7 +9,7 @@ import {
   subscribeToActivity,
 } from "@/lib/progress/activityLog";
 import { getScanningProgress } from "@/lib/reading/scanningProgress";
-import { getSkimmingProgress } from "@/lib/reading/skimmingProgress";
+import { getStrategyProgress } from "@/lib/reading/strategyProgress";
 import { getReviewItems } from "@/lib/reviewStorage";
 
 /*
@@ -36,7 +36,9 @@ export function useProgressData() {
       log: readActivityLog(),
       readingProgress: {
         scanning: getScanningProgress(),
-        skimming: getSkimmingProgress(),
+        skimming: getStrategyProgress("skimming"),
+        naerlaesning: getStrategyProgress("naerlaesning"),
+        inferens: getStrategyProgress("inferens"),
       },
       savedItems: getReviewItems(),
     };

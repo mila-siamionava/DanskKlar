@@ -119,6 +119,12 @@
   font-weight: 600;
 }
 
+.mistakeText {
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-body-small);
+}
+
 .explanation {
   color: var(--color-text-secondary);
 }

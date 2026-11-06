@@ -7,8 +7,8 @@ import Button from "@/components/ui/Button/Button";
 import { useActivitySession } from "@/lib/progress/useActivitySession";
 import {
   MASTERY_SCORE,
-  saveSkimmingResult,
-} from "@/lib/reading/skimmingProgress";
+  saveStrategyResult,
+} from "@/lib/reading/strategyProgress";
 
 import { formatSeconds } from "../TextStage/TextStage";
 
@@ -42,7 +42,12 @@ function readingTimes(results = []) {
   Last step: the test score, practice → test,
   reading time against the target and the mistakes.
 */
-export default function LessonReview({ lesson, stageResults, onRestart }) {
+export default function LessonReview({
+  lesson,
+  strategy,
+  stageResults,
+  onRestart,
+}) {
   const practiceResults = stageResults.practice?.results ?? [];
   const checkResults = stageResults.check?.results ?? [];
 
@@ -60,14 +65,19 @@ export default function LessonReview({ lesson, stageResults, onRestart }) {
     (result) => result.readSeconds <= result.targetSeconds,
   ).length;
 
+  // every text read counts, timed or not (nærlæsning and inferens have no clock)
+  const textCount = new Set(
+    [...practiceResults, ...checkResults].map((result) => result.textSlug),
+  ).size;
+
   const mistakes = [...practiceResults, ...checkResults].filter(
     (result) => !result.isCorrect,
   );
 
   const session = useActivitySession({
     area: "reading",
-    activity: `skimming/${lesson.slug}`,
-    title: `Skimming · ${lesson.title}`,
+    activity: `${strategy.id}/${lesson.slug}`,
+    title: `${strategy.name} · ${lesson.title}`,
   });
 
   const lessonSeconds = Object.values(stageResults).reduce(
@@ -76,24 +86,26 @@ export default function LessonReview({ lesson, stageResults, onRestart }) {
   );
 
   useEffect(() => {
-    saveSkimmingResult(lesson.slug, score);
+    saveStrategyResult(strategy.id, lesson.slug, score);
 
     session.finish({
       points: check.points,
       max: check.max,
       seconds: lessonSeconds,
-      extra: {
-        texts: times.length,
-        textsOnTarget: onTarget,
-      },
+      // the time target only exists for timed strategies
+      extra: times.length
+        ? { texts: textCount, textsOnTarget: onTarget }
+        : { texts: textCount },
     });
   }, [
+    strategy.id,
     lesson.slug,
     score,
     session,
     check.points,
     check.max,
     lessonSeconds,
+    textCount,
     times.length,
     onTarget,
   ]);
@@ -123,9 +135,7 @@ export default function LessonReview({ lesson, stageResults, onRestart }) {
         )}
 
         <p className={styles.message}>
-          {isMastered
-            ? "Flot! Du får overblik over teksten uden at fare vild i detaljerne."
-            : "Du er på vej. Se dine fejl nedenfor, og tag lektionen igen."}
+          {isMastered ? strategy.review.mastered : strategy.review.practise}
         </p>
       </section>
 
@@ -134,7 +144,7 @@ export default function LessonReview({ lesson, stageResults, onRestart }) {
           <h3 className={styles.sectionTitle}>Læsetid</h3>
 
           <p>
-            Du skimmede {onTarget} af {times.length} tekster inden for
+            Du {strategy.review.timesVerb} {onTarget} af {times.length} tekster inden for
             målet. Tiden tæller ikke med i resultatet.
           </p>
 
@@ -159,6 +169,9 @@ export default function LessonReview({ lesson, stageResults, onRestart }) {
           <ul className={styles.mistakeList}>
             {mistakes.map((mistake) => (
               <li key={mistake.questionId}>
+                {mistake.textTitle && (
+                  <p className={styles.mistakeText}>{mistake.textTitle}</p>
+                )}
                 <p className={styles.mistakePrompt}>{mistake.prompt}</p>
                 <p>Dit svar: {mistake.givenAnswer}</p>
                 <p>Rigtigt svar: {mistake.correctAnswer}</p>
@@ -172,8 +185,8 @@ export default function LessonReview({ lesson, stageResults, onRestart }) {
       <div className={styles.actions}>
         <Button onClick={onRestart}>Tag lektionen igen</Button>
 
-        <Button variant="secondary" href="/reading/skimming">
-          Tilbage til skimming
+        <Button variant="secondary" href={strategy.basePath}>
+          {strategy.backLabel}
         </Button>
       </div>
     </div>

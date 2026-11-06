@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 
 import Logo from "@/components/brand/Logo/Logo";
 
+import { isReadingLessonPath } from "@/lib/reading/lessonPaths";
+
 import styles from "./SiteHeader.module.css";
 
 export default function SiteHeader() {
@@ -13,8 +15,7 @@ export default function SiteHeader() {
   // home shows the large logo; lessons have their own top bar
   if (
     pathname === "/" ||
-    pathname.startsWith("/reading/scanning/") ||
-    pathname.startsWith("/reading/skimming/")
+    isReadingLessonPath(pathname)
   ) {
     return null;
   }
