@@ -10,6 +10,8 @@ import {
   ClipboardList,
 } from "lucide-react";
 
+import { isReadingLessonPath } from "@/lib/reading/lessonPaths";
+
 import styles from "./BottomNavigation.module.css";
 
 const icons = {
@@ -30,8 +32,7 @@ const icons = {
   // home has its own cards; reading lessons need the whole screen
   if (
     pathname === "/" ||
-    pathname.startsWith("/reading/scanning/") ||
-    pathname.startsWith("/reading/skimming/")
+    isReadingLessonPath(pathname)
   ) {
     return null;
   }

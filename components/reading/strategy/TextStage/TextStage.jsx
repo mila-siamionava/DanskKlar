@@ -7,14 +7,15 @@ import Button from "@/components/ui/Button/Button";
 import {
   formatCorrectAnswer,
   formatGivenAnswer,
+  hasItems,
   isAnswerComplete,
   isAnswerCorrect,
   maxPoints,
   scoreAnswer,
-} from "@/lib/reading/skimmingAnswer";
+} from "@/lib/reading/lessonAnswer";
 
-import SkimmingQuestion from "../SkimmingQuestion/SkimmingQuestion";
-import SkimmingText from "../SkimmingText/SkimmingText";
+import LessonQuestion from "../LessonQuestion/LessonQuestion";
+import LessonText from "../LessonText/LessonText";
 
 import styles from "./TextStage.module.css";
 
@@ -56,7 +57,15 @@ function describeParagraphs(text) {
   mode "practice": each answer is checked right away, with strategy feedback
   mode "check": answer, move on; the results come in the review
 */
-function TextItem({ item, mode, itemNumber, itemCount, isLast, onDone }) {
+function TextItem({
+  item,
+  strategy,
+  mode,
+  itemNumber,
+  itemCount,
+  isLast,
+  onDone,
+}) {
   const { text, questions } = item;
 
   const [phase, setPhase] = useState(item.preview ? "preview" : "read");
@@ -74,12 +83,15 @@ function TextItem({ item, mode, itemNumber, itemCount, isLast, onDone }) {
   const question = questions[questionIndex];
   const isLastQuestion = questionIndex === questions.length - 1;
   const isPractice = mode === "practice";
+  const { read } = strategy;
 
   // count up while reading; the target guides, it never stops the learner
   useEffect(() => {
     if (phase !== "read") return;
 
     readStartRef.current = Date.now();
+
+    if (!read.timed) return;
 
     const timer = setInterval(() => {
       setElapsedSeconds(
@@ -88,7 +100,7 @@ function TextItem({ item, mode, itemNumber, itemCount, isLast, onDone }) {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [phase]);
+  }, [phase, read.timed]);
 
   // move focus to the panel heading when the step changes
   useEffect(() => {
@@ -101,9 +113,13 @@ function TextItem({ item, mode, itemNumber, itemCount, isLast, onDone }) {
   }, [phase, questionIndex]);
 
   function finishReading() {
-    setReadSeconds(
-      Math.round((Date.now() - readStartRef.current) / 1000),
-    );
+    // untimed strategies keep no reading time, so the review leaves it out
+    if (read.timed) {
+      setReadSeconds(
+        Math.round((Date.now() - readStartRef.current) / 1000),
+      );
+    }
+
     setPhase("questions");
   }
 
@@ -184,49 +200,55 @@ function TextItem({ item, mode, itemNumber, itemCount, isLast, onDone }) {
     const target = text.targetSeconds;
     const isOverTarget = elapsedSeconds > target;
 
-    panelSummary = `${textLabel} · Hurtig læsning · ${formatSeconds(elapsedSeconds)}`;
+    panelSummary = read.timed
+      ? `${textLabel} · ${read.label} · ${formatSeconds(elapsedSeconds)}`
+      : `${textLabel} · ${read.label}`;
 
     panel = (
       <div className={styles.panel}>
-        <p className={styles.step}>{textLabel} · Hurtig læsning</p>
+        <p className={styles.step}>
+          {textLabel} · {read.label}
+        </p>
 
         <h2 ref={headingRef} tabIndex={-1} className={styles.title}>
-          Skim teksten for helheden
+          {read.title}
         </h2>
 
-        <div className={styles.timerCard}>
-          <div className={styles.timerRow}>
-            <p className={styles.timer} role="timer">
-              {formatSeconds(elapsedSeconds)}
+        {read.timed && (
+          <div className={styles.timerCard}>
+            <div className={styles.timerRow}>
+              <p className={styles.timer} role="timer">
+                {formatSeconds(elapsedSeconds)}
+              </p>
+
+              <p className={styles.meta}>Mål: ca. {target} sek.</p>
+            </div>
+
+            <div className={styles.track} aria-hidden="true">
+              <div
+                className={styles.fill}
+                style={{
+                  width: `${Math.min(100, (elapsedSeconds / target) * 100)}%`,
+                }}
+              />
+            </div>
+
+            <p className={styles.meta}>
+              {isOverTarget
+                ? "Over målet – det er helt i orden. Næste gang kan du prøve at læse færre detaljer."
+                : "Målet er en vejledning, ikke en tidsgrænse. Teksten forsvinder ikke."}
             </p>
-
-            <p className={styles.meta}>Mål: ca. {target} sek.</p>
           </div>
-
-          <div className={styles.track} aria-hidden="true">
-            <div
-              className={styles.fill}
-              style={{
-                width: `${Math.min(100, (elapsedSeconds / target) * 100)}%`,
-              }}
-            />
-          </div>
-
-          <p className={styles.meta}>
-            {isOverTarget
-              ? "Over målet – det er helt i orden. Næste gang kan du prøve at læse færre detaljer."
-              : "Målet er en vejledning, ikke en tidsgrænse. Teksten forsvinder ikke."}
-          </p>
-        </div>
+        )}
 
         <ul className={styles.tips}>
-          <li>Læs første sætning i hvert afsnit.</li>
-          <li>Spring tal, navne og eksempler over.</li>
-          <li>Hold øje med ord som »men«, »til gengæld« og »derfor«.</li>
+          {read.tips.map((tip) => (
+            <li key={tip}>{tip}</li>
+          ))}
         </ul>
 
         <div className={styles.actions}>
-          <Button onClick={finishReading}>Jeg har skimmet teksten</Button>
+          <Button onClick={finishReading}>{read.done}</Button>
         </div>
       </div>
     );
@@ -250,7 +272,7 @@ function TextItem({ item, mode, itemNumber, itemCount, isLast, onDone }) {
           {counter}
         </p>
 
-        <SkimmingQuestion
+        <LessonQuestion
           key={question.id}
           question={question}
           paragraphs={describeParagraphs(text)}
@@ -294,10 +316,12 @@ function TextItem({ item, mode, itemNumber, itemCount, isLast, onDone }) {
                 {isCorrect ? "Rigtigt!" : "Ikke helt"}
               </p>
 
-              {question.type === "paragraph_functions" && (
+              {hasItems(question) && (
                 <p>
                   {scoreAnswer(question, answers[question.id])} af{" "}
-                  {maxPoints(question)} afsnit rigtige.
+                  {maxPoints(question)}{" "}
+                  {question.type === "statements" ? "udsagn" : "afsnit"}{" "}
+                  rigtige.
                 </p>
               )}
 
@@ -307,9 +331,9 @@ function TextItem({ item, mode, itemNumber, itemCount, isLast, onDone }) {
               </p>
 
               <p className={styles.legend}>
-                I teksten er signalordene markeret
+                {strategy.legend.clue}
                 {question.marks.some((mark) => mark.kind === "detail") &&
-                  ", og detaljerne er understreget"}
+                  strategy.legend.detail}
                 .
               </p>
             </div>
@@ -338,7 +362,7 @@ function TextItem({ item, mode, itemNumber, itemCount, isLast, onDone }) {
   return (
     <SplitReader
       document={
-        <SkimmingText
+        <LessonText
           text={text}
           preview={phase === "preview"}
           marks={isChecked ? question.marks : []}
@@ -351,7 +375,7 @@ function TextItem({ item, mode, itemNumber, itemCount, isLast, onDone }) {
   );
 }
 
-export default function TextStage({ stage, mode, onComplete }) {
+export default function TextStage({ stage, strategy, mode, onComplete }) {
   const [itemIndex, setItemIndex] = useState(0);
   const [results, setResults] = useState([]);
 
@@ -382,6 +406,7 @@ export default function TextStage({ stage, mode, onComplete }) {
     <TextItem
       key={itemIndex}
       item={stage.items[itemIndex]}
+      strategy={strategy}
       mode={mode}
       itemNumber={itemIndex + 1}
       itemCount={stage.items.length}

@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useSyncExternalStore } from "react";
 
 import ScoreBadge from "@/components/reading/ScoreBadge/ScoreBadge";
-import { getSkimmingProgress } from "@/lib/reading/skimmingProgress";
+import { getStrategy } from "@/lib/reading/strategies";
+import { getStrategyProgress } from "@/lib/reading/strategyProgress";
 
 import styles from "./SkillList.module.css";
 
 // read as a string so the snapshot stays the same between renders
-function readProgress() {
-  return JSON.stringify(getSkimmingProgress());
+function readProgress(strategyId) {
+  return JSON.stringify(getStrategyProgress(strategyId));
 }
 
 function subscribe(onChange) {
@@ -30,9 +31,15 @@ function SkillContent({ skill, children }) {
   );
 }
 
-export default function SkillList({ skills, upcoming }) {
+export default function SkillList({ strategyId, skills, upcoming = [] }) {
+  const strategy = getStrategy(strategyId);
+
   const progress = JSON.parse(
-    useSyncExternalStore(subscribe, readProgress, () => "{}"),
+    useSyncExternalStore(
+      subscribe,
+      () => readProgress(strategyId),
+      () => "{}",
+    ),
   );
 
   return (
@@ -46,7 +53,7 @@ export default function SkillList({ skills, upcoming }) {
           {skills.map((skill) => (
             <li key={skill.slug}>
               <Link
-                href={`/reading/skimming/${skill.slug}`}
+                href={`${strategy.basePath}/${skill.slug}`}
                 className={styles.card}
               >
                 <SkillContent skill={skill}>
@@ -62,22 +69,24 @@ export default function SkillList({ skills, upcoming }) {
         </ol>
       </section>
 
-      <section aria-labelledby="upcoming-heading">
-        <h2 id="upcoming-heading" className={styles.heading}>
-          Kommer snart
-        </h2>
+      {upcoming.length > 0 && (
+        <section aria-labelledby="upcoming-heading">
+          <h2 id="upcoming-heading" className={styles.heading}>
+            Kommer snart
+          </h2>
 
-        <ul className={styles.list}>
-          {upcoming.map((skill) => (
-            <li
-              key={skill.slug}
-              className={[styles.card, styles.upcoming].join(" ")}
-            >
-              <SkillContent skill={skill} />
-            </li>
-          ))}
-        </ul>
-      </section>
+          <ul className={styles.list}>
+            {upcoming.map((skill) => (
+              <li
+                key={skill.slug}
+                className={[styles.card, styles.upcoming].join(" ")}
+              >
+                <SkillContent skill={skill} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </>
   );
 }

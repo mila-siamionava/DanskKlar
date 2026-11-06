@@ -272,3 +272,20 @@ p.prompt {
   font-size: var(--font-size-body-small);
   font-weight: 600;
 }
+
+/* a statement is the thing to judge, so it reads like body text */
+.statement {
+  color: var(--color-text-primary);
+
+  font-size: var(--font-size-body-medium);
+  line-height: var(--line-height-body-medium);
+}
+
+.itemExplanation {
+  margin: 0;
+
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body-small);
+}

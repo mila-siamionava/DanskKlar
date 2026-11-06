@@ -6,43 +6,29 @@ import { useState } from "react";
 import { BookMark } from "@/components/brand/Logo/Logo";
 import BackLink from "@/components/navigation/BackLink/BackLink";
 import Button from "@/components/ui/Button/Button";
+import { getStrategy } from "@/lib/reading/strategies";
 
 import LessonReview from "../LessonReview/LessonReview";
-import SkimmingWalkthrough from "../SkimmingWalkthrough/SkimmingWalkthrough";
+import LessonWalkthrough from "../LessonWalkthrough/LessonWalkthrough";
 import TextStage from "../TextStage/TextStage";
 
-import styles from "./SkimmingLesson.module.css";
-
-const STAGE_INFO = {
-  walkthrough: {
-    label: "Se hvordan",
-    intro: "Se, hvordan en god læser får overblik over en tekst uden at gå i detaljer.",
-  },
-  practice: {
-    label: "Øv med hjælp",
-    intro: "Skim teksten, og svar på spørgsmålet. Du får feedback med det samme og kan få et tip.",
-  },
-  check: {
-    label: "Test dig selv",
-    intro: "Nye tekster uden tips. Du ser svarene i gennemgangen. Målet er mindst 85 % rigtige.",
-  },
-  review: {
-    label: "Gennemgang",
-  },
-};
+import styles from "./StrategyLesson.module.css";
 
 /*
   Runs one lesson: see how → practise → test → review.
   Each stage starts with a short intro, so the learner knows what comes next.
+  The wording comes from the lesson's strategy (lib/reading/strategies.js).
 */
-export default function SkimmingLesson({ lesson }) {
+export default function StrategyLesson({ lesson }) {
+  const strategy = getStrategy(lesson.strategy);
+
   const [stageIndex, setStageIndex] = useState(0);
   const [isStarted, setIsStarted] = useState(false);
   const [stageResults, setStageResults] = useState({});
   const [attempt, setAttempt] = useState(0);
 
   const stage = lesson.stages[stageIndex];
-  const info = STAGE_INFO[stage.kind];
+  const info = strategy.stages[stage.kind];
 
   function completeStage(result) {
     if (result) {
@@ -68,6 +54,7 @@ export default function SkimmingLesson({ lesson }) {
       return (
         <LessonReview
           lesson={lesson}
+          strategy={strategy}
           stageResults={stageResults}
           onRestart={restart}
         />
@@ -100,7 +87,7 @@ export default function SkimmingLesson({ lesson }) {
 
     if (stage.kind === "walkthrough") {
       return (
-        <SkimmingWalkthrough
+        <LessonWalkthrough
           stage={stage}
           onComplete={() => completeStage()}
         />
@@ -110,6 +97,7 @@ export default function SkimmingLesson({ lesson }) {
     return (
       <TextStage
         stage={stage}
+        strategy={strategy}
         mode={stage.kind}
         onComplete={completeStage}
       />
@@ -128,8 +116,8 @@ export default function SkimmingLesson({ lesson }) {
         </Link>
 
         <BackLink
-          href="/reading/skimming"
-          label="Tilbage til skimming"
+          href={strategy.basePath}
+          label={strategy.backLabel}
         />
 
         <div className={styles.heading}>

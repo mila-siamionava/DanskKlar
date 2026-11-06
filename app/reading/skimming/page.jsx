@@ -1,8 +1,7 @@
 import BackLink from "@/components/navigation/BackLink/BackLink";
+import SkillList from "@/components/reading/strategy/SkillList/SkillList";
 import { requireUser } from "@/lib/access/requireUser";
 import { getSkimmingSkills } from "@/lib/reading/getSkimming";
-
-import SkillList from "./_components/SkillList/SkillList";
 
 import styles from "./Skimming.module.css";
 
@@ -25,7 +24,7 @@ export default async function SkimmingPage() {
         ad gangen.
       </p>
 
-      <SkillList skills={skills} upcoming={upcoming} />
+      <SkillList strategyId="skimming" skills={skills} upcoming={upcoming} />
     </main>
   );
 }

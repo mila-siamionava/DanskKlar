@@ -4,19 +4,19 @@ import { useEffect, useState } from "react";
 
 import Button from "@/components/ui/Button/Button";
 
-import SkimmingText from "../SkimmingText/SkimmingText";
+import LessonText from "../LessonText/LessonText";
 import SplitReader from "@/components/reading/SplitReader/SplitReader";
 
-import styles from "./SkimmingWalkthrough.module.css";
+import styles from "./LessonWalkthrough.module.css";
 
 const STEP_DURATION_MS = 5000;
 
 /*
-  Shows how an efficient reader skims one text:
+  Shows how an efficient reader works through one text:
   each step marks the clues the eyes pick up and fades out the rest.
   Plays by itself, or step by step with the buttons.
 */
-export default function SkimmingWalkthrough({ stage, onComplete }) {
+export default function LessonWalkthrough({ stage, onComplete }) {
   const { steps } = stage;
 
   const [stepIndex, setStepIndex] = useState(0);
@@ -124,7 +124,7 @@ export default function SkimmingWalkthrough({ stage, onComplete }) {
   return (
     <SplitReader
       document={
-        <SkimmingText text={stage.text} marks={step.marks} dimOthers />
+        <LessonText text={stage.text} marks={step.marks} dimOthers />
       }
       panel={panel}
       panelLabel="Gennemgang"

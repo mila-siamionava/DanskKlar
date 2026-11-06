@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-import styles from "./SkimmingText.module.css";
+import styles from "./LessonText.module.css";
 
 function classNames(...names) {
   return names.filter(Boolean).join(" ");
@@ -45,12 +45,12 @@ function splitByMarks(text, marks) {
 }
 
 /*
-  A short article for skimming.
-  marks: clues and details to show, by block or by phrase (see skimmingSamples.js)
+  A short article for a strategy lesson.
+  marks: clues and details to show, by block or by phrase (see the samples files)
   preview: only the title and headings; the paragraphs are grey lines
   dimOthers: walkthrough mode, everything but the marks fades back
 */
-export default function SkimmingText({
+export default function LessonText({
   text,
   marks = [],
   preview = false,
