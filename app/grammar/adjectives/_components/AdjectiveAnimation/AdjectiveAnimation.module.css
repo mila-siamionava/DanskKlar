@@ -133,6 +133,11 @@
   color: var(--color-grammar-green);
 }
 
+.picture[data-done="true"][data-effect="red"] {
+  background: var(--color-grammar-ending-background);
+  color: var(--color-grammar-ending);
+}
+
 .picture[data-done="true"][data-effect="black"] {
   color: var(--color-text-primary);
 }

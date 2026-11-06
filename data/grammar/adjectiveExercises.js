@@ -1,7 +1,7 @@
 /*
   Adjective exercises, A1–B1 vocabulary.
 
-  vaelg-formen: pick the right form for the gap (___).
+  vaelg-formen, endelser: pick the right form for the gap (___).
   find-fejlen: the sentence is split in four parts, one has the error.
     error is the index of the wrong part, fix replaces it.
 
@@ -91,14 +91,14 @@ export const adjectiveExercises = [
         sentence: "Det er et ___ ord.",
         options: ["danskt", "dansk", "danske", "dansket"],
         answer: "dansk",
-        lesson: "undtagelser",
+        lesson: "sk-vis",
         why: "Adjektiver på -sk får ikke -t: et dansk ord.",
       },
       {
         sentence: "Vi bor i et ___ område.",
         options: ["stillet", "stilt", "stille", "stilles"],
         answer: "stille",
-        lesson: "undtagelser",
+        lesson: "uboejelige",
         why: "Adjektiver på -e ændrer sig aldrig.",
       },
       {
@@ -112,14 +112,14 @@ export const adjectiveExercises = [
         sentence: "To ___ børn leger i haven.",
         options: ["lille", "lilles", "små", "småe"],
         answer: "små",
-        lesson: "undtagelser",
+        lesson: "uboejelige",
         why: "lille hedder små i flertal.",
       },
       {
         sentence: "Det er et ___ hotel.",
         options: ["modernt", "moderne", "moderner", "modernet"],
         answer: "moderne",
-        lesson: "undtagelser",
+        lesson: "uboejelige",
         why: "moderne ender på -e og ændrer sig aldrig.",
       },
       {
@@ -147,7 +147,7 @@ export const adjectiveExercises = [
         sentence: "Jeg har et ___ spørgsmål.",
         options: ["kortt", "korte", "kort", "kortet"],
         answer: "kort",
-        lesson: "undtagelser",
+        lesson: "t-et",
         why: "kort ender allerede på -t: ingen ekstra -t.",
       },
       {
@@ -160,6 +160,156 @@ export const adjectiveExercises = [
     ],
   },
 
+  {
+    id: "endelser",
+    type: "choose",
+    title: "Endelser og undtagelser",
+    short: "-ig, -som, -sk, -el, -et, åben, blå …",
+    instructions: "Vælg den form af adjektivet, der passer i sætningen.",
+
+    questions: [
+      {
+        sentence: "Det var et ___ møde.",
+        options: ["vigtig", "vigtige", "vigtigt", "vigtigte"],
+        answer: "vigtigt",
+        lesson: "ig-som",
+        why: "-ig følger reglen: et møde er et et-ord, så + t.",
+      },
+      {
+        sentence: "Vi tog det ___ tog til Odense.",
+        options: ["langsomme", "langsom", "langsomt", "langsome"],
+        answer: "langsomme",
+        lesson: "ig-som",
+        why: "Efter det får adjektivet -e, og -som får dobbelt m: langsomme.",
+      },
+      {
+        sentence: "Det er et ___ problem.",
+        options: ["typiskt", "typiske", "typisk", "typiskte"],
+        answer: "typisk",
+        lesson: "sk-vis",
+        why: "Adjektiver på -sk får ikke -t: et typisk problem.",
+      },
+      {
+        sentence: "Vi spiste en ___ kage.",
+        options: ["lækkert", "lækker", "lækre", "lækkre"],
+        answer: "lækker",
+        lesson: "en-el-er",
+        why: "kage er et en-ord i ubestemt form: ingen endelse.",
+      },
+      {
+        sentence: "Den ___ kage er allerede væk.",
+        options: ["lækker", "lækkre", "lækkert", "lækre"],
+        answer: "lækre",
+        lesson: "en-el-er",
+        why: "Efter den får adjektivet -e, og e'et i -er forsvinder: lækker → lækre.",
+      },
+      {
+        sentence: "Min ___ bror vil ikke hjælpe.",
+        options: ["doven", "dovne", "dovene", "dovent"],
+        answer: "dovne",
+        lesson: "en-el-er",
+        why: "Efter min får adjektivet -e, og e'et i -en forsvinder: doven → dovne.",
+      },
+      {
+        sentence: "Vi bor i et ___ hus.",
+        options: ["gamle", "gammel", "gammelt", "gamelt"],
+        answer: "gammelt",
+        lesson: "en-el-er",
+        why: "et hus: + t. Med -t forsvinder e'et ikke: et gammelt hus.",
+      },
+      {
+        sentence: "Der er mange ___ nyheder i dag.",
+        options: ["aktuel", "aktuelt", "aktuelle", "aktuele"],
+        answer: "aktuelle",
+        lesson: "dobbelt-l",
+        why: "Flertal: + e, og l bliver til ll: aktuelle.",
+      },
+      {
+        sentence: "Det er en ___ løsning for familien.",
+        options: ["ideelle", "ideel", "ideelt", "ideele"],
+        answer: "ideel",
+        lesson: "dobbelt-l",
+        why: "løsning er et en-ord i ubestemt form: ingen endelse.",
+      },
+      {
+        sentence: "Vi havde et ___ møde i morges.",
+        options: ["kortt", "korte", "kort", "kortet"],
+        answer: "kort",
+        lesson: "t-et",
+        why: "kort ender allerede på -t: intet ekstra -t.",
+      },
+      {
+        sentence: "Kan du vaske de ___ glas?",
+        options: ["snavset", "snavsete", "snavsedt", "snavsede"],
+        answer: "snavsede",
+        lesson: "t-et",
+        why: "Efter de får adjektivet -e, og -et bliver til -ede: snavsede.",
+      },
+      {
+        sentence: "Han sad på en ___ bænk i parken.",
+        options: ["malede", "malet", "malt", "malete"],
+        answer: "malet",
+        lesson: "t-et",
+        why: "bænk er et en-ord i ubestemt form: malet uden endelse.",
+      },
+      {
+        sentence: "Politiet fandt den ___ cykel.",
+        options: ["stjålen", "stjålet", "stjålne", "stjålede"],
+        answer: "stjålne",
+        lesson: "tillaegsform",
+        why: "Efter den: stjålen bliver til stjålne.",
+      },
+      {
+        sentence: "Døren er ___.",
+        options: ["åbent", "åben", "åbne", "åbene"],
+        answer: "åben",
+        lesson: "tillaegsform",
+        why: "Efter er: døren er et en-ord, så ingen endelse.",
+      },
+      {
+        sentence: "Vinduet står ___.",
+        options: ["åben", "åbne", "åbnt", "åbent"],
+        answer: "åbent",
+        lesson: "tillaegsform",
+        why: "vinduet er et et-ord, så åben får -t: åbent.",
+      },
+      {
+        sentence: "Pas på det ___ tog! Det kører ind på perronen nu.",
+        options: ["ankomne", "ankommende", "ankommet", "ankomster"],
+        answer: "ankommende",
+        lesson: "tillaegsform",
+        why: "Toget kører ind nu, så det er -ende: det ankommende tog.",
+      },
+      {
+        sentence: "Det var et ___ møde.",
+        options: ["spændendt", "spændende", "spændendes", "spændene"],
+        answer: "spændende",
+        lesson: "uboejelige",
+        why: "Adjektiver på -ende ændrer sig aldrig.",
+      },
+      {
+        sentence: "Vi har købt et ___ tæppe til stuen.",
+        options: ["blå", "blåe", "blåt", "blått"],
+        answer: "blåt",
+        lesson: "uboejelige",
+        why: "blå og grå får -t ved et-ord: et blåt tæppe.",
+      },
+      {
+        sentence: "Vi har købt et ___ tag til huset.",
+        options: ["nyt", "ny", "nye", "nytt"],
+        answer: "nyt",
+        lesson: "uboejelige",
+        why: "ny får -t ved et-ord, men kun ét t: et nyt tag.",
+      },
+      {
+        sentence: "Det ___ barn græder.",
+        options: ["stakkel", "stakkelt", "stakkels", "stakkelse"],
+        answer: "stakkels",
+        lesson: "uboejelige",
+        why: "stakkels ændrer sig aldrig.",
+      },
+    ],
+  },
   {
     id: "find-fejlen",
     type: "error",
@@ -214,7 +364,7 @@ export const adjectiveExercises = [
         parts: ["Hun har", "et danskt", "pas", "nu."],
         error: 1,
         fix: "et dansk",
-        lesson: "undtagelser",
+        lesson: "sk-vis",
         why: "Adjektiver på -sk får ikke -t: et dansk pas.",
       },
       {
@@ -228,7 +378,7 @@ export const adjectiveExercises = [
         parts: ["Mange unge", "mennesker", "har en", "små lejlighed."],
         error: 3,
         fix: "lille lejlighed.",
-        lesson: "undtagelser",
+        lesson: "uboejelige",
         why: "små er kun flertal. I ental hedder det lille: en lille lejlighed.",
       },
       {
@@ -242,7 +392,7 @@ export const adjectiveExercises = [
         parts: ["Vi har", "to", "lille", "børn."],
         error: 2,
         fix: "små",
-        lesson: "undtagelser",
+        lesson: "uboejelige",
         why: "lille hedder små i flertal: to små børn.",
       },
       {
@@ -284,7 +434,7 @@ export const adjectiveExercises = [
         parts: ["Vi har", "et", "sortt", "tag på huset."],
         error: 2,
         fix: "sort",
-        lesson: "undtagelser",
+        lesson: "t-et",
         why: "sort ender allerede på -t: et sort tag.",
       },
       {

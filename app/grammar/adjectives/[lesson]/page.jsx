@@ -13,6 +13,7 @@ import {
 
 import AdjectiveAnimation from "../_components/AdjectiveAnimation/AdjectiveAnimation";
 import GrammarQuiz from "../_components/GrammarQuiz/GrammarQuiz";
+import InflectionTable from "../_components/InflectionTable/InflectionTable";
 
 import styles from "../Adjectives.module.css";
 
@@ -54,12 +55,14 @@ export default async function AdjectiveLessonPage({ params }) {
         aria-labelledby="lesson-heading"
       >
         <h2 id="lesson-heading" className={styles.heading}>
-          {index + 1}. {lesson.title}
+          {lesson.title}
         </h2>
 
         <p className={styles.intro}>{lesson.intro}</p>
 
         <AdjectiveAnimation lesson={lesson} />
+
+        {lesson.table && <InflectionTable rows={lesson.table} />}
       </section>
 
       <div className={styles.next}>
@@ -68,8 +71,8 @@ export default async function AdjectiveLessonPage({ params }) {
             Næste: {nextLesson.title}
           </Button>
         ) : (
-          <Button href="/grammar/adjectives/vaelg-formen" fullWidth>
-            Øv dig: Vælg den rigtige form
+          <Button href="/grammar/adjectives" fullWidth>
+            Til øvelserne
           </Button>
         )}
       </div>

@@ -1,8 +1,9 @@
+/* long phrases wrap to a second line instead of squeezing the words */
 .phrase {
   display: inline-flex;
   align-items: baseline;
   justify-content: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 
   font-family: var(--font-family-heading);
   font-weight: 700;
@@ -19,9 +20,20 @@
   line-height: var(--line-height-body-large);
 }
 
+/* in the inflection table: may wrap, so long rows fit a phone */
+.table {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  font-size: var(--font-size-body-medium);
+  line-height: var(--line-height-body-medium);
+  white-space: normal;
+}
+
 .word {
   display: inline-flex;
   align-items: baseline;
+  flex-shrink: 0;
 }
 
 /* the space after a word lives inside it, so a closed slot leaves no gap */
@@ -39,6 +51,8 @@
   grid-template-columns can animate between 0fr and 1fr.
 */
 .slot {
+  flex-shrink: 0;
+
   display: inline-grid;
   grid-template-columns: 0fr;
 

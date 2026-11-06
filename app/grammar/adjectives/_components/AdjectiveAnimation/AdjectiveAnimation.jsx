@@ -1,7 +1,32 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Car, Flag, House, Pause, Play } from "lucide-react";
+import {
+  Armchair,
+  Baby,
+  Bike,
+  Brain,
+  Cake,
+  Car,
+  Clapperboard,
+  CloudLightning,
+  CreditCard,
+  Flag,
+  GlassWater,
+  House,
+  Lightbulb,
+  Mail,
+  Newspaper,
+  Pause,
+  Play,
+  Sunrise,
+  Table2,
+  Train,
+  User,
+  Users,
+  UtensilsCrossed,
+  Watch,
+} from "lucide-react";
 
 import { adjectiveText, phraseText } from "@/lib/grammar/phrase";
 
@@ -9,7 +34,31 @@ import NounPhrase from "../NounPhrase/NounPhrase";
 
 import styles from "./AdjectiveAnimation.module.css";
 
-const pictures = { car: Car, house: House, flag: Flag };
+// scene.picture names an icon; scenes without one show no picture
+const pictures = {
+  baby: Baby,
+  bench: Armchair,
+  bike: Bike,
+  brain: Brain,
+  cake: Cake,
+  car: Car,
+  card: CreditCard,
+  film: Clapperboard,
+  flag: Flag,
+  glass: GlassWater,
+  house: House,
+  letter: Mail,
+  lightbulb: Lightbulb,
+  meal: UtensilsCrossed,
+  news: Newspaper,
+  storm: CloudLightning,
+  sunrise: Sunrise,
+  table: Table2,
+  train: Train,
+  user: User,
+  users: Users,
+  watch: Watch,
+};
 
 /*
   One scene plays in four phases, like a short gif:
@@ -193,19 +242,21 @@ function Scene({ scene, phase }) {
         <NounPhrase phrase={scene.phrase} step={phase} />
       </div>
 
-      <div
-        className={styles.picture}
-        data-done={isDone}
-        data-effect={scene.effect ?? "plain"}
-      >
-        {Array.from({ length: scene.count }, (_, index) => (
-          <Picture
-            key={index}
-            className={styles.icon}
-            strokeWidth={1.6}
-          />
-        ))}
-      </div>
+      {Picture && (
+        <div
+          className={styles.picture}
+          data-done={isDone}
+          data-effect={scene.effect ?? "plain"}
+        >
+          {Array.from({ length: scene.count ?? 1 }, (_, index) => (
+            <Picture
+              key={index}
+              className={styles.icon}
+              strokeWidth={1.6}
+            />
+          ))}
+        </div>
+      )}
 
       <p className={styles.gloss} lang="en">
         {isDone ? scene.gloss.after : scene.gloss.before}

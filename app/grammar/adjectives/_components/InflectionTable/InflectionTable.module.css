@@ -1,0 +1,100 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-sm);
+}
+
+.heading {
+  margin: 0;
+
+  font-size: var(--font-size-body-large);
+  line-height: var(--line-height-body-large);
+}
+
+.table {
+  width: 100%;
+
+  border-collapse: separate;
+  border-spacing: 0;
+
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--border-radius-md);
+
+  background: var(--color-background-surface);
+
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  padding: var(--spacing-xs) var(--spacing-sm);
+
+  border-bottom: 1px solid var(--color-border-primary);
+
+  text-align: left;
+  vertical-align: top;
+}
+
+.table th {
+  background: var(--color-background-soft);
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-label-small);
+  line-height: var(--line-height-label-small);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* phone: one card per noun, the column name above each form */
+@media (max-width: 47.99em) {
+  .table,
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+  }
+
+  .table thead {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    overflow: hidden;
+
+    clip-path: inset(50%);
+  }
+
+  .table tbody tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    border-bottom: 1px solid var(--color-border-primary);
+  }
+
+  .table tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .table td {
+    border-bottom: 0;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+
+    display: block;
+
+    color: var(--color-text-muted);
+
+    font-size: var(--font-size-label-small);
+    line-height: var(--line-height-label-small);
+    font-weight: 600;
+  }
+}
