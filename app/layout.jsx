@@ -8,6 +8,7 @@ import BottomNavigation from "@/components/navigation/BottomNavigation/BottomNav
 import SiteFooter from "@/components/navigation/SiteFooter/SiteFooter";
 import SiteHeader from "@/components/navigation/SiteHeader/SiteHeader";
 import { navItems } from "@/data/navigation";
+import { restorePreferencesScript } from "@/lib/theme/preferences";
 
 import "@/styles/global.css";
 
@@ -53,6 +54,14 @@ export default function RootLayout({
       data-appearance="light"
       suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: restorePreferencesScript,
+          }}
+        />
+      </head>
+
       <body>
         <a
           href="#main-content"

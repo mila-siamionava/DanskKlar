@@ -1,7 +1,8 @@
 import { readFileSync } from "node:fs";
 
 /*
-  Checks WCAG contrast of design tokens in light and dark theme.
+  Checks WCAG contrast of design tokens for every palette,
+  in light and dark appearance.
   Text needs 4.5:1, focus rings and control borders need 3:1.
   Run: npm run check:contrast
 */
@@ -9,7 +10,7 @@ import { readFileSync } from "node:fs";
 const css = readFileSync(
   new URL("../styles/base/_variables.css", import.meta.url),
   "utf8",
-);
+).replace(/\/\*[\s\S]*?\*\//g, "");
 
 function getTokens(block) {
   const tokens = {};
@@ -23,18 +24,54 @@ function getTokens(block) {
   return tokens;
 }
 
-const lightBlock = css.match(/:root\s*{([\s\S]*?)\n}/)[1];
+// every top-level rule: its attribute conditions and its tokens
+const rules = [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)].map(
+  ([, selector, body]) => ({
+    conditions: Object.fromEntries(
+      [...selector.matchAll(/\[([\w-]+)="([\w-]+)"\]/g)].map(
+        ([, attribute, value]) => [attribute, value],
+      ),
+    ),
+    tokens: getTokens(body),
+  }),
+);
 
-const darkBlock = css.match(
-  /\[data-appearance="dark"\]\s*{([\s\S]*?)\n}/,
-)[1];
+const palettes = [
+  ...new Set(
+    rules.map((rule) => rule.conditions["data-theme"]).filter(Boolean),
+  ),
+];
 
-const lightTokens = getTokens(lightBlock);
+function tokensFor(theme, appearance) {
+  const attributes = {
+    "data-theme": theme,
+    "data-appearance": appearance,
+  };
 
-const themes = {
-  light: lightTokens,
-  dark: { ...lightTokens, ...getTokens(darkBlock) },
-};
+  // more specific selectors win; source order breaks ties
+  return rules
+    .filter((rule) =>
+      Object.entries(rule.conditions).every(
+        ([attribute, value]) => attributes[attribute] === value,
+      ),
+    )
+    .map((rule, index) => ({ ...rule, index }))
+    .sort(
+      (a, b) =>
+        Object.keys(a.conditions).length -
+          Object.keys(b.conditions).length || a.index - b.index,
+    )
+    .reduce((tokens, rule) => ({ ...tokens, ...rule.tokens }), {});
+}
+
+const themes = Object.fromEntries(
+  palettes.flatMap((theme) =>
+    ["light", "dark"].map((appearance) => [
+      `${theme} / ${appearance}`,
+      tokensFor(theme, appearance),
+    ]),
+  ),
+);
 
 function resolve(tokens, name) {
   let value = tokens[name];
