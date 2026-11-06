@@ -75,10 +75,13 @@ function caption(lesson, scene, phase) {
   }
 
   if (phase === 1) {
-    return `Vi tilføjer adjektivet ${chipText(scene).replace("+ ", "")}`;
+    return (
+      scene.offer ??
+      `Vi tilføjer adjektivet ${chipText(scene).replace("+ ", "")}`
+    );
   }
 
-  if (phase === 2) return lesson.middle;
+  if (phase === 2) return scene.middle ?? lesson.middle;
 
   return scene.rule;
 }

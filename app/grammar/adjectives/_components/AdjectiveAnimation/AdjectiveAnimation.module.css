@@ -85,6 +85,7 @@
 
   font-size: var(--font-size-body-large);
   font-weight: 700;
+  white-space: nowrap;
 
   opacity: 0;
   transform: translate(-50%, -1.2rem) scale(0.9);

@@ -1,3 +1,5 @@
+import { degreeLessons } from "./adjectiveDegrees.js";
+
 /*
   Adjective lessons. Each scene is one phrase written in the markup
   from lib/grammar/phrase.js and plays in four steps:
@@ -19,9 +21,10 @@
   summary rows show the finished phrases of the scenes they list.
 */
 
-export const adjectiveLessons = [
+const positiveLessons = [
   {
     id: "hvad-er",
+    part: "grundform",
     section: "Grundregler",
     title: "Hvad er et adjektiv?",
     short: "En rød bil, bilen er rød, at være smart",
@@ -80,6 +83,7 @@ export const adjectiveLessons = [
   },
   {
     id: "grundform",
+    part: "grundform",
     section: "Grundregler",
     title: "Grundform: en, et og flertal",
     short: "En grøn bil, et grønt hus, grønne huse",
@@ -139,6 +143,7 @@ export const adjectiveLessons = [
 
   {
     id: "bestemt-form",
+    part: "grundform",
     section: "Grundregler",
     title: "Bestemt form: den, det, de",
     short: "Bilen → den grønne bil",
@@ -202,6 +207,7 @@ export const adjectiveLessons = [
 
   {
     id: "ejefald",
+    part: "grundform",
     section: "Grundregler",
     title: "Efter min, Peters og denne",
     short: "Min grønne bil, Peters grønne hus",
@@ -273,6 +279,7 @@ export const adjectiveLessons = [
 
   {
     id: "efter-er",
+    part: "grundform",
     section: "Grundregler",
     title: "Efter er og bliver",
     short: "Bilen er grøn, huset er grønt",
@@ -339,6 +346,7 @@ export const adjectiveLessons = [
 
   {
     id: "skema",
+    part: "grundform",
     section: "Grundregler",
     title: "Hele skemaet: ental og flertal",
     short: "Et rødt hus, det røde hus, røde huse, de røde huse",
@@ -408,6 +416,7 @@ export const adjectiveLessons = [
 
   {
     id: "ig-som",
+    part: "grundform",
     section: "Endelser og undtagelser",
     title: "Adjektiver på -ig og -som",
     short: "Et vigtigt møde, de langsomme tog",
@@ -498,6 +507,7 @@ export const adjectiveLessons = [
 
   {
     id: "sk-vis",
+    part: "grundform",
     section: "Endelser og undtagelser",
     title: "Adjektiver på -sk og -vis",
     short: "Et dansk flag, et typisk eksempel",
@@ -562,6 +572,7 @@ export const adjectiveLessons = [
 
   {
     id: "en-el-er",
+    part: "grundform",
     section: "Endelser og undtagelser",
     title: "Adjektiver på -en, -el og -er",
     short: "Den lækre kage, dovne mænd, gamle huse",
@@ -628,6 +639,7 @@ export const adjectiveLessons = [
 
   {
     id: "dobbelt-l",
+    part: "grundform",
     section: "Endelser og undtagelser",
     title: "Aktuel, ideel, kriminel: dobbelt l",
     short: "Aktuelle nyheder, den ideelle løsning",
@@ -689,6 +701,7 @@ export const adjectiveLessons = [
 
   {
     id: "t-et",
+    part: "grundform",
     section: "Endelser og undtagelser",
     title: "Adjektiver på -t og -et",
     short: "Et kort møde, den malede bænk",
@@ -752,6 +765,7 @@ export const adjectiveLessons = [
 
   {
     id: "tillaegsform",
+    part: "grundform",
     section: "Endelser og undtagelser",
     title: "Tillægsform: stjålen, stjålet, stjålne",
     short: "En stjålen cykel, det ankomne tog",
@@ -846,6 +860,7 @@ export const adjectiveLessons = [
 
   {
     id: "uboejelige",
+    part: "grundform",
     section: "Endelser og undtagelser",
     title: "Adjektiver, der ikke ændrer sig",
     short: "Et moderne hus, det blå kort, små biler",
@@ -955,6 +970,7 @@ export const adjectiveLessons = [
 
   {
     id: "komma",
+    part: "grundform",
     section: "Tegnsætning",
     title: "Komma mellem adjektiver",
     short: "En kold, frostklar morgen",
@@ -1004,6 +1020,9 @@ export const adjectiveLessons = [
     ],
   },
 ];
+
+// grundform first, then gradbøjning
+export const adjectiveLessons = [...positiveLessons, ...degreeLessons];
 
 export function getAdjectiveLesson(id) {
   return adjectiveLessons.find((lesson) => lesson.id === id) ?? null;

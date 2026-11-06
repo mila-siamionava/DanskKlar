@@ -8,13 +8,23 @@ import { adjectiveExercises } from "@/data/grammar/adjectiveExercises";
 import styles from "./Adjectives.module.css";
 
 const exerciseIcons = {
-  "vaelg-formen": CircleHelp,
-  endelser: SpellCheck,
-  "find-fejlen": SearchCheck,
+  choose: CircleHelp,
+  error: SearchCheck,
 };
 
-// lessons are grouped like the teaching slides, in this order
-const sections = [...new Set(adjectiveLessons.map((lesson) => lesson.section))];
+// two parts, each with its lessons (grouped like the slides) and exercises
+const parts = [
+  {
+    id: "grundform",
+    title: "Grundform (1. grad)",
+    intro: "Sådan bøjer du adjektivet efter navneordet: en grøn bil, et grønt hus, de grønne huse.",
+  },
+  {
+    id: "grad",
+    title: "Gradbøjning (2. og 3. grad)",
+    intro: "Sådan sammenligner du: høj, højere, højest, den højeste.",
+  },
+];
 
 export default function AdjectivesPage() {
   return (
@@ -25,56 +35,76 @@ export default function AdjectivesPage() {
         title="Adjektiver"
       />
 
-      {sections.map((section, sectionIndex) => (
-        <section
-          key={section}
-          className={styles.lesson}
-          aria-labelledby={`section-${sectionIndex}`}
-        >
-          <h2 id={`section-${sectionIndex}`} className={styles.heading}>
-            {section}
-          </h2>
+      {parts.map((part) => {
+        const lessons = adjectiveLessons.filter(
+          (lesson) => lesson.part === part.id,
+        );
 
-          <nav className={styles.list} aria-label={section}>
-            {adjectiveLessons
-              .filter((lesson) => lesson.section === section)
-              .map((lesson) => (
-                <HomeNavigationCard
-                  key={lesson.id}
-                  href={`/grammar/adjectives/${lesson.id}`}
-                  icon={Play}
-                  title={`${adjectiveLessons.indexOf(lesson) + 1}. ${lesson.title}`}
-                  description={lesson.short}
-                />
-              ))}
-          </nav>
-        </section>
-      ))}
+        const sections = [...new Set(lessons.map((lesson) => lesson.section))];
 
-      <section
-        className={styles.lesson}
-        aria-labelledby="exercises-heading"
-      >
-        <h2 id="exercises-heading" className={styles.heading}>
-          Øvelser
-        </h2>
+        const exercises = adjectiveExercises.filter(
+          (exercise) => exercise.part === part.id,
+        );
 
-        <p className={styles.intro}>
-          Alle øvelser handler om grundformen (1. grad). Ord på A1–B1-niveau.
-        </p>
+        return (
+          <section
+            key={part.id}
+            className={styles.part}
+            aria-labelledby={`part-${part.id}`}
+          >
+            <div className={styles.partHeader}>
+              <h2 id={`part-${part.id}`} className={styles.partTitle}>
+                {part.title}
+              </h2>
 
-        <nav className={styles.list} aria-label="Øvelser">
-          {adjectiveExercises.map((exercise) => (
-            <HomeNavigationCard
-              key={exercise.id}
-              href={`/grammar/adjectives/${exercise.id}`}
-              icon={exerciseIcons[exercise.id]}
-              title={exercise.title}
-              description={`${exercise.questions.length} spørgsmål · ${exercise.short}`}
-            />
-          ))}
-        </nav>
-      </section>
+              <p className={styles.intro}>{part.intro}</p>
+            </div>
+
+            {sections.map((section) => (
+              <div key={section} className={styles.lesson}>
+                <h3 className={styles.heading}>{section}</h3>
+
+                <nav className={styles.list} aria-label={section}>
+                  {lessons
+                    .filter((lesson) => lesson.section === section)
+                    .map((lesson) => (
+                      <HomeNavigationCard
+                        key={lesson.id}
+                        href={`/grammar/adjectives/${lesson.id}`}
+                        icon={Play}
+                        title={`${lessons.indexOf(lesson) + 1}. ${lesson.title}`}
+                        description={lesson.short}
+                      />
+                    ))}
+                </nav>
+              </div>
+            ))}
+
+            <div className={styles.lesson}>
+              <h3 className={styles.heading}>Øvelser</h3>
+
+              <nav
+                className={styles.list}
+                aria-label={`Øvelser: ${part.title}`}
+              >
+                {exercises.map((exercise) => (
+                  <HomeNavigationCard
+                    key={exercise.id}
+                    href={`/grammar/adjectives/${exercise.id}`}
+                    icon={
+                      exercise.id === "endelser"
+                        ? SpellCheck
+                        : exerciseIcons[exercise.type]
+                    }
+                    title={exercise.title}
+                    description={`${exercise.questions.length} spørgsmål · ${exercise.short}`}
+                  />
+                ))}
+              </nav>
+            </div>
+          </section>
+        );
+      })}
     </main>
   );
 }

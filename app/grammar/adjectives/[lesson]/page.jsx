@@ -40,7 +40,10 @@ export default async function AdjectiveLessonPage({ params }) {
   if (!lesson) notFound();
 
   const index = adjectiveLessons.indexOf(lesson);
-  const nextLesson = adjectiveLessons[index + 1];
+  const following = adjectiveLessons[index + 1];
+
+  // the next lesson in the same part; at the end of a part, the exercises
+  const nextLesson = following?.part === lesson.part ? following : null;
 
   return (
     <main className={styles.page}>
@@ -62,7 +65,13 @@ export default async function AdjectiveLessonPage({ params }) {
 
         <AdjectiveAnimation lesson={lesson} />
 
-        {lesson.table && <InflectionTable rows={lesson.table} />}
+        {lesson.table && (
+          <InflectionTable
+            rows={lesson.table}
+            columns={lesson.tableColumns}
+            heading={lesson.tableHeading}
+          />
+        )}
       </section>
 
       <div className={styles.next}>
