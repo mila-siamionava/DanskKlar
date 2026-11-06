@@ -1,0 +1,32 @@
+.help {
+  display: flex;
+  align-items: baseline;
+
+  gap: var(--spacing-xs);
+
+  margin: var(--spacing-2xs) 0 0;
+
+  color: var(--color-text-secondary);
+
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body-small);
+  font-weight: 400;
+  font-style: normal;
+  text-align: left;
+}
+
+.label {
+  flex: none;
+
+  padding: 0 var(--spacing-2xs);
+
+  border: 1px solid var(--color-border-secondary);
+  border-radius: var(--border-radius-xs);
+
+  color: var(--color-text-muted);
+
+  font-size: var(--font-size-label-small);
+  line-height: var(--line-height-label-small);
+  font-weight: 700;
+}

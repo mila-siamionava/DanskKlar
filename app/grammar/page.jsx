@@ -16,7 +16,7 @@ export default function GrammarPage() {
 
       <nav className={styles.navigation} aria-label="Grammatik">
         <HomeNavigationCard
-          href="/grammar/adjectives"
+          href="/grammar/adjektiver"
           icon={Palette}
           title="Adjektiver"
           description="Grundform og gradbøjning: en grøn bil, det grønne hus, højere end"

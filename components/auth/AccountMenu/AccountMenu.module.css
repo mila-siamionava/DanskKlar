@@ -64,6 +64,10 @@
 
   z-index: 20;
 
+  /* palette, appearance and language: scroll on short screens */
+  max-height: calc(100dvh - 8rem);
+  overflow-y: auto;
+
   width:
     min(
       26rem,

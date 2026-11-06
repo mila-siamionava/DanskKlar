@@ -60,6 +60,7 @@ export default async function TopicVocabularyPage({
         <TopicVocabularyList
           words={words}
           topicName={topic.name}
+          topicSlug={slug}
         />
       </main>
     </>

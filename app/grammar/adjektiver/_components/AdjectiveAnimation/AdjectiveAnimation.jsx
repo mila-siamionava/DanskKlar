@@ -28,6 +28,7 @@ import {
   Watch,
 } from "lucide-react";
 
+import HelpText from "@/components/i18n/HelpText/HelpText";
 import { adjectiveText, phraseText } from "@/lib/grammar/phrase";
 
 import NounPhrase from "../NounPhrase/NounPhrase";
@@ -186,6 +187,15 @@ export default function AdjectiveAnimation({ lesson }) {
         {isSummary
           ? "Reglen"
           : caption(lesson, scene, shownPhase)}
+
+        {/* the rule in the help language, once the rule is shown */}
+        {!isSummary && shownPhase === LAST_PHASE && (
+          <HelpText
+            className={styles.captionHelp}
+            en={scene.rule_en}
+            ru={scene.rule_ru}
+          />
+        )}
       </figcaption>
 
       <nav aria-label="Scener">

@@ -8,7 +8,9 @@
   lesson points to the explanation in data/grammar/adjectives.js.
 */
 
-export const adjectiveExercises = [
+import { withExerciseHelp } from "./adjectiveHelp.js";
+
+const exercises = [
   {
     id: "vaelg-formen",
     part: "grundform",
@@ -767,6 +769,9 @@ export const adjectiveExercises = [
     ],
   },
 ];
+
+// with English and Russian help texts (data/grammar/adjectiveHelp.js)
+export const adjectiveExercises = exercises.map(withExerciseHelp);
 
 export function getAdjectiveExercise(id) {
   return adjectiveExercises.find((exercise) => exercise.id === id) ?? null;

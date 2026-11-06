@@ -1,4 +1,5 @@
 import { degreeLessons } from "./adjectiveDegrees.js";
+import { withLessonHelp } from "./adjectiveHelp.js";
 
 /*
   Adjective lessons. Each scene is one phrase written in the markup
@@ -1022,7 +1023,9 @@ const positiveLessons = [
 ];
 
 // grundform first, then gradbøjning
-export const adjectiveLessons = [...positiveLessons, ...degreeLessons];
+export const adjectiveLessons = [...positiveLessons, ...degreeLessons].map(
+  withLessonHelp,
+);
 
 export function getAdjectiveLesson(id) {
   return adjectiveLessons.find((lesson) => lesson.id === id) ?? null;
