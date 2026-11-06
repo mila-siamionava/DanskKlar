@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { LogOut, UserRound } from "lucide-react";
 
+import HelpLanguageSwitch from "@/components/settings/HelpLanguageSwitch/HelpLanguageSwitch";
 import PaletteSwitch from "@/components/theme/PaletteSwitch/PaletteSwitch";
 import ThemeToggle from "@/components/theme/ThemeToggle/ThemeToggle";
 
@@ -93,6 +94,10 @@ export default function AccountMenu({ email }) {
           <PaletteSwitch />
 
           <ThemeToggle />
+
+          <div className={styles.accountDivider} />
+
+          <HelpLanguageSwitch />
 
           <div className={styles.accountDivider} />
 

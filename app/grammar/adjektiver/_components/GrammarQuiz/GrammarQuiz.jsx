@@ -5,6 +5,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 
 import ExerciseQuestionCard from "@/components/exercises/ExerciseQuestionCard/ExerciseQuestionCard";
 import ExerciseShell from "@/components/exercises/ExerciseShell/ExerciseShell";
+import HelpText from "@/components/i18n/HelpText/HelpText";
 import Button from "@/components/ui/Button/Button";
 import { useActivitySession } from "@/lib/progress/useActivitySession";
 
@@ -18,7 +19,12 @@ const LETTERS = ["A", "B", "C", "D"];
   error   pick the part of the sentence that is wrong
   Every answer shows why, with a link to the lesson that explains it.
 */
-export default function GrammarQuiz({ exercise, lessons }) {
+export default function GrammarQuiz({
+  exercise,
+  lessonLinks,
+  backHref,
+  backLabel,
+}) {
   const { questions } = exercise;
 
   const [index, setIndex] = useState(0);
@@ -80,11 +86,7 @@ export default function GrammarQuiz({ exercise, lessons }) {
     setIsFinished(false);
   }
 
-  const shellProps = {
-    eyebrow: "Adjektiver",
-    backHref: "/grammar/adjectives",
-    backLabel: "Tilbage til adjektiver",
-  };
+  const shellProps = { eyebrow: "Adjektiver", backHref, backLabel };
 
   if (isFinished) {
     const mistakes = answers.filter((answer) => !answer.isCorrect);
@@ -123,12 +125,8 @@ export default function GrammarQuiz({ exercise, lessons }) {
                 Prøv igen
               </Button>
 
-              <Button
-                href="/grammar/adjectives"
-                variant="secondary"
-                fullWidth
-              >
-                Tilbage til adjektiver
+              <Button href={backHref} variant="secondary" fullWidth>
+                Til øvelserne
               </Button>
             </div>
           </div>
@@ -137,7 +135,7 @@ export default function GrammarQuiz({ exercise, lessons }) {
     );
   }
 
-  const lesson = lessons.find((item) => item.id === question.lesson);
+  const lesson = lessonLinks[question.lesson];
 
   const options =
     exercise.type === "choose" ? question.options : [0, 1, 2, 3];
@@ -148,6 +146,12 @@ export default function GrammarQuiz({ exercise, lessons }) {
       title={exercise.instructions}
       current={index + 1}
       total={questions.length}
+      controls={
+        <HelpText
+          en={exercise.instructions_en}
+          ru={exercise.instructions_ru}
+        />
+      }
     >
       <ExerciseQuestionCard>
         <h2
@@ -224,13 +228,13 @@ export default function GrammarQuiz({ exercise, lessons }) {
                 <CorrectSentence exercise={exercise} question={question} />
               </p>
 
-              <p className={styles.why}>{question.why}</p>
+              <div>
+                <p className={styles.why}>{question.why}</p>
+                <HelpText en={question.why_en} ru={question.why_ru} />
+              </div>
 
               {lesson && (
-                <Link
-                  href={`/grammar/adjectives/${lesson.id}`}
-                  className={styles.lessonLink}
-                >
+                <Link href={lesson.href} className={styles.lessonLink}>
                   Se forklaringen: {lesson.title}
                 </Link>
               )}

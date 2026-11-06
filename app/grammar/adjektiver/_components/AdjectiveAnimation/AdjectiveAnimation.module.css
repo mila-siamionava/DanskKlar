@@ -333,3 +333,10 @@
     transition: none;
   }
 }
+
+/* the translated rule, centred under the Danish one */
+.captionHelp {
+  justify-content: center;
+
+  text-align: center;
+}
