@@ -14,7 +14,7 @@ export function sessionMeta(session) {
 
   if (session.texts) {
     parts.push(`${session.texts} ${session.texts === 1 ? "tekst" : "tekster"}`);
-  } else if (session.area === "words") {
+  } else if (session.area === "words" || session.area === "grammar") {
     parts.push(`${session.max} svar`);
   }
 

@@ -19,7 +19,7 @@ export default function GrammarPage() {
           href="/grammar/adjectives"
           icon={Palette}
           title="Adjektiver"
-          description="En grøn bil, et grønt hus, grønne huse"
+          description="Forklaringer og øvelser: en grøn bil, den grønne bil, huset er grønt"
         />
       </nav>
     </main>

@@ -9,13 +9,15 @@ export default function ExerciseTop({
   title,
   current,
   total,
+  backHref = "/review/train",
+  backLabel = "Tilbage til træning",
 }) {
   return (
     <div className={styles.top}>
       <div className={styles.topRow}>
         <BackLink
-          href="/review/train"
-          label="Tilbage til træning"
+          href={backHref}
+          label={backLabel}
           title={eyebrow}
         />
 

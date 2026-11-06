@@ -36,3 +36,15 @@
   font-size: var(--font-size-body-medium);
   line-height: var(--line-height-body-medium);
 }
+
+.list {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-md);
+}
+
+.next {
+  display: flex;
+  flex-direction: column;
+}

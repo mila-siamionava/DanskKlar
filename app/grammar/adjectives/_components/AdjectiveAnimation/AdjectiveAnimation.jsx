@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Car, House, Pause, Play } from "lucide-react";
+import { Car, Flag, House, Pause, Play } from "lucide-react";
+
+import { adjectiveText, phraseText } from "@/lib/grammar/phrase";
 
 import NounPhrase from "../NounPhrase/NounPhrase";
 
 import styles from "./AdjectiveAnimation.module.css";
 
-const pictures = { car: Car, house: House };
+const pictures = { car: Car, house: House, flag: Flag };
 
 /*
   One scene plays in four phases, like a short gif:
@@ -18,12 +20,23 @@ const PHASE_MS = [1400, 1300, 1300, 2800];
 const SUMMARY_MS = 6000;
 const LAST_PHASE = PHASE_MS.length - 1;
 
-const captions = [
-  (scene) => `Navneordet: ${scene.group}`,
-  (scene) => `Vi tilføjer adjektivet ${scene.adjective.stem}`,
-  () => "Adjektivet står foran navneordet",
-  (scene) => scene.rule,
-];
+function caption(lesson, scene, phase) {
+  if (phase === 0) {
+    return scene.start ?? `Navneordet: ${phraseText(scene.phrase, 0)}`;
+  }
+
+  if (phase === 1) {
+    return `Vi tilføjer adjektivet ${chipText(scene).replace("+ ", "")}`;
+  }
+
+  if (phase === 2) return lesson.middle;
+
+  return scene.rule;
+}
+
+function chipText(scene) {
+  return scene.chip ?? `+ ${adjectiveText(scene.phrase)}`;
+}
 
 export default function AdjectiveAnimation({ lesson }) {
   const { scenes, summary } = lesson;
@@ -120,14 +133,14 @@ export default function AdjectiveAnimation({ lesson }) {
       <figcaption className={styles.caption}>
         {isSummary
           ? "Reglen"
-          : captions[shownPhase](scene)}
+          : caption(lesson, scene, shownPhase)}
       </figcaption>
 
       <nav aria-label="Scener">
         <ol className={styles.frames}>
           {[...scenes, null].map((item, index) => {
             const label = item
-              ? `${item.article ?? ""} ${item.noun.stem}${item.noun.ending}`.trim()
+              ? (item.label ?? phraseText(item.phrase, 0))
               : "Reglen";
 
             return (
@@ -151,11 +164,8 @@ export default function AdjectiveAnimation({ lesson }) {
       <ul className="u-visually-hidden">
         {scenes.map((item) => (
           <li key={item.id} lang="da">
-            {item.article} {item.noun.stem}
-            {item.noun.ending} + {item.adjective.stem} ={" "}
-            {item.article} {item.adjective.stem}
-            {item.adjective.ending} {item.noun.stem}
-            {item.noun.ending}. {item.rule}
+            {phraseText(item.phrase, 0)} {chipText(item)} ={" "}
+            {phraseText(item.phrase)}. {item.rule}
           </li>
         ))}
       </ul>
@@ -177,17 +187,17 @@ function Scene({ scene, phase }) {
           data-phase={phase}
           lang="da"
         >
-          + {scene.adjective.stem}
+          {chipText(scene)}
         </span>
 
-        <NounPhrase
-          scene={scene}
-          withAdjective={phase >= 2}
-          withEnding={phase >= 3}
-        />
+        <NounPhrase phrase={scene.phrase} step={phase} />
       </div>
 
-      <div className={styles.picture} data-done={isDone}>
+      <div
+        className={styles.picture}
+        data-done={isDone}
+        data-effect={scene.effect ?? "plain"}
+      >
         {Array.from({ length: scene.count }, (_, index) => (
           <Picture
             key={index}
@@ -217,7 +227,7 @@ function RuleCard({ scenes, summary }) {
 
           <span className={styles.ruleExamples}>
             {row.examples.map((id) => (
-              <NounPhrase key={id} scene={byId[id]} size="small" />
+              <NounPhrase key={id} phrase={byId[id].phrase} size="small" />
             ))}
           </span>
         </div>

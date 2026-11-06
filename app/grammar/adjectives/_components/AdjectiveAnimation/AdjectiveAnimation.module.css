@@ -124,16 +124,35 @@
 }
 
 .picture[data-done="true"] {
+  background: var(--color-background-soft);
+  color: var(--color-text-accent);
+}
+
+.picture[data-done="true"][data-effect="green"] {
   background: var(--color-grammar-green-background);
   color: var(--color-grammar-green);
+}
+
+.picture[data-done="true"][data-effect="black"] {
+  color: var(--color-text-primary);
+}
+
+.picture[data-done="true"][data-effect="black"] .icon {
+  stroke-width: 2.6;
+}
+
+.picture[data-done="true"][data-effect="small"] .icon {
+  transform: scale(0.6);
 }
 
 .icon {
   width: 6.4rem;
   height: 6.4rem;
+
+  transition: transform 600ms ease;
 }
 
-.picture[data-done="true"] .icon {
+.picture[data-done="true"]:not([data-effect="small"]) .icon {
   animation: pop 500ms ease;
 }
 
@@ -161,7 +180,7 @@
 
 .ruleRow {
   display: grid;
-  grid-template-columns: 7.6rem 1fr;
+  grid-template-columns: minmax(7.6rem, auto) 1fr;
   grid-template-areas:
     "group ending"
     "examples examples";
@@ -298,12 +317,13 @@
 @media (prefers-reduced-motion: reduce) {
   .scene,
   .rules,
-  .picture[data-done="true"] .icon {
+  .picture[data-done="true"]:not([data-effect="small"]) .icon {
     animation: none;
   }
 
   .chip,
-  .picture {
+  .picture,
+  .icon {
     transition: none;
   }
 }

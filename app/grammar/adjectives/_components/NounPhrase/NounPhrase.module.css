@@ -10,7 +10,7 @@
 }
 
 .large {
-  font-size: clamp(2.8rem, 9vw, 4rem);
+  font-size: clamp(2.6rem, 8vw, 4rem);
   line-height: 1.3;
 }
 
@@ -19,15 +19,19 @@
   line-height: var(--line-height-body-large);
 }
 
-/* the space after a word lives inside it, so a closed slot leaves no gap */
 .word {
   display: inline-flex;
   align-items: baseline;
 }
 
-.word:not(:last-child),
-.phrase > .slot .word {
+/* the space after a word lives inside it, so a closed slot leaves no gap */
+.spaced {
   padding-inline-end: 0.3em;
+}
+
+/* a whole new word, such as den or er */
+.addedWord {
+  color: var(--color-grammar-ending);
 }
 
 /*
@@ -64,6 +68,12 @@
 
   background: var(--color-grammar-ending-background);
   color: var(--color-grammar-ending);
+}
+
+/* letters on their way out */
+.struck {
+  text-decoration: line-through;
+  text-decoration-thickness: 0.08em;
 }
 
 @media (prefers-reduced-motion: reduce) {
