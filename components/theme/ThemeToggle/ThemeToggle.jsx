@@ -1,30 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Moon, Sun } from "lucide-react";
+
+import { applyAppearance } from "@/lib/theme/preferences";
 
 import styles from "./ThemeToggle.module.css";
 
-const STORAGE_KEY = "danskklar-appearance";
-
 export default function ThemeToggle() {
-  const [appearance, setAppearance] =
-    useState("light");
-
-  useEffect(() => {
-    const savedAppearance =
-      localStorage.getItem(STORAGE_KEY);
-
-    const initialAppearance =
-      savedAppearance === "dark"
-        ? "dark"
-        : "light";
-
-    setAppearance(initialAppearance);
-
-    document.documentElement.dataset.appearance =
-      initialAppearance;
-  }, []);
+  // only rendered inside the open account menu, so document exists;
+  // the head script has already applied the saved appearance
+  const [appearance, setAppearance] = useState(() =>
+    typeof document !== "undefined" &&
+    document.documentElement.dataset.appearance === "dark"
+      ? "dark"
+      : "light",
+  );
 
   function toggleAppearance() {
     const nextAppearance =
@@ -33,14 +24,7 @@ export default function ThemeToggle() {
         : "dark";
 
     setAppearance(nextAppearance);
-
-    document.documentElement.dataset.appearance =
-      nextAppearance;
-
-    localStorage.setItem(
-      STORAGE_KEY,
-      nextAppearance
-    );
+    applyAppearance(nextAppearance);
   }
 
   const isDark = appearance === "dark";

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { LogOut, UserRound } from "lucide-react";
 
+import PaletteSwitch from "@/components/theme/PaletteSwitch/PaletteSwitch";
 import ThemeToggle from "@/components/theme/ThemeToggle/ThemeToggle";
 
 import styles from "./AccountMenu.module.css";
@@ -88,6 +89,8 @@ export default function AccountMenu({ email }) {
           </div>
 
           <div className={styles.accountDivider} />
+
+          <PaletteSwitch />
 
           <ThemeToggle />
 

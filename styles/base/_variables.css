@@ -258,8 +258,45 @@
 }
 
 /* ==============================================================
-   WARM PALETTE — DARK APPEARANCE
+   PALETTES
+   data-theme picks the palette, data-appearance picks light or
+   dark. :root holds the warm light palette; every palette below
+   only overrides colour tokens. Status colours and shadows are
+   shared by all dark palettes.
+   Check contrast after any change: npm run check:contrast
    ============================================================== */
+
+/* ---------- Shared dark appearance ---------- */
+
+[data-appearance="dark"] {
+  /* Success */
+  --color-success: #9fc9ad;
+  --color-success-background: #24352a;
+  --color-success-border: #3d5a47;
+
+  /* Error */
+  --color-error: #e1a1a1;
+  --color-error-background: #3a2424;
+  --color-error-border: #654040;
+
+  /* Warning */
+  --color-warning: #dfb36f;
+  --color-warning-background: #3a3020;
+
+  /* Brand */
+  --color-flag: #d0283c;
+
+  /* Shadows */
+  --shadow-small: 0 2px 8px rgba(0, 0, 0, 0.22);
+
+  --shadow-card: 0 6px 20px rgba(0, 0, 0, 0.28);
+
+  --shadow-elevated: 0 10px 30px rgba(0, 0, 0, 0.34);
+
+  --shadow-sheet: 0 -6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------- Warm Scandinavian — dark ---------- */
 
 [data-theme="warm"][data-appearance="dark"] {
   /* Text */
@@ -282,25 +319,10 @@
   /* Borders */
   --color-border-primary: #403930;
   --color-border-secondary: #51483d;
-  --color-border-accent: var(--color-accent);
   --color-border-control: #817361;
 
   /* Focus */
   --color-focus: #e2cda8;
-
-  /* Success */
-  --color-success: #9fc9ad;
-  --color-success-background: #24352a;
-  --color-success-border: #3d5a47;
-
-  /* Error */
-  --color-error: #e1a1a1;
-  --color-error-background: #3a2424;
-  --color-error-border: #654040;
-
-  /* Warning */
-  --color-warning: #dfb36f;
-  --color-warning-background: #3a3020;
 
   /* Progress */
   --color-progress-track: #403930;
@@ -309,14 +331,223 @@
   --color-logo-cover: #b49a7a;
   --color-logo-page: #f3eee6;
   --color-logo-line: #9c8a70;
-  --color-flag: #d0283c;
+}
 
-  /* Shadows */
-  --shadow-small: 0 2px 8px rgba(0, 0, 0, 0.22);
+/* ---------- Nordic Blue — light ---------- */
 
-  --shadow-card: 0 6px 20px rgba(0, 0, 0, 0.28);
+[data-theme="nordic"] {
+  /* Text */
+  --color-text-primary: #1b2430;
+  --color-text-secondary: #3e4a58;
+  --color-text-muted: #5a6676;
+  --color-text-accent: #2f5577;
+  --color-text-on-accent: #1b2430;
 
-  --shadow-elevated: 0 10px 30px rgba(0, 0, 0, 0.34);
+  /* Backgrounds */
+  --color-background-page: #eef2f6;
+  --color-background-surface: #ffffff;
+  --color-background-soft: #f6f8fb;
 
-  --shadow-sheet: 0 -6px 20px rgba(0, 0, 0, 0.3);
+  /* Accent */
+  --color-accent: #b9cde0;
+  --color-accent-hover: #a3bdd5;
+
+  /* Borders */
+  --color-border-primary: #dde4ec;
+  --color-border-secondary: #c9d3de;
+  --color-border-control: #6f8296;
+
+  /* Focus */
+  --color-focus: #2f5d86;
+
+  /* Progress */
+  --color-progress-track: #dce4ed;
+
+  /* Brand */
+  --color-logo-cover: #5f7a96;
+  --color-logo-page: #f6f8fb;
+  --color-logo-line: #94a9bf;
+}
+
+/* ---------- Nordic Blue — dark ---------- */
+
+[data-theme="nordic"][data-appearance="dark"] {
+  /* Text */
+  --color-text-primary: #e9eef4;
+  --color-text-secondary: #c3ccd6;
+  --color-text-muted: #9aa6b3;
+  --color-text-inverse: #141a21;
+  --color-text-accent: #a9c6e2;
+  --color-text-on-accent: #141a21;
+
+  /* Backgrounds */
+  --color-background-page: #141a21;
+  --color-background-surface: #1c242d;
+  --color-background-soft: #24303b;
+
+  /* Accent */
+  --color-accent: #a9c3dc;
+  --color-accent-hover: #bed2e6;
+
+  /* Borders */
+  --color-border-primary: #2f3b48;
+  --color-border-secondary: #3d4b5a;
+  --color-border-control: #73879b;
+
+  /* Focus */
+  --color-focus: #b5cfe8;
+
+  /* Progress */
+  --color-progress-track: #2f3b48;
+
+  /* Brand */
+  --color-logo-cover: #8ea8c2;
+  --color-logo-page: #e9eef4;
+  --color-logo-line: #6d8399;
+}
+
+/* ---------- Sage Study — light ---------- */
+
+[data-theme="sage"] {
+  /* Text */
+  --color-text-primary: #1e231c;
+  --color-text-secondary: #464d42;
+  --color-text-muted: #5f675a;
+  --color-text-accent: #4b6641;
+  --color-text-on-accent: #1e231c;
+
+  /* Backgrounds */
+  --color-background-page: #f1f3ec;
+  --color-background-surface: #ffffff;
+  --color-background-soft: #f8f9f4;
+
+  /* Accent */
+  --color-accent: #c5d3b5;
+  --color-accent-hover: #b0c39c;
+
+  /* Borders */
+  --color-border-primary: #e1e6d8;
+  --color-border-secondary: #cdd5c1;
+  --color-border-control: #7a876d;
+
+  /* Focus */
+  --color-focus: #4a6640;
+
+  /* Progress */
+  --color-progress-track: #e0e6d7;
+
+  /* Brand */
+  --color-logo-cover: #74866a;
+  --color-logo-page: #f8f9f4;
+  --color-logo-line: #a5b598;
+}
+
+/* ---------- Sage Study — dark ---------- */
+
+[data-theme="sage"][data-appearance="dark"] {
+  /* Text */
+  --color-text-primary: #edf0e8;
+  --color-text-secondary: #cbd2c3;
+  --color-text-muted: #a2ab97;
+  --color-text-inverse: #171b16;
+  --color-text-accent: #bcd0a9;
+  --color-text-on-accent: #171b16;
+
+  /* Backgrounds */
+  --color-background-page: #171b16;
+  --color-background-surface: #20251e;
+  --color-background-soft: #293026;
+
+  /* Accent */
+  --color-accent: #b9cba6;
+  --color-accent-hover: #cadabb;
+
+  /* Borders */
+  --color-border-primary: #363f32;
+  --color-border-secondary: #455040;
+  --color-border-control: #7b8870;
+
+  /* Focus */
+  --color-focus: #c5d8b1;
+
+  /* Progress */
+  --color-progress-track: #363f32;
+
+  /* Brand */
+  --color-logo-cover: #98aa88;
+  --color-logo-page: #edf0e8;
+  --color-logo-line: #74846a;
+}
+
+/* ---------- Clay Terracotta — light ---------- */
+
+[data-theme="clay"] {
+  /* Text */
+  --color-text-primary: #2a1d18;
+  --color-text-secondary: #56453d;
+  --color-text-muted: #725f57;
+  --color-text-accent: #964c30;
+  --color-text-on-accent: #2a1d18;
+
+  /* Backgrounds */
+  --color-background-page: #f8f1ec;
+  --color-background-surface: #ffffff;
+  --color-background-soft: #fcf8f5;
+
+  /* Accent */
+  --color-accent: #e6b9a2;
+  --color-accent-hover: #dca287;
+
+  /* Borders */
+  --color-border-primary: #eddfd6;
+  --color-border-secondary: #dfcabd;
+  --color-border-control: #a27662;
+
+  /* Focus */
+  --color-focus: #964c30;
+
+  /* Progress */
+  --color-progress-track: #eee0d6;
+
+  /* Brand */
+  --color-logo-cover: #b06a4f;
+  --color-logo-page: #fcf8f5;
+  --color-logo-line: #cf9f88;
+}
+
+/* ---------- Clay Terracotta — dark ---------- */
+
+[data-theme="clay"][data-appearance="dark"] {
+  /* Text */
+  --color-text-primary: #f5ece6;
+  --color-text-secondary: #d8c8be;
+  --color-text-muted: #b09f95;
+  --color-text-inverse: #1d1714;
+  --color-text-accent: #eab49b;
+  --color-text-on-accent: #1d1714;
+
+  /* Backgrounds */
+  --color-background-page: #1d1714;
+  --color-background-surface: #27201c;
+  --color-background-soft: #322824;
+
+  /* Accent */
+  --color-accent: #e3ad93;
+  --color-accent-hover: #ecc0aa;
+
+  /* Borders */
+  --color-border-primary: #44372f;
+  --color-border-secondary: #56463c;
+  --color-border-control: #8f7869;
+
+  /* Focus */
+  --color-focus: #f0c0a8;
+
+  /* Progress */
+  --color-progress-track: #44372f;
+
+  /* Brand */
+  --color-logo-cover: #c78a70;
+  --color-logo-page: #f5ece6;
+  --color-logo-line: #9c6f5c;
 }

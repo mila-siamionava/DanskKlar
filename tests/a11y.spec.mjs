@@ -30,10 +30,14 @@ async function saveWords(page) {
   }, selectedWords);
 }
 
-async function setAppearance(page, appearance) {
-  await page.evaluate((value) => {
-    document.documentElement.dataset.appearance = value;
-  }, appearance);
+async function setAppearance(page, appearance, theme = "warm") {
+  await page.evaluate(
+    ([appearance, theme]) => {
+      document.documentElement.dataset.appearance = appearance;
+      document.documentElement.dataset.theme = theme;
+    },
+    [appearance, theme],
+  );
 }
 
 const pages = [
@@ -84,6 +88,53 @@ test.describe("axe: no WCAG A/AA violations", () => {
       });
     }
   }
+});
+
+// other palettes on pages that use most colour tokens
+const palettePages = ["/", "/exercises/jobskifte", "/review/train/multiple-choice"];
+
+test.describe("axe: palettes", () => {
+  for (const theme of ["nordic", "sage", "clay"]) {
+    for (const appearance of ["light", "dark"]) {
+      for (const path of palettePages) {
+        test(`${path} (${theme}, ${appearance})`, async ({ page }) => {
+          await saveWords(page);
+          await page.goto(path);
+          await page.waitForLoadState("networkidle");
+          await setAppearance(page, appearance, theme);
+
+          const results = await new AxeBuilder({ page })
+            .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+            .analyze();
+
+          expect(
+            results.violations.map(
+              (violation) =>
+                `${violation.id}: ${violation.nodes
+                  .map((node) => node.target.join(" "))
+                  .join(", ")}`,
+            ),
+          ).toEqual([]);
+        });
+      }
+    }
+  }
+});
+
+test.describe("saved palette", () => {
+  test("is applied before the page paints", async ({ page }) => {
+    await page.addInitScript(() => {
+      localStorage.setItem("danskklar-palette", "nordic");
+      localStorage.setItem("danskklar-appearance", "dark");
+    });
+
+    await page.goto("/topics");
+
+    const root = page.locator("html");
+
+    await expect(root).toHaveAttribute("data-theme", "nordic");
+    await expect(root).toHaveAttribute("data-appearance", "dark");
+  });
 });
 
 test.describe("keyboard", () => {
