@@ -46,6 +46,8 @@ const pages = [
   "/login?mode=signup",
   "/forgot-password",
   "/reading",
+  "/grammar",
+  "/grammar/adjectives",
   "/topics",
   "/topics/arbejde",
   "/topics/arbejde/vocabulary",
