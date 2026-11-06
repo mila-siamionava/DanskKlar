@@ -10,6 +10,8 @@ export default function ExerciseShell({
   total,
   instructions,
   controls,
+  backHref,
+  backLabel,
   children,
 }) {
   return (
@@ -20,6 +22,8 @@ export default function ExerciseShell({
           title={title}
           current={current}
           total={total}
+          backHref={backHref}
+          backLabel={backLabel}
         />
 
         {instructions && (

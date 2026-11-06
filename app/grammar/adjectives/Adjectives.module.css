@@ -36,3 +36,46 @@
   font-size: var(--font-size-body-medium);
   line-height: var(--line-height-body-medium);
 }
+
+.list {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-md);
+}
+
+.next {
+  display: flex;
+  flex-direction: column;
+}
+
+.part {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-lg);
+
+  padding-top: var(--spacing-lg);
+
+  border-top: 1px solid var(--color-border-secondary);
+}
+
+.part:first-of-type {
+  padding-top: 0;
+
+  border-top: 0;
+}
+
+.partHeader {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-xs);
+}
+
+.partTitle {
+  margin: 0;
+
+  font-size: var(--font-size-headline-medium);
+  line-height: var(--line-height-headline-medium);
+}
