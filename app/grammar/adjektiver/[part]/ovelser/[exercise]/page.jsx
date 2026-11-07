@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 
 import { adjectiveLessons } from "@/data/grammar/adjectives";
 import { adjectiveExercises } from "@/data/grammar/adjectiveExercises";
+import { ruleExercises } from "@/data/grammar/ruleExercises";
 import {
   getPart,
   getPartBySlug,
@@ -11,8 +12,11 @@ import {
 
 import GrammarQuiz from "../../../_components/GrammarQuiz/GrammarQuiz";
 
+// mixed exercises and one exercise per rule (same id as the lesson)
+const allExercises = [...adjectiveExercises, ...ruleExercises];
+
 export function generateStaticParams() {
-  return adjectiveExercises.map((exercise) => ({
+  return allExercises.map((exercise) => ({
     part: getPart(exercise.part).slug,
     exercise: exercise.id,
   }));
@@ -24,7 +28,7 @@ export default async function AdjectiveExercisePage({ params }) {
   const { part: slug, exercise: id } = await params;
   const part = getPartBySlug(slug);
 
-  const exercise = adjectiveExercises.find(
+  const exercise = allExercises.find(
     (item) => item.id === id && item.part === part?.id,
   );
 

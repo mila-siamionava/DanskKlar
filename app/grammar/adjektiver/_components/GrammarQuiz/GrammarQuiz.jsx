@@ -34,7 +34,8 @@ export default function GrammarQuiz({
 
   const session = useActivitySession({
     area: "grammar",
-    activity: exercise.id,
+    activity:
+      exercise.kind === "rule" ? `regel-${exercise.id}` : exercise.id,
     title: `Adjektiver: ${exercise.title}`,
   });
 
@@ -174,9 +175,13 @@ export default function GrammarQuiz({
           )}
         </h2>
 
+        {/* short words side by side; sentence parts and long phrases in a list */}
         <div
           className={
-            exercise.type === "choose" ? styles.optionGrid : styles.optionList
+            exercise.type === "choose" &&
+            options.every((option) => option.length <= 14)
+              ? styles.optionGrid
+              : styles.optionList
           }
         >
           {options.map((option, optionIndex) => {
@@ -250,7 +255,32 @@ export default function GrammarQuiz({
   );
 }
 
+// "Vi har en stor have." with stor marked (tasks without a gap)
+function markWord(sentence, word) {
+  const match = new RegExp(`(^|[^\\p{L}])(${word})(?![\\p{L}])`, "iu").exec(
+    sentence,
+  );
+
+  if (!match) return sentence;
+
+  const start = match.index + match[1].length;
+  const end = start + match[2].length;
+
+  return (
+    <>
+      {sentence.slice(0, start)}
+      <mark className={styles.fix}>{sentence.slice(start, end)}</mark>
+      {sentence.slice(end)}
+    </>
+  );
+}
+
 function GapSentence({ question, filled }) {
+  // no gap: the learner picks a word from the sentence itself
+  if (!question.sentence.includes("___")) {
+    return filled ? markWord(question.sentence, filled) : question.sentence;
+  }
+
   const [before, after] = question.sentence.split("___");
 
   return (
@@ -281,6 +311,10 @@ function PartsSentence({ question }) {
 // the sentence with the right answer marked
 function CorrectSentence({ exercise, question }) {
   if (exercise.type === "choose") {
+    if (!question.sentence.includes("___")) {
+      return markWord(question.sentence, question.answer);
+    }
+
     const [before, after] = question.sentence.split("___");
 
     return (

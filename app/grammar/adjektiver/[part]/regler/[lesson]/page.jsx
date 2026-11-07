@@ -4,7 +4,9 @@ import HelpText from "@/components/i18n/HelpText/HelpText";
 import BackLink from "@/components/navigation/BackLink/BackLink";
 import Button from "@/components/ui/Button/Button";
 import { adjectiveLessons } from "@/data/grammar/adjectives";
+import { getRuleExercise } from "@/data/grammar/ruleExercises";
 import {
+  exerciseHref,
   getPart,
   getPartBySlug,
   lessonHref,
@@ -40,6 +42,9 @@ export default async function AdjectiveLessonPage({ params }) {
 
   // the next lesson in this part; after the last one, the exercises
   const nextLesson = lessons[lessons.indexOf(lesson) + 1];
+
+  // 20 tasks on just this rule
+  const practice = getRuleExercise(lesson.id);
 
   return (
     <main className={styles.page}>
@@ -88,6 +93,12 @@ export default async function AdjectiveLessonPage({ params }) {
       </section>
 
       <div className={styles.next}>
+        {practice && (
+          <Button href={exerciseHref(practice)} variant="secondary" fullWidth>
+            Øv reglen · {practice.questions.length} opgaver
+          </Button>
+        )}
+
         {nextLesson ? (
           <Button href={lessonHref(nextLesson)} fullWidth>
             Næste: {nextLesson.title}
