@@ -9,6 +9,7 @@ import {
   getPartBySlug,
 } from "@/lib/grammar/adjectivePaths";
 
+import Fold from "../../_components/Fold/Fold";
 import LessonList from "../../_components/LessonList/LessonList";
 import PartTabs from "../../_components/PartTabs/PartTabs";
 
@@ -48,24 +49,27 @@ export default async function AdjectiveRulesPage({ params }) {
         <HelpText en={part.intro_en} ru={part.intro_ru} />
       </div>
 
-      {sections.map((section, index) => (
-        <section
-          key={section}
-          className={styles.lesson}
-          aria-labelledby={`section-${index}`}
-        >
-          <h2 id={`section-${index}`} className={styles.heading}>
-            {section}
-          </h2>
+      <div>
+        {sections.map((section, index) => {
+          const inSection = lessons.filter(
+            (lesson) => lesson.section === section,
+          );
 
-          <nav aria-label={section}>
-            <LessonList
-              lessons={lessons.filter((lesson) => lesson.section === section)}
-              numberOf={(lesson) => lessons.indexOf(lesson) + 1}
-            />
-          </nav>
-        </section>
-      ))}
+          return (
+            <Fold
+              key={section}
+              title={section}
+              count={inSection.length}
+              open={index === 0}
+            >
+              <LessonList
+                lessons={inSection}
+                numberOf={(lesson) => lessons.indexOf(lesson) + 1}
+              />
+            </Fold>
+          );
+        })}
+      </div>
     </main>
   );
 }

@@ -5,6 +5,7 @@ import BackLink from "@/components/navigation/BackLink/BackLink";
 import Button from "@/components/ui/Button/Button";
 import { adjectiveLessons } from "@/data/grammar/adjectives";
 import { getRuleExercise } from "@/data/grammar/ruleExercises";
+import { helpFor } from "@/data/grammar/textHelp";
 import {
   exerciseHref,
   getPart,
@@ -58,9 +59,12 @@ export default async function AdjectiveLessonPage({ params }) {
         className={styles.lesson}
         aria-labelledby="lesson-heading"
       >
-        <h2 id="lesson-heading" className={styles.heading}>
-          {lesson.title}
-        </h2>
+        <div>
+          <h2 id="lesson-heading" className={styles.heading}>
+            {lesson.title}
+          </h2>
+          <HelpText {...helpFor(lesson.title)} />
+        </div>
 
         {/* 1. what to remember, 2. how it works, 3. more if you want it */}
         <KeyRules lesson={lesson} />

@@ -41,6 +41,7 @@
   grid-template-columns: minmax(7.6rem, auto) 1fr;
   grid-template-areas:
     "group ending"
+    "help help"
     "examples examples";
   align-items: baseline;
 
@@ -83,4 +84,10 @@
   flex-wrap: wrap;
 
   gap: var(--spacing-2xs) var(--spacing-md);
+}
+
+.help {
+  grid-area: help;
+
+  margin: 0;
 }

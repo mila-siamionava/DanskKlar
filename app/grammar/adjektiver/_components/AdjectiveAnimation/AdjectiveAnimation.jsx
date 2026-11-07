@@ -31,6 +31,7 @@ import {
 } from "lucide-react";
 
 import HelpText from "@/components/i18n/HelpText/HelpText";
+import { helpFor } from "@/data/grammar/textHelp";
 import { useHelpLanguage } from "@/lib/preferences/helpLanguage";
 import { adjectiveText, phraseText } from "@/lib/grammar/phrase";
 
@@ -163,13 +164,13 @@ export default function AdjectiveAnimation({ lesson }) {
       >
         {caption(lesson, scene, shownPhase)}
 
-        {isDone && (
-          <HelpText
-            className={styles.captionHelp}
-            en={scene.rule_en}
-            ru={scene.rule_ru}
-          />
-        )}
+        {/* the same caption in the help language, right under it */}
+        <HelpText
+          className={styles.captionHelp}
+          {...(isDone
+            ? { en: scene.rule_en, ru: scene.rule_ru }
+            : helpFor(caption(lesson, scene, shownPhase)))}
+        />
       </figcaption>
 
       <div className={styles.controls}>

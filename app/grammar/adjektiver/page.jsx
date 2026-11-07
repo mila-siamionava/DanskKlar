@@ -1,15 +1,9 @@
-import { ChartNoAxesColumnIncreasing, Palette } from "lucide-react";
-
 import BackLink from "@/components/navigation/BackLink/BackLink";
-import HomeNavigationCard from "@/components/navigation/HomeNavigationCard/HomeNavigationCard";
 import { adjectiveParts, partHref } from "@/lib/grammar/adjectivePaths";
 
-import styles from "./Adjectives.module.css";
+import LessonList from "./_components/LessonList/LessonList";
 
-const partIcons = {
-  grundform: Palette,
-  grad: ChartNoAxesColumnIncreasing,
-};
+import styles from "./Adjectives.module.css";
 
 export default function AdjectivesPage() {
   return (
@@ -20,16 +14,12 @@ export default function AdjectivesPage() {
         title="Adjektiver"
       />
 
-      <nav className={styles.list} aria-label="Adjektiver">
-        {adjectiveParts.map((part) => (
-          <HomeNavigationCard
-            key={part.id}
-            href={partHref(part.id)}
-            icon={partIcons[part.id]}
-            title={part.title}
-            description={part.short}
-          />
-        ))}
+      <nav aria-label="Adjektiver">
+        <LessonList
+          lessons={adjectiveParts}
+          numberOf={(part) => (part.id === "grad" ? "2·3" : "1")}
+          hrefOf={(part) => partHref(part.id)}
+        />
       </nav>
     </main>
   );

@@ -147,7 +147,7 @@ export default function GrammarQuiz({
       title={exercise.instructions}
       current={index + 1}
       total={questions.length}
-      controls={
+      taskHelp={
         <HelpText
           en={exercise.instructions_en}
           ru={exercise.instructions_ru}

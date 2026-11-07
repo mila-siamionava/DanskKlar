@@ -1,3 +1,6 @@
+import HelpText from "@/components/i18n/HelpText/HelpText";
+import { helpFor } from "@/data/grammar/textHelp";
+
 import NounPhrase from "../NounPhrase/NounPhrase";
 
 import styles from "./KeyRules.module.css";
@@ -24,6 +27,12 @@ export default function KeyRules({ lesson }) {
             <span className={styles.group}>{row.group}</span>
 
             <span className={styles.ending}>{row.ending}</span>
+
+            <HelpText
+              as="span"
+              className={styles.help}
+              {...helpFor(`${row.group} — ${row.ending}`)}
+            />
 
             <span className={styles.examples}>
               {row.examples.map((id) => (

@@ -88,3 +88,7 @@
 
   color: var(--color-text-muted);
 }
+
+.help {
+  margin: 0;
+}

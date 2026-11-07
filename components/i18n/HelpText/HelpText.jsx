@@ -11,7 +11,11 @@ import styles from "./HelpText.module.css";
 
   <HelpText en={lesson.intro_en} ru={lesson.intro_ru} />
 */
-export default function HelpText({ className = "", ...translations }) {
+export default function HelpText({
+  as: Tag = "p",
+  className = "",
+  ...translations
+}) {
   const language = useHelpLanguage();
   const text = language ? translations[language] : null;
 
@@ -20,12 +24,12 @@ export default function HelpText({ className = "", ...translations }) {
   const { label } = helpLanguages.find((item) => item.id === language);
 
   return (
-    <p className={`${styles.help} ${className}`.trim()} lang={language}>
+    <Tag className={`${styles.help} ${className}`.trim()} lang={language}>
       <span className={styles.label} aria-hidden="true">
         {label}
       </span>
 
       <span>{text}</span>
-    </p>
+    </Tag>
   );
 }

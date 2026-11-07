@@ -11,6 +11,7 @@ export default function ExerciseTop({
   total,
   backHref = "/review/train",
   backLabel = "Tilbage til træning",
+  taskHelp,
 }) {
   return (
     <div className={styles.top}>
@@ -36,6 +37,9 @@ export default function ExerciseTop({
           {title}
         </p>
       )}
+
+      {/* the task in the learner's help language, right under the Danish */}
+      {taskHelp}
 
       <ExerciseProgress
         current={current}

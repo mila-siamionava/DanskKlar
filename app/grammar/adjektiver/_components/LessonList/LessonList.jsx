@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
+import HelpText from "@/components/i18n/HelpText/HelpText";
+import { helpFor } from "@/data/grammar/textHelp";
 import { lessonHref } from "@/lib/grammar/adjectivePaths";
 
 import styles from "./LessonList.module.css";
@@ -23,6 +25,12 @@ export default function LessonList({
 
             <span className={styles.text}>
               <span className={styles.title}>{lesson.title}</span>
+
+              <HelpText
+                as="span"
+                className={styles.help}
+                {...helpFor(lesson.title)}
+              />
               <span className={styles.example} lang="da">
                 {detailOf(lesson)}
               </span>

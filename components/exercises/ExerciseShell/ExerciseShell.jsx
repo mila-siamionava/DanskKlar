@@ -12,6 +12,7 @@ export default function ExerciseShell({
   controls,
   backHref,
   backLabel,
+  taskHelp,
   children,
 }) {
   return (
@@ -24,6 +25,7 @@ export default function ExerciseShell({
           total={total}
           backHref={backHref}
           backLabel={backLabel}
+          taskHelp={taskHelp}
         />
 
         {instructions && (
