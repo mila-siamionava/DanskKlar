@@ -135,3 +135,17 @@
 .moreBody {
   padding: 0 var(--spacing-md) var(--spacing-md);
 }
+
+/* one line above each level of exercises */
+.reminder {
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+
+  border-left: 3px solid var(--color-border-accent);
+}
+
+.reminderText {
+  margin: 0;
+
+  font-weight: 600;
+}

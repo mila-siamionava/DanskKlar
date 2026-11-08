@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Armchair,
   Baby,
@@ -19,8 +19,7 @@ import {
   Lightbulb,
   Mail,
   Newspaper,
-  Pause,
-  Play,
+  RotateCcw,
   Sunrise,
   Table2,
   Train,
@@ -66,12 +65,14 @@ const pictures = {
 };
 
 /*
-  One scene plays in four phases, like a short gif:
-  0 the noun alone, 1 "+ grøn" appears, 2 grøn moves in, 3 the ending grows.
-  The scenes loop; the rule itself is shown above the animation (KeyRules).
+  A carousel of examples. Each example plays once, in four steps,
+  like a short gif: 0 the noun alone, 1 "+ grøn" appears,
+  2 grøn moves in, 3 the ending grows and the rule shows.
+  The learner moves on with the arrows, the dots or a swipe.
 */
-const PHASE_MS = [1400, 1300, 1300, 2800];
-const LAST_PHASE = PHASE_MS.length - 1;
+const PHASE_MS = [1200, 1100, 1100];
+const LAST_PHASE = PHASE_MS.length;
+const SWIPE_PX = 40;
 
 function caption(lesson, scene, phase) {
   if (phase === 0) {
@@ -99,17 +100,15 @@ export default function AdjectiveAnimation({ lesson }) {
 
   const [frame, setFrame] = useState(0);
   const [phase, setPhase] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const swipeStart = useRef(null);
 
-  // without motion: no autoplay, every scene shows its result
+  // without motion: every example shows its result straight away
   useEffect(() => {
     const query = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     function update() {
       setReduceMotion(query.matches);
-
-      if (query.matches) setIsPlaying(false);
     }
 
     update();
@@ -121,46 +120,83 @@ export default function AdjectiveAnimation({ lesson }) {
   const shownPhase = reduceMotion ? LAST_PHASE : phase;
   const isDone = shownPhase === LAST_PHASE;
 
+  // play the example once, then wait for the learner
   useEffect(() => {
-    if (!isPlaying) return;
+    if (reduceMotion || phase >= LAST_PHASE) return;
 
-    const timer = setTimeout(() => {
-      if (phase < LAST_PHASE) {
-        setPhase(phase + 1);
-        return;
-      }
-
-      setFrame((frame + 1) % scenes.length);
-      setPhase(0);
-    }, PHASE_MS[phase]);
+    const timer = setTimeout(() => setPhase(phase + 1), PHASE_MS[phase]);
 
     return () => clearTimeout(timer);
-  }, [isPlaying, phase, frame, scenes.length]);
+  }, [phase, reduceMotion]);
 
   function goTo(index) {
-    setFrame((index + scenes.length) % scenes.length);
+    if (index < 0 || index >= scenes.length || index === frame) return;
+
+    setFrame(index);
     setPhase(0);
   }
 
-  function togglePlaying() {
-    // a finished scene starts over instead of jumping straight on
-    if (!isPlaying && phase === LAST_PHASE) setPhase(0);
+  function handlePointerDown(event) {
+    swipeStart.current = event.clientX;
+  }
 
-    setIsPlaying(!isPlaying);
+  function handlePointerUp(event) {
+    if (swipeStart.current === null) return;
+
+    const distance = event.clientX - swipeStart.current;
+    swipeStart.current = null;
+
+    if (distance > SWIPE_PX) goTo(frame - 1);
+    if (distance < -SWIPE_PX) goTo(frame + 1);
   }
 
   const scene = scenes[frame];
+  const isFirst = frame === 0;
+  const isLast = frame === scenes.length - 1;
 
   return (
-    <figure className={styles.player}>
-      <div className={styles.stage} aria-hidden="true">
-        {/* key: a new scene starts closed, without animating shut */}
-        <Scene key={scene.id} scene={scene} phase={shownPhase} />
+    <figure
+      className={styles.player}
+      aria-roledescription="karrusel"
+      aria-label="Eksempler"
+    >
+      <div className={styles.carousel}>
+        <div
+          className={styles.stage}
+          aria-hidden="true"
+          onPointerDown={handlePointerDown}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={() => (swipeStart.current = null)}
+        >
+          {/* key: a new example starts closed, without animating shut */}
+          <Scene key={scene.id} scene={scene} phase={shownPhase} />
+        </div>
+
+        <button
+          type="button"
+          className={`${styles.arrow} ${styles.arrowPrevious}`}
+          onClick={() => goTo(frame - 1)}
+          disabled={isFirst}
+          aria-label="Forrige eksempel"
+        >
+          <ChevronLeft size={24} aria-hidden="true" />
+        </button>
+
+        <button
+          type="button"
+          className={`${styles.arrow} ${styles.arrowNext}`}
+          onClick={() => goTo(frame + 1)}
+          disabled={isLast}
+          aria-label="Næste eksempel"
+        >
+          <ChevronRight size={24} aria-hidden="true" />
+        </button>
       </div>
 
       {/* what happens now; the rule itself stands out at the end */}
       <figcaption
         className={isDone ? styles.captionRule : styles.caption}
+        aria-live="polite"
       >
         {caption(lesson, scene, shownPhase)}
 
@@ -174,42 +210,31 @@ export default function AdjectiveAnimation({ lesson }) {
       </figcaption>
 
       <div className={styles.controls}>
-        <button
-          type="button"
-          className={styles.controlButton}
-          onClick={() => goTo(frame - 1)}
-          aria-label="Forrige eksempel"
-        >
-          <ChevronLeft size={20} aria-hidden="true" />
-        </button>
+        <ol className={styles.dots}>
+          {scenes.map((item, index) => (
+            <li key={item.id}>
+              <button
+                type="button"
+                className={styles.dot}
+                onClick={() => goTo(index)}
+                aria-label={`Eksempel ${index + 1} af ${scenes.length}`}
+                aria-current={index === frame ? "step" : undefined}
+              />
+            </li>
+          ))}
+        </ol>
 
         {!reduceMotion && (
           <button
             type="button"
-            className={styles.controlButton}
-            onClick={togglePlaying}
-            aria-label={isPlaying ? "Pause animationen" : "Afspil animationen"}
+            className={styles.replay}
+            onClick={() => setPhase(0)}
+            disabled={!isDone}
+            aria-label="Se eksemplet igen"
           >
-            {isPlaying ? (
-              <Pause size={18} aria-hidden="true" />
-            ) : (
-              <Play size={18} aria-hidden="true" />
-            )}
+            <RotateCcw size={16} aria-hidden="true" />
           </button>
         )}
-
-        <span className={styles.counter} aria-live="polite">
-          Eksempel {frame + 1} af {scenes.length}
-        </span>
-
-        <button
-          type="button"
-          className={styles.controlButton}
-          onClick={() => goTo(frame + 1)}
-          aria-label="Næste eksempel"
-        >
-          <ChevronRight size={20} aria-hidden="true" />
-        </button>
       </div>
 
       {/* the stage is visual only; this says the same in words */}

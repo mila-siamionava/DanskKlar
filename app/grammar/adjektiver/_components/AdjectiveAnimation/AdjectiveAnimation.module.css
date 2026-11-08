@@ -202,16 +202,23 @@
   text-align: center;
 }
 
-.controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* ---------- carousel ---------- */
 
-  gap: var(--spacing-xs);
+.carousel {
+  position: relative;
 }
 
-.controlButton {
-  flex: none;
+.stage {
+  /* room for the arrows on both sides */
+  padding-inline: 5.2rem;
+
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
 
   display: inline-flex;
   align-items: center;
@@ -226,23 +233,121 @@
   background: var(--color-background-surface);
   color: var(--color-text-primary);
 
+  box-shadow: var(--shadow-small);
+
+  transform: translateY(-50%);
+
   cursor: pointer;
 }
 
-.controlButton:focus-visible {
+.arrowPrevious {
+  left: var(--spacing-xs);
+}
+
+.arrowNext {
+  right: var(--spacing-xs);
+}
+
+.arrow:disabled {
+  opacity: var(--opacity-disabled);
+
+  cursor: default;
+}
+
+.arrow:focus-visible,
+.dot:focus-visible,
+.replay:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }
 
-.counter {
-  min-width: 10rem;
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  color: var(--color-text-secondary);
+  gap: var(--spacing-sm);
+}
 
-  font-size: var(--font-size-label-medium);
-  font-weight: 600;
+.dots {
+  display: flex;
+  align-items: center;
 
-  text-align: center;
+  gap: var(--spacing-2xs);
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+/* a 24px target around a small dot */
+.dot {
+  position: relative;
+
+  width: 2.4rem;
+  height: 2.4rem;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: var(--border-radius-full);
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.dot::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  width: 1rem;
+  height: 1rem;
+
+  margin: auto;
+
+  border: 1px solid var(--color-border-control);
+  border-radius: var(--border-radius-full);
+
+  background: var(--color-background-surface);
+
+  transition:
+    width var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.dot[aria-current="step"]::after {
+  width: 2rem;
+
+  border-color: var(--color-text-accent);
+
+  background: var(--color-text-accent);
+}
+
+.replay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: var(--control-height-sm);
+  height: var(--control-height-sm);
+
+  border: 1px solid var(--color-border-control);
+  border-radius: var(--border-radius-full);
+
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
+
+  cursor: pointer;
+}
+
+.replay:disabled {
+  opacity: var(--opacity-disabled);
+
+  cursor: default;
 }
 
 @keyframes sceneIn {
@@ -266,7 +371,8 @@
 
   .chip,
   .picture,
-  .icon {
+  .icon,
+  .dot::after {
     transition: none;
   }
 }

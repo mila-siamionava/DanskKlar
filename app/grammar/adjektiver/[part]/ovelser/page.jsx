@@ -3,7 +3,13 @@ import { notFound } from "next/navigation";
 import BackLink from "@/components/navigation/BackLink/BackLink";
 import { adjectiveLessons } from "@/data/grammar/adjectives";
 import { adjectiveExercises } from "@/data/grammar/adjectiveExercises";
+import {
+  levelOfLesson,
+  levelOfMixedExercise,
+  levels,
+} from "@/data/grammar/adjectiveLevels";
 import { ruleExercises } from "@/data/grammar/ruleExercises";
+import HelpText from "@/components/i18n/HelpText/HelpText";
 import {
   ADJECTIVES_PATH,
   adjectiveParts,
@@ -42,7 +48,6 @@ export default async function AdjectiveExercisesPage({ params }) {
     (lesson) => lesson.part === part.id && ruleOf[lesson.id],
   );
 
-  const sections = [...new Set(lessons.map((lesson) => lesson.section))];
 
   return (
     <main className={styles.page}>
@@ -54,43 +59,52 @@ export default async function AdjectiveExercisesPage({ params }) {
 
       <PartTabs part={part} current="ovelser" />
 
-      <p className={styles.intro}>
-        Øv én regel ad gangen, eller bland dem. 20 opgaver i hver øvelse.
-      </p>
-
       <div>
-        {sections.map((section, index) => {
-          const inSection = lessons.filter(
-            (lesson) => lesson.section === section,
+        {levels.map((item) => {
+          const ruleLessons = lessons.filter(
+            (lesson) => levelOfLesson[lesson.id] === item.level,
           );
+
+          const mixed = exercises.filter(
+            (exercise) => levelOfMixedExercise[exercise.id] === item.level,
+          );
+
+          const [reminder, reminderEn, reminderRu] = item.reminder[part.id];
 
           return (
             <Fold
-              key={section}
-              title={section}
-              count={inSection.length}
-              open={index === 0}
+              key={item.level}
+              title={item.title}
+              count={ruleLessons.length + mixed.length}
+              open={item.level === 1}
             >
-              <LessonList
-                lessons={inSection}
-                numberOf={(lesson) => lessons.indexOf(lesson) + 1}
-                hrefOf={(lesson) => exerciseHref(ruleOf[lesson.id])}
-                detailOf={() => "20 opgaver"}
-              />
+              <div className={styles.reminder}>
+                <p className={styles.reminderText}>{reminder}</p>
+                <HelpText en={reminderEn} ru={reminderRu} />
+              </div>
+
+              {ruleLessons.length > 0 && (
+                <LessonList
+                  lessons={ruleLessons}
+                  numberOf={(lesson) => lessons.indexOf(lesson) + 1}
+                  hrefOf={(lesson) => exerciseHref(ruleOf[lesson.id])}
+                  detailOf={() => "20 opgaver"}
+                />
+              )}
+
+              {mixed.length > 0 && (
+                <LessonList
+                  lessons={mixed}
+                  numberOf={() => "✱"}
+                  hrefOf={exerciseHref}
+                  detailOf={(exercise) =>
+                    `${exercise.questions.length} opgaver · ${exercise.short}`
+                  }
+                />
+              )}
             </Fold>
           );
         })}
-
-        <Fold title="Blandede øvelser" count={exercises.length}>
-          <LessonList
-            lessons={exercises}
-            numberOf={(exercise) => (exercise.type === "error" ? "?" : "✓")}
-            hrefOf={exerciseHref}
-            detailOf={(exercise) =>
-              `${exercise.questions.length} opgaver · ${exercise.short}`
-            }
-          />
-        </Fold>
       </div>
     </main>
   );

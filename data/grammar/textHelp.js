@@ -23,6 +23,13 @@ const texts = {
   Gradbøjning: ["Degrees of comparison", "Степени сравнения"],
   Sammenligning: ["Comparing", "Сравнение"],
   "Øv én regel ad gangen": ["Practise one rule at a time", "Тренируйте одно правило за раз"],
+  "1. Almindelige tilfælde": ["1. Common cases", "1. Обычные случаи"],
+  "2. Undtagelser og svære tilfælde": [
+    "2. Exceptions and difficult cases",
+    "2. Исключения и трудные случаи",
+  ],
+  "3. Blandet": ["3. Mixed", "3. Всё вместе"],
+  "Reglen kort": ["The rule in short", "Правило коротко"],
   "Blandede øvelser": ["Mixed exercises", "Смешанные упражнения"],
 
   // ---------- lesson titles ----------

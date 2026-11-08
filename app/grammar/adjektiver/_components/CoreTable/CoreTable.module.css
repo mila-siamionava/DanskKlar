@@ -1,0 +1,72 @@
+.box {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--spacing-sm);
+
+  padding: var(--spacing-md);
+
+  border: 2px solid var(--color-border-accent);
+  border-radius: var(--border-radius-md);
+
+  background: var(--color-background-surface);
+}
+
+.heading {
+  margin: 0;
+
+  color: var(--color-text-accent);
+
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-small);
+  line-height: var(--line-height-label-small);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: var(--spacing-2xs) var(--spacing-xs);
+
+  border-bottom: 1px solid var(--color-border-primary);
+
+  text-align: left;
+  vertical-align: baseline;
+}
+
+.table tbody tr:last-child th,
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.table thead th {
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-label-small);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.table tbody th {
+  padding-left: 0;
+
+  color: var(--color-text-secondary);
+
+  font-size: var(--font-size-label-small);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.note {
+  margin: 0;
+
+  font-weight: 600;
+}

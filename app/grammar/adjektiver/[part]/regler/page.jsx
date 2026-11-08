@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 
-import HelpText from "@/components/i18n/HelpText/HelpText";
 import BackLink from "@/components/navigation/BackLink/BackLink";
 import { adjectiveLessons } from "@/data/grammar/adjectives";
 import {
@@ -9,6 +8,7 @@ import {
   getPartBySlug,
 } from "@/lib/grammar/adjectivePaths";
 
+import CoreTable from "../../_components/CoreTable/CoreTable";
 import Fold from "../../_components/Fold/Fold";
 import LessonList from "../../_components/LessonList/LessonList";
 import PartTabs from "../../_components/PartTabs/PartTabs";
@@ -44,10 +44,7 @@ export default async function AdjectiveRulesPage({ params }) {
 
       <PartTabs part={part} current="regler" />
 
-      <div>
-        <p className={styles.intro}>{part.intro}</p>
-        <HelpText en={part.intro_en} ru={part.intro_ru} />
-      </div>
+      <CoreTable partId={part.id} />
 
       <div>
         {sections.map((section, index) => {
