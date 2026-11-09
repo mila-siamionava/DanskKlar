@@ -4,7 +4,10 @@ import HelpText from "@/components/i18n/HelpText/HelpText";
 import BackLink from "@/components/navigation/BackLink/BackLink";
 import Button from "@/components/ui/Button/Button";
 import { adjectiveLessons } from "@/data/grammar/adjectives";
+import { getRuleExercise } from "@/data/grammar/ruleExercises";
+import { helpFor } from "@/data/grammar/textHelp";
 import {
+  exerciseHref,
   getPart,
   getPartBySlug,
   lessonHref,
@@ -13,6 +16,7 @@ import {
 
 import AdjectiveAnimation from "../../../_components/AdjectiveAnimation/AdjectiveAnimation";
 import InflectionTable from "../../../_components/InflectionTable/InflectionTable";
+import KeyRules from "../../../_components/KeyRules/KeyRules";
 
 import styles from "../../../Adjectives.module.css";
 
@@ -40,6 +44,9 @@ export default async function AdjectiveLessonPage({ params }) {
   // the next lesson in this part; after the last one, the exercises
   const nextLesson = lessons[lessons.indexOf(lesson) + 1];
 
+  // 20 tasks on just this rule
+  const practice = getRuleExercise(lesson.id);
+
   return (
     <main className={styles.page}>
       <BackLink
@@ -52,27 +59,50 @@ export default async function AdjectiveLessonPage({ params }) {
         className={styles.lesson}
         aria-labelledby="lesson-heading"
       >
-        <h2 id="lesson-heading" className={styles.heading}>
-          {lesson.title}
-        </h2>
-
         <div>
-          <p className={styles.intro}>{lesson.intro}</p>
-          <HelpText en={lesson.intro_en} ru={lesson.intro_ru} />
+          <h2 id="lesson-heading" className={styles.heading}>
+            {lesson.title}
+          </h2>
+          <HelpText {...helpFor(lesson.title)} />
         </div>
+
+        {/* 1. what to remember, 2. how it works, 3. more if you want it */}
+        <KeyRules lesson={lesson} />
 
         <AdjectiveAnimation lesson={lesson} />
 
+        <details className={styles.more}>
+          <summary className={styles.moreSummary}>Læs forklaringen</summary>
+
+          <div className={styles.moreBody}>
+            <p className={styles.intro}>{lesson.intro}</p>
+            <HelpText en={lesson.intro_en} ru={lesson.intro_ru} />
+          </div>
+        </details>
+
         {lesson.table && (
-          <InflectionTable
-            rows={lesson.table}
-            columns={lesson.tableColumns}
-            heading={lesson.tableHeading}
-          />
+          <details className={styles.more}>
+            <summary className={styles.moreSummary}>
+              Se {(lesson.tableHeading ?? "Bøjningsskema").toLowerCase()}
+            </summary>
+
+            <div className={styles.moreBody}>
+              <InflectionTable
+                rows={lesson.table}
+                columns={lesson.tableColumns}
+              />
+            </div>
+          </details>
         )}
       </section>
 
       <div className={styles.next}>
+        {practice && (
+          <Button href={exerciseHref(practice)} variant="secondary" fullWidth>
+            Øv reglen · {practice.questions.length} opgaver
+          </Button>
+        )}
+
         {nextLesson ? (
           <Button href={lessonHref(nextLesson)} fullWidth>
             Næste: {nextLesson.title}

@@ -1,9 +1,15 @@
 import { notFound } from "next/navigation";
-import { CircleHelp, SearchCheck, SpellCheck } from "lucide-react";
 
 import BackLink from "@/components/navigation/BackLink/BackLink";
-import HomeNavigationCard from "@/components/navigation/HomeNavigationCard/HomeNavigationCard";
+import { adjectiveLessons } from "@/data/grammar/adjectives";
 import { adjectiveExercises } from "@/data/grammar/adjectiveExercises";
+import {
+  levelOfLesson,
+  levelOfMixedExercise,
+  levels,
+} from "@/data/grammar/adjectiveLevels";
+import { ruleExercises } from "@/data/grammar/ruleExercises";
+import HelpText from "@/components/i18n/HelpText/HelpText";
 import {
   ADJECTIVES_PATH,
   adjectiveParts,
@@ -11,14 +17,11 @@ import {
   getPartBySlug,
 } from "@/lib/grammar/adjectivePaths";
 
+import Fold from "../../_components/Fold/Fold";
+import LessonList from "../../_components/LessonList/LessonList";
 import PartTabs from "../../_components/PartTabs/PartTabs";
 
 import styles from "../../Adjectives.module.css";
-
-const typeIcons = {
-  choose: CircleHelp,
-  error: SearchCheck,
-};
 
 export function generateStaticParams() {
   return adjectiveParts.map((part) => ({ part: part.slug }));
@@ -36,6 +39,16 @@ export default async function AdjectiveExercisesPage({ params }) {
     (exercise) => exercise.part === part.id,
   );
 
+  // lessons that have their own practice exercise, in lesson order
+  const ruleOf = Object.fromEntries(
+    ruleExercises.map((exercise) => [exercise.id, exercise]),
+  );
+
+  const lessons = adjectiveLessons.filter(
+    (lesson) => lesson.part === part.id && ruleOf[lesson.id],
+  );
+
+
   return (
     <main className={styles.page}>
       <BackLink
@@ -46,25 +59,53 @@ export default async function AdjectiveExercisesPage({ params }) {
 
       <PartTabs part={part} current="ovelser" />
 
-      <p className={styles.intro}>
-        20 spørgsmål i hver øvelse. Ord på A1–B1-niveau.
-      </p>
+      <div>
+        {levels.map((item) => {
+          const ruleLessons = lessons.filter(
+            (lesson) => levelOfLesson[lesson.id] === item.level,
+          );
 
-      <nav className={styles.list} aria-label="Øvelser">
-        {exercises.map((exercise) => (
-          <HomeNavigationCard
-            key={exercise.id}
-            href={exerciseHref(exercise)}
-            icon={
-              exercise.id === "endelser"
-                ? SpellCheck
-                : typeIcons[exercise.type]
-            }
-            title={exercise.title}
-            description={`${exercise.questions.length} spørgsmål · ${exercise.short}`}
-          />
-        ))}
-      </nav>
+          const mixed = exercises.filter(
+            (exercise) => levelOfMixedExercise[exercise.id] === item.level,
+          );
+
+          const [reminder, reminderEn, reminderRu] = item.reminder[part.id];
+
+          return (
+            <Fold
+              key={item.level}
+              title={item.title}
+              count={ruleLessons.length + mixed.length}
+              open={item.level === 1}
+            >
+              <div className={styles.reminder}>
+                <p className={styles.reminderText}>{reminder}</p>
+                <HelpText en={reminderEn} ru={reminderRu} />
+              </div>
+
+              {ruleLessons.length > 0 && (
+                <LessonList
+                  lessons={ruleLessons}
+                  numberOf={(lesson) => lessons.indexOf(lesson) + 1}
+                  hrefOf={(lesson) => exerciseHref(ruleOf[lesson.id])}
+                  detailOf={() => "20 opgaver"}
+                />
+              )}
+
+              {mixed.length > 0 && (
+                <LessonList
+                  lessons={mixed}
+                  numberOf={() => "✱"}
+                  hrefOf={exerciseHref}
+                  detailOf={(exercise) =>
+                    `${exercise.questions.length} opgaver · ${exercise.short}`
+                  }
+                />
+              )}
+            </Fold>
+          );
+        })}
+      </div>
     </main>
   );
 }

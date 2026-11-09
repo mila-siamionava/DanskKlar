@@ -7,10 +7,6 @@
   margin: 0;
 }
 
-.screen {
-  position: relative;
-}
-
 .stage {
   min-height: 30rem;
 
@@ -171,84 +167,58 @@
   font-style: italic;
 }
 
-/* ---------- rule card ---------- */
+/* ---------- caption and controls ---------- */
 
-.rules {
-  display: flex;
-  flex-direction: column;
-
-  gap: var(--spacing-sm);
-
-  width: 100%;
-
-  animation: sceneIn 400ms ease both;
-}
-
-.ruleRow {
-  display: grid;
-  grid-template-columns: minmax(7.6rem, auto) 1fr;
-  grid-template-areas:
-    "group ending"
-    "examples examples";
-  align-items: center;
-
-  gap: var(--spacing-2xs) var(--spacing-sm);
-
-  padding-bottom: var(--spacing-sm);
-
-  border-bottom: 1px solid var(--color-border-primary);
-}
-
-.ruleRow:last-child {
-  padding-bottom: 0;
-
-  border-bottom: 0;
-}
-
-.ruleGroup {
-  grid-area: group;
+/* what is happening: quiet */
+.caption {
+  min-height: calc(var(--line-height-body-large) * 2);
+  margin: 0;
 
   color: var(--color-text-secondary);
 
-  font-size: var(--font-size-label-small);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.ruleEnding {
-  grid-area: ending;
-
-  color: var(--color-grammar-ending);
-
-  font-weight: 700;
-}
-
-.ruleExamples {
-  grid-area: examples;
-
-  display: flex;
-  flex-wrap: wrap;
-
-  gap: var(--spacing-2xs) var(--spacing-md);
-}
-
-/* ---------- caption and controls ---------- */
-
-.caption {
-  min-height: calc(var(--line-height-body-large) * 2);
+  font-size: var(--font-size-body-medium);
+  line-height: var(--line-height-body-medium);
 
   text-align: center;
+}
+
+/* the rule at the end of a scene: what to remember */
+.captionRule {
+  min-height: calc(var(--line-height-body-large) * 2);
+  margin: 0;
+
+  color: var(--color-text-primary);
 
   font-size: var(--font-size-body-large);
   line-height: var(--line-height-body-large);
-  font-weight: 600;
+  font-weight: 700;
+
+  text-align: center;
 }
 
-.playButton {
+.captionHelp {
+  justify-content: center;
+
+  text-align: center;
+}
+
+/* ---------- carousel ---------- */
+
+.carousel {
+  position: relative;
+}
+
+.stage {
+  /* room for the arrows on both sides */
+  padding-inline: 5.2rem;
+
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.arrow {
   position: absolute;
-  top: var(--spacing-sm);
-  right: var(--spacing-sm);
+  top: 50%;
 
   display: inline-flex;
   align-items: center;
@@ -263,13 +233,45 @@
   background: var(--color-background-surface);
   color: var(--color-text-primary);
 
+  box-shadow: var(--shadow-small);
+
+  transform: translateY(-50%);
+
   cursor: pointer;
 }
 
-.frames {
+.arrowPrevious {
+  left: var(--spacing-xs);
+}
+
+.arrowNext {
+  right: var(--spacing-xs);
+}
+
+.arrow:disabled {
+  opacity: var(--opacity-disabled);
+
+  cursor: default;
+}
+
+.arrow:focus-visible,
+.dot:focus-visible,
+.replay:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.controls {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+
+  gap: var(--spacing-sm);
+}
+
+.dots {
+  display: flex;
+  align-items: center;
 
   gap: var(--spacing-2xs);
 
@@ -279,32 +281,73 @@
   list-style: none;
 }
 
-.frameButton {
-  min-height: var(--control-height-sm);
+/* a 24px target around a small dot */
+.dot {
+  position: relative;
 
-  padding: 0 var(--spacing-xs);
+  width: 2.4rem;
+  height: 2.4rem;
 
-  border: 1px solid var(--color-border-primary);
+  padding: 0;
+
+  border: 0;
+  border-radius: var(--border-radius-full);
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.dot::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  width: 1rem;
+  height: 1rem;
+
+  margin: auto;
+
+  border: 1px solid var(--color-border-control);
   border-radius: var(--border-radius-full);
 
   background: var(--color-background-surface);
-  color: var(--color-text-secondary);
-
-  font-size: var(--font-size-label-medium);
-  font-weight: 600;
-
-  cursor: pointer;
 
   transition:
-    background-color var(--transition-fast),
-    border-color var(--transition-fast);
+    width var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
-.frameButton[aria-current="step"] {
-  border-color: var(--color-accent);
+.dot[aria-current="step"]::after {
+  width: 2rem;
 
-  background: var(--color-accent);
-  color: var(--color-text-on-accent);
+  border-color: var(--color-text-accent);
+
+  background: var(--color-text-accent);
+}
+
+.replay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: var(--control-height-sm);
+  height: var(--control-height-sm);
+
+  border: 1px solid var(--color-border-control);
+  border-radius: var(--border-radius-full);
+
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
+
+  cursor: pointer;
+}
+
+.replay:disabled {
+  opacity: var(--opacity-disabled);
+
+  cursor: default;
 }
 
 @keyframes sceneIn {
@@ -322,21 +365,14 @@
 
 @media (prefers-reduced-motion: reduce) {
   .scene,
-  .rules,
   .picture[data-done="true"]:not([data-effect="small"]) .icon {
     animation: none;
   }
 
   .chip,
   .picture,
-  .icon {
+  .icon,
+  .dot::after {
     transition: none;
   }
-}
-
-/* the translated rule, centred under the Danish one */
-.captionHelp {
-  justify-content: center;
-
-  text-align: center;
 }

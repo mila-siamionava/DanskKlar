@@ -1,17 +1,16 @@
 import { notFound } from "next/navigation";
-import { Play } from "lucide-react";
 
-import HelpText from "@/components/i18n/HelpText/HelpText";
 import BackLink from "@/components/navigation/BackLink/BackLink";
-import HomeNavigationCard from "@/components/navigation/HomeNavigationCard/HomeNavigationCard";
 import { adjectiveLessons } from "@/data/grammar/adjectives";
 import {
   ADJECTIVES_PATH,
   adjectiveParts,
   getPartBySlug,
-  lessonHref,
 } from "@/lib/grammar/adjectivePaths";
 
+import CoreTable from "../../_components/CoreTable/CoreTable";
+import Fold from "../../_components/Fold/Fold";
+import LessonList from "../../_components/LessonList/LessonList";
 import PartTabs from "../../_components/PartTabs/PartTabs";
 
 import styles from "../../Adjectives.module.css";
@@ -45,36 +44,29 @@ export default async function AdjectiveRulesPage({ params }) {
 
       <PartTabs part={part} current="regler" />
 
+      <CoreTable partId={part.id} />
+
       <div>
-        <p className={styles.intro}>{part.intro}</p>
-        <HelpText en={part.intro_en} ru={part.intro_ru} />
+        {sections.map((section, index) => {
+          const inSection = lessons.filter(
+            (lesson) => lesson.section === section,
+          );
+
+          return (
+            <Fold
+              key={section}
+              title={section}
+              count={inSection.length}
+              open={index === 0}
+            >
+              <LessonList
+                lessons={inSection}
+                numberOf={(lesson) => lessons.indexOf(lesson) + 1}
+              />
+            </Fold>
+          );
+        })}
       </div>
-
-      {sections.map((section, index) => (
-        <section
-          key={section}
-          className={styles.lesson}
-          aria-labelledby={`section-${index}`}
-        >
-          <h2 id={`section-${index}`} className={styles.heading}>
-            {section}
-          </h2>
-
-          <nav className={styles.list} aria-label={section}>
-            {lessons
-              .filter((lesson) => lesson.section === section)
-              .map((lesson) => (
-                <HomeNavigationCard
-                  key={lesson.id}
-                  href={lessonHref(lesson)}
-                  icon={Play}
-                  title={`${lessons.indexOf(lesson) + 1}. ${lesson.title}`}
-                  description={lesson.short}
-                />
-              ))}
-          </nav>
-        </section>
-      ))}
     </main>
   );
 }

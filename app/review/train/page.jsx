@@ -1,10 +1,12 @@
 import BackLink from "@/components/navigation/BackLink/BackLink";
-import { Eye, RotateCcw, PencilLine, Brain } from "lucide-react";
+import { Eye, RotateCcw, PencilLine, Brain, SpellCheck } from "lucide-react";
 
 import ExerciseModeGroup from "../_components/ExerciseModeGroup/ExerciseModeGroup";
 
 import { canAccessResource } from "@/lib/access/canAccessResource";
 import { getCurrentAccess } from "@/lib/access/getCurrentAccess";
+import { ruleExercises } from "@/data/grammar/ruleExercises";
+import { adjectiveParts, partHref } from "@/lib/grammar/adjectivePaths";
 
 import styles from "./ReviewTrain.module.css";
 
@@ -98,6 +100,25 @@ const trainingGroups = [
   },
 ];
 
+// grammar practice is open to everyone, so it is not filtered by plan
+const grammarGroup = {
+  title: "Grammatik",
+  icon: SpellCheck,
+  modes: adjectiveParts.map((part) => {
+    const rules = ruleExercises.filter(
+      (exercise) => exercise.part === part.id,
+    ).length;
+
+    return {
+      key: `adjektiver-${part.slug}`,
+      href: partHref(part.id, "ovelser"),
+      title: `Adjektiver: ${part.title}`,
+      description: `${rules} regler · 20 opgaver til hver regel`,
+      icon: part.id === "grad" ? "↗" : "Aa",
+    };
+  }),
+};
+
 export default async function ReviewTrainPage() {
   const access = await getCurrentAccess();
 
@@ -123,7 +144,7 @@ export default async function ReviewTrainPage() {
           <p>Fra genkendelse til aktiv brug.</p>
         </header>
         <div className={styles.groups}>
-          {availableGroups.map((group) => (
+          {[...availableGroups, grammarGroup].map((group) => (
             <ExerciseModeGroup
               key={group.title}
               title={group.title}

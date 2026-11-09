@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Armchair,
   Baby,
@@ -8,6 +8,8 @@ import {
   Brain,
   Cake,
   Car,
+  ChevronLeft,
+  ChevronRight,
   Clapperboard,
   CloudLightning,
   CreditCard,
@@ -17,8 +19,7 @@ import {
   Lightbulb,
   Mail,
   Newspaper,
-  Pause,
-  Play,
+  RotateCcw,
   Sunrise,
   Table2,
   Train,
@@ -29,6 +30,8 @@ import {
 } from "lucide-react";
 
 import HelpText from "@/components/i18n/HelpText/HelpText";
+import { helpFor } from "@/data/grammar/textHelp";
+import { useHelpLanguage } from "@/lib/preferences/helpLanguage";
 import { adjectiveText, phraseText } from "@/lib/grammar/phrase";
 
 import NounPhrase from "../NounPhrase/NounPhrase";
@@ -62,13 +65,14 @@ const pictures = {
 };
 
 /*
-  One scene plays in four phases, like a short gif:
-  0 the noun alone, 1 "+ grøn" appears, 2 grøn moves in, 3 the ending grows.
-  After the last scene a rule card shows, then everything loops.
+  A carousel of examples. Each example plays once, in four steps,
+  like a short gif: 0 the noun alone, 1 "+ grøn" appears,
+  2 grøn moves in, 3 the ending grows and the rule shows.
+  The learner moves on with the arrows, the dots or a swipe.
 */
-const PHASE_MS = [1400, 1300, 1300, 2800];
-const SUMMARY_MS = 6000;
-const LAST_PHASE = PHASE_MS.length - 1;
+const PHASE_MS = [1200, 1100, 1100];
+const LAST_PHASE = PHASE_MS.length;
+const SWIPE_PX = 40;
 
 function caption(lesson, scene, phase) {
   if (phase === 0) {
@@ -92,22 +96,19 @@ function chipText(scene) {
 }
 
 export default function AdjectiveAnimation({ lesson }) {
-  const { scenes, summary } = lesson;
-  const frameCount = scenes.length + 1; // + the rule card
+  const { scenes } = lesson;
 
   const [frame, setFrame] = useState(0);
   const [phase, setPhase] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const swipeStart = useRef(null);
 
-  // without motion: no autoplay, every scene shows its result
+  // without motion: every example shows its result straight away
   useEffect(() => {
     const query = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     function update() {
       setReduceMotion(query.matches);
-
-      if (query.matches) setIsPlaying(false);
     }
 
     update();
@@ -116,111 +117,125 @@ export default function AdjectiveAnimation({ lesson }) {
     return () => query.removeEventListener("change", update);
   }, []);
 
-  const isSummary = frame === scenes.length;
   const shownPhase = reduceMotion ? LAST_PHASE : phase;
+  const isDone = shownPhase === LAST_PHASE;
 
+  // play the example once, then wait for the learner
   useEffect(() => {
-    if (!isPlaying) return;
+    if (reduceMotion || phase >= LAST_PHASE) return;
 
-    const delay = isSummary ? SUMMARY_MS : PHASE_MS[phase];
-
-    const timer = setTimeout(() => {
-      if (!isSummary && phase < LAST_PHASE) {
-        setPhase(phase + 1);
-        return;
-      }
-
-      setFrame((frame + 1) % frameCount);
-      setPhase(0);
-    }, delay);
+    const timer = setTimeout(() => setPhase(phase + 1), PHASE_MS[phase]);
 
     return () => clearTimeout(timer);
-  }, [isPlaying, isSummary, phase, frame, frameCount]);
+  }, [phase, reduceMotion]);
 
   function goTo(index) {
+    if (index < 0 || index >= scenes.length || index === frame) return;
+
     setFrame(index);
     setPhase(0);
   }
 
-  function togglePlaying() {
-    // a finished scene starts over instead of jumping straight on
-    if (!isPlaying && !isSummary && phase === LAST_PHASE) setPhase(0);
+  function handlePointerDown(event) {
+    swipeStart.current = event.clientX;
+  }
 
-    setIsPlaying(!isPlaying);
+  function handlePointerUp(event) {
+    if (swipeStart.current === null) return;
+
+    const distance = event.clientX - swipeStart.current;
+    swipeStart.current = null;
+
+    if (distance > SWIPE_PX) goTo(frame - 1);
+    if (distance < -SWIPE_PX) goTo(frame + 1);
   }
 
   const scene = scenes[frame];
+  const isFirst = frame === 0;
+  const isLast = frame === scenes.length - 1;
 
   return (
-    <figure className={styles.player}>
-      <div className={styles.screen}>
-        <div className={styles.stage} aria-hidden="true">
-          {isSummary ? (
-            <RuleCard
-              key="summary"
-              scenes={scenes}
-              summary={summary}
-            />
-          ) : (
-            // key: a new scene starts closed, without animating shut
-            <Scene key={scene.id} scene={scene} phase={shownPhase} />
-          )}
+    <figure
+      className={styles.player}
+      aria-roledescription="karrusel"
+      aria-label="Eksempler"
+    >
+      <div className={styles.carousel}>
+        <div
+          className={styles.stage}
+          aria-hidden="true"
+          onPointerDown={handlePointerDown}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={() => (swipeStart.current = null)}
+        >
+          {/* key: a new example starts closed, without animating shut */}
+          <Scene key={scene.id} scene={scene} phase={shownPhase} />
         </div>
+
+        <button
+          type="button"
+          className={`${styles.arrow} ${styles.arrowPrevious}`}
+          onClick={() => goTo(frame - 1)}
+          disabled={isFirst}
+          aria-label="Forrige eksempel"
+        >
+          <ChevronLeft size={24} aria-hidden="true" />
+        </button>
+
+        <button
+          type="button"
+          className={`${styles.arrow} ${styles.arrowNext}`}
+          onClick={() => goTo(frame + 1)}
+          disabled={isLast}
+          aria-label="Næste eksempel"
+        >
+          <ChevronRight size={24} aria-hidden="true" />
+        </button>
+      </div>
+
+      {/* what happens now; the rule itself stands out at the end */}
+      <figcaption
+        className={isDone ? styles.captionRule : styles.caption}
+        aria-live="polite"
+      >
+        {caption(lesson, scene, shownPhase)}
+
+        {/* the same caption in the help language, right under it */}
+        <HelpText
+          className={styles.captionHelp}
+          {...(isDone
+            ? { en: scene.rule_en, ru: scene.rule_ru }
+            : helpFor(caption(lesson, scene, shownPhase)))}
+        />
+      </figcaption>
+
+      <div className={styles.controls}>
+        <ol className={styles.dots}>
+          {scenes.map((item, index) => (
+            <li key={item.id}>
+              <button
+                type="button"
+                className={styles.dot}
+                onClick={() => goTo(index)}
+                aria-label={`Eksempel ${index + 1} af ${scenes.length}`}
+                aria-current={index === frame ? "step" : undefined}
+              />
+            </li>
+          ))}
+        </ol>
 
         {!reduceMotion && (
           <button
             type="button"
-            className={styles.playButton}
-            onClick={togglePlaying}
-            aria-label={isPlaying ? "Pause animationen" : "Afspil animationen"}
+            className={styles.replay}
+            onClick={() => setPhase(0)}
+            disabled={!isDone}
+            aria-label="Se eksemplet igen"
           >
-            {isPlaying ? (
-              <Pause size={20} aria-hidden="true" />
-            ) : (
-              <Play size={20} aria-hidden="true" />
-            )}
+            <RotateCcw size={16} aria-hidden="true" />
           </button>
         )}
       </div>
-
-      <figcaption className={styles.caption}>
-        {isSummary
-          ? "Reglen"
-          : caption(lesson, scene, shownPhase)}
-
-        {/* the rule in the help language, once the rule is shown */}
-        {!isSummary && shownPhase === LAST_PHASE && (
-          <HelpText
-            className={styles.captionHelp}
-            en={scene.rule_en}
-            ru={scene.rule_ru}
-          />
-        )}
-      </figcaption>
-
-      <nav aria-label="Scener">
-        <ol className={styles.frames}>
-          {[...scenes, null].map((item, index) => {
-            const label = item
-              ? (item.label ?? phraseText(item.phrase, 0))
-              : "Reglen";
-
-            return (
-              <li key={item?.id ?? "summary"}>
-                <button
-                  type="button"
-                  className={styles.frameButton}
-                  aria-current={index === frame ? "step" : undefined}
-                  onClick={() => goTo(index)}
-                  lang={item ? "da" : undefined}
-                >
-                  {label}
-                </button>
-              </li>
-            );
-          })}
-        </ol>
-      </nav>
 
       {/* the stage is visual only; this says the same in words */}
       <ul className="u-visually-hidden">
@@ -238,6 +253,9 @@ export default function AdjectiveAnimation({ lesson }) {
 function Scene({ scene, phase }) {
   const Picture = pictures[scene.picture];
   const isDone = phase === LAST_PHASE;
+
+  // the English meaning only for learners who chose English as help
+  const showGloss = useHelpLanguage() === "en";
 
   return (
     <div className={styles.scene}>
@@ -271,31 +289,11 @@ function Scene({ scene, phase }) {
         </div>
       )}
 
-      <p className={styles.gloss} lang="en">
-        {isDone ? scene.gloss.after : scene.gloss.before}
-      </p>
-    </div>
-  );
-}
-
-function RuleCard({ scenes, summary }) {
-  const byId = Object.fromEntries(scenes.map((scene) => [scene.id, scene]));
-
-  return (
-    <div className={styles.rules}>
-      {summary.map((row) => (
-        <div key={row.group} className={styles.ruleRow}>
-          <span className={styles.ruleGroup}>{row.group}</span>
-
-          <span className={styles.ruleEnding}>{row.ending}</span>
-
-          <span className={styles.ruleExamples}>
-            {row.examples.map((id) => (
-              <NounPhrase key={id} phrase={byId[id].phrase} size="small" />
-            ))}
-          </span>
-        </div>
-      ))}
+      {showGloss && scene.gloss && (
+        <p className={styles.gloss} lang="en">
+          {isDone ? scene.gloss.after : scene.gloss.before}
+        </p>
+      )}
     </div>
   );
 }

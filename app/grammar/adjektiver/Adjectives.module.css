@@ -47,6 +47,8 @@
 .next {
   display: flex;
   flex-direction: column;
+
+  gap: var(--spacing-sm);
 }
 
 .part {
@@ -78,4 +80,72 @@
 
   font-size: var(--font-size-headline-medium);
   line-height: var(--line-height-headline-medium);
+}
+
+/* extra material folded away: explanation and tables */
+.more {
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--border-radius-md);
+
+  background: var(--color-background-surface);
+}
+
+.moreSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: var(--control-height-lg);
+
+  padding: 0 var(--spacing-md);
+
+  color: var(--color-text-primary);
+
+  font-size: var(--font-size-label-large);
+  font-weight: 600;
+
+  cursor: pointer;
+
+  list-style: none;
+}
+
+.moreSummary::-webkit-details-marker {
+  display: none;
+}
+
+.moreSummary::after {
+  content: "⌄";
+
+  color: var(--color-text-muted);
+
+  transition: transform var(--transition-fast);
+}
+
+.more[open] .moreSummary::after {
+  transform: rotate(180deg);
+}
+
+.moreSummary:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+
+  border-radius: var(--border-radius-md);
+}
+
+.moreBody {
+  padding: 0 var(--spacing-md) var(--spacing-md);
+}
+
+/* one line above each level of exercises */
+.reminder {
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+
+  border-left: 3px solid var(--color-border-accent);
+}
+
+.reminderText {
+  margin: 0;
+
+  font-weight: 600;
 }
